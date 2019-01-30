@@ -17,7 +17,7 @@ namespace API
 
         public Task<WeatherData> GetWeatherByCityNameAsync(string cityName)
         {
-            return forecast.GetWeatherDataByCityNameAsync(apiKey, cityName);
+            return forecast.GetWeatherDataByCityNameAsync(ApiKey, cityName);
         }
     }
 }

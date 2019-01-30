@@ -9,13 +9,31 @@ namespace API.UnitTests
     public class ApiClientTests
     {
         [TestMethod]
-        public void GetWeatherByCityNameTest()
+        public void Call_api_with_correct_city_name_should_return_weather_data()
         {
+            //Arrange
             var fake = A.Fake<IRestService>();
-            WeatherData expect = null;
-            A.CallTo(() => fake.GetAsync("http://api.openweathermap.org/data/2.5/weather?q=Cocoa,FL,USA&appid=UnitTest&units=Standard")).Returns(Task.FromResult(expect));
-            var weather = new OpenWeatherMap.Standard.Forecast(fake);
-            string actual = weather.GetWeatherDataByCityNameAsync("UnitTest", "Cocoa,FL", "USA", WeatherUnits.Standard).Result.weather[0].description;
+            var expect = new WeatherData();
+            var apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=FakeCity,us&appid=UnitTest&units=Standard";
+
+            expect.weather = new Weather[]
+            {
+                new Weather
+                {
+                    description = "few clouds"
+                }
+            };
+            A.CallTo(() => fake
+                    .GetAsync(apiUrl))
+                    .Returns(Task.FromResult(expect));
+            var weather = new ApiClient(fake) { ApiKey = "UnitTest" };
+
+            //Act
+            var actual = weather.GetWeatherByCityNameAsync("FakeCity")
+                .Result.weather[0].description;
+
+            //Assert
+            A.CallTo(() => fake.GetAsync(apiUrl)).MustHaveHappened();
             Assert.AreEqual("few clouds", actual);
         }
     }
