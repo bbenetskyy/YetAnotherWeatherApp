@@ -41,25 +41,11 @@ namespace API.IntegrationTests
             });
         }
 
-        [Test]
-        public void Api_Should_Throw_Error_for_Empty_City_Name()
+        [TestCase("")]
+        [TestCase(null)]
+        public void Api_Should_Throw_Error_for_Empty_Or_Null_City_Name(string cityName)
         {
             //Arrange
-            var cityName = string.Empty;
-            var apiClient = new ApiClient();
-
-            //Act & Assert
-            Should.Throw<ArgumentException>(() =>
-            {
-                var weatherData = apiClient.GetWeatherByCityNameAsync(cityName).Result;
-            });
-        }
-
-        [Test]
-        public void Api_Should_Throw_Error_for_Null_City_Name()
-        {
-            //Arrange
-            string cityName = null;
             var apiClient = new ApiClient();
 
             //Act & Assert

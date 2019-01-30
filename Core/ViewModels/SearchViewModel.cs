@@ -30,7 +30,7 @@ namespace Core.ViewModels
             {
                 if (SetProperty(ref cityName, value))
                 {
-                    checkWeatherCommand.RaiseCanExecuteChanged();
+                    CheckWeatherCommand.RaiseCanExecuteChanged();
                 }
             }
         }

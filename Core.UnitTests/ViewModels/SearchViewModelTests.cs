@@ -1,20 +1,27 @@
 ﻿using API;
 using AutoMapper;
+using Core.Models;
+using Core.UnitTests.TestData;
 using Core.ViewModels;
 using Moq;
 using MvvmCross.Base;
-using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using MvvmCross.Tests;
 using NUnit.Framework;
-using OpenWeatherMap;
 using Shouldly;
+using System.Threading;
+using System.Threading.Tasks;
+using IMvxCommandHelper = MvvmCross.Commands.IMvxCommandHelper;
 
 namespace Core.UnitTests.ViewModels
 {
     [TestFixture]
     public class SearchViewModelTests : MvxIoCSupportingTest
     {
+        private Mock<IApiClient> apiMock;
+        private Mock<IMapper> mapperMock;
+        private Mock<IMvxNavigationService> navigationMock;
+
         protected override void AdditionalSetup()
         {
             MvxSingletonCache.Instance
@@ -24,22 +31,22 @@ namespace Core.UnitTests.ViewModels
             var helper = new MvxUnitTestCommandHelper();
             Ioc.RegisterSingleton<IMvxCommandHelper>(helper);
 
-            var currentWeather = new CurrentWeatherResponse
-            {
-                Weather = new Weather
-                {
-                    Value = "Weather"
-                }
-            };
-            var apiMock = new Mock<IApiClient>();
-            apiMock.Setup(a => a.GetWeatherByCityNameAsync(It.IsAny<string>()))
-                .ReturnsAsync(currentWeather);
+            apiMock = new Mock<IApiClient>();
+            apiMock.Setup(a => a.GetWeatherByCityNameAsync(CurrentWeatherTestData.FakeCurrentWeather.City.Name))
+                .ReturnsAsync(CurrentWeatherTestData.FakeCurrentWeather);
+            //apiMock.Setup(a => a.GetWeatherByCityNameAsync(It.IsAny<string>()))
+            //    .Throws<AggregateException>();
+            //apiMock.Setup(a => a.GetWeatherByCityNameAsync(null))
+            //    .Throws<ArgumentException>();
             Ioc.RegisterSingleton<IApiClient>(apiMock.Object);
 
-            var mapperMock = new Mock<IMapper>();
+            mapperMock = new Mock<IMapper>();
             Ioc.RegisterSingleton<IMapper>(mapperMock.Object);
 
-            var navigationMock = new Mock<IMvxNavigationService>();
+            navigationMock = new Mock<IMvxNavigationService>();
+            navigationMock.Setup(n => n.Navigate<WeatherDetailsViewModel, WeatherDetails>(
+                        It.IsAny<WeatherDetails>(), null, default(CancellationToken)))
+                .ReturnsAsync(true);
             Ioc.RegisterSingleton<IMvxNavigationService>(navigationMock.Object);
         }
 
@@ -56,6 +63,24 @@ namespace Core.UnitTests.ViewModels
 
             //Assert
             vm.CheckWeatherCommand.RaisedCanExecuteChanged().ShouldBeTrue();
+        }
+
+        [Test]
+        public async Task CheckWeatherCommand_Should_Call_Api_And_Navigate_To_WeatherDetailsViewModel()
+        {
+            //Arrange
+            base.Setup();
+            var vm = Ioc.IoCConstruct<SearchViewModel>();
+
+            //Act
+            vm.CityName = CurrentWeatherTestData.FakeCurrentWeather.City.Name;
+            await vm.CheckWeatherCommand.ExecuteAsync();
+
+            //Assert
+            apiMock.Verify(a => a.GetWeatherByCityNameAsync(vm.CityName), Times.Once);
+            navigationMock.Verify(n => n.Navigate<WeatherDetailsViewModel, WeatherDetails>(
+                It.IsAny<WeatherDetails>(), null, default(CancellationToken)),
+                Times.Once);
         }
     }
 }
