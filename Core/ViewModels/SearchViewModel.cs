@@ -29,6 +29,13 @@ namespace Core.ViewModels
             set => SetProperty(ref cityName, value);
         }
 
+        private bool isLoading;
+        public bool IsLoading
+        {
+            get => isLoading;
+            set => SetProperty(ref isLoading, value);
+        }
+
         private IMvxAsyncCommand checkWeatherCommand;
         public IMvxAsyncCommand CheckWeatherCommand
         {
@@ -36,9 +43,11 @@ namespace Core.ViewModels
             {
                 return checkWeatherCommand ?? (checkWeatherCommand = new MvxAsyncCommand(async () =>
                 {
+                    IsLoading = true;
                     var currentWeather = await apiClient.GetWeatherByCityNameAsync(cityName);
                     await navigationService.Navigate<WeatherDetailsViewModel, WeatherDetails>(
                         mapper.Map<CurrentWeatherResponse, WeatherDetails>(currentWeather));
+                    IsLoading = false;
                 }));
             }
         }

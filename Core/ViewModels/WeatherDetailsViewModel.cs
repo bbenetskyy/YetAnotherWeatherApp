@@ -1,8 +1,10 @@
 ﻿using API;
 using AutoMapper;
 using Core.Models;
+using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
+using OpenWeatherMap;
 
 namespace Core.ViewModels
 {
@@ -24,6 +26,28 @@ namespace Core.ViewModels
         public string CurrentTemperature => weatherDetails.CurrentTemperature;
         public string MinTemperature => weatherDetails.MinTemperature;
         public string MaxTemperature => weatherDetails.MaxTemperature;
+
+        private bool isLoading;
+        public bool IsLoading
+        {
+            get => isLoading;
+            set => SetProperty(ref isLoading, value);
+        }
+
+        private IMvxAsyncCommand refreshWeatherCommand;
+        public IMvxAsyncCommand RefreshWeatherCommand
+        {
+            get
+            {
+                return refreshWeatherCommand ?? (refreshWeatherCommand = new MvxAsyncCommand(async () =>
+                {
+                    IsLoading = true;
+                    var currentWeather = await apiClient.GetWeatherByCityNameAsync(weatherDetails.CityName);
+                    weatherDetails = mapper.Map<CurrentWeatherResponse, WeatherDetails>(currentWeather);
+                    IsLoading = false;
+                }));
+            }
+        }
 
         public override void Prepare(WeatherDetails parameter)
         {
