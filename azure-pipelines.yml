@@ -9,6 +9,9 @@ variables:
   outputDirectory: '$(build.binariesDirectory)/$(buildConfiguration)'
 
 steps:
+- script:
+    dotnet build --configuration $(buildConfiguration)
+    dotnet test dotnetcore-tests --configuration $(buildConfiguration) --logger trx
 - task: NuGetToolInstaller@0
 
 - task: NuGetCommand@1
