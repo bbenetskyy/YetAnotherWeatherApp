@@ -1,15 +1,16 @@
-using API.IntegrationTests.TestData;
-using FluentAssertions;
+using NUnit.Framework;
+using Shouldly;
 using System;
 using System.Threading.Tasks;
-using Xunit;
 
 namespace API.IntegrationTests
 {
+    [TestFixture]
     public class ApiClientIntegrationTests
     {
-        [Theory]
-        [MemberData(nameof(ApiClientTestData.ValidCityNames), MemberType = typeof(ApiClientTestData))]
+        [TestCase("London")]
+        [TestCase("Rzeszow")]
+        [TestCase("Kalush")]
         public async Task Call_api_with_correct_city_name_should_return_weather_data(string cityName)
         {
             //Arrange
@@ -19,28 +20,53 @@ namespace API.IntegrationTests
             var weatherData = await apiClient.GetWeatherByCityNameAsync(cityName);
 
             //Assert
-            weatherData.Should().NotBeNull();
-            weatherData.City.Should().NotBeNull();
-            weatherData.City.Name.Should().Be(cityName);
-            weatherData.Weather.Should().NotBeNull();
+            weatherData.ShouldNotBeNull();
+            weatherData.City.ShouldNotBeNull();
+            weatherData.City.Name.ShouldBe(cityName);
+            weatherData.Weather.ShouldNotBeNull();
 
         }
 
-        [Theory]
-        [MemberData(nameof(ApiClientTestData.InValidCityNames), MemberType = typeof(ApiClientTestData))]
-        public void Call_api_with_invalid_city_name_should_return_weather_data(string cityName)
+        [TestCase("London2")]
+        [TestCase("asdasda")]
+        public void Call_api_with_invalid_city_name_should_trow_error(string cityName)
         {
             //Arrange
             var apiClient = new ApiClient();
 
-            //Act
-            Func<Task> act = async () =>
+            //Act & Assert
+            Should.Throw<AggregateException>(() =>
             {
                 var weatherData = apiClient.GetWeatherByCityNameAsync(cityName).Result;
-            };
+            });
+        }
 
-            //Assert
-            act.Should().Throw<Exception>();
+        [Test]
+        public void Call_api_with_empty_city_name_should_trow_error()
+        {
+            //Arrange
+            var cityName = string.Empty;
+            var apiClient = new ApiClient();
+
+            //Act & Assert
+            Should.Throw<ArgumentException>(() =>
+            {
+                var weatherData = apiClient.GetWeatherByCityNameAsync(cityName).Result;
+            });
+        }
+
+        [Test]
+        public void Call_api_with_null_city_name_should_trow_error()
+        {
+            //Arrange
+            string cityName = null;
+            var apiClient = new ApiClient();
+
+            //Act & Assert
+            Should.Throw<ArgumentException>(() =>
+            {
+                var weatherData = apiClient.GetWeatherByCityNameAsync(cityName).Result;
+            });
         }
     }
 }
