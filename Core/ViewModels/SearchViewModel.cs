@@ -26,7 +26,13 @@ namespace Core.ViewModels
         public string CityName
         {
             get => cityName;
-            set => SetProperty(ref cityName, value);
+            set
+            {
+                if (SetProperty(ref cityName, value))
+                {
+                    checkWeatherCommand.RaiseCanExecuteChanged();
+                }
+            }
         }
 
         private bool isLoading;
@@ -48,7 +54,7 @@ namespace Core.ViewModels
                     await navigationService.Navigate<WeatherDetailsViewModel, WeatherDetails>(
                         mapper.Map<CurrentWeatherResponse, WeatherDetails>(currentWeather));
                     IsLoading = false;
-                }));
+                }, () => !string.IsNullOrEmpty(CityName)));
             }
         }
     }
