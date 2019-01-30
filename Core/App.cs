@@ -12,7 +12,6 @@ namespace Core
         {
             Mvx.IoCProvider.RegisterSingleton(MapService.ConfigureMapper);
             Mvx.IoCProvider.RegisterType<IApiClient, ApiClient>();
-
             RegisterAppStart<SearchViewModel>();
         }
     }
