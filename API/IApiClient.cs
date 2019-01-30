@@ -1,11 +1,10 @@
-﻿using OpenWeatherMap.Standard;
+﻿using OpenWeatherMap;
 using System.Threading.Tasks;
 
 namespace API
 {
     public interface IApiClient
     {
-        string ApiKey { get; set; }
-        Task<WeatherData> GetWeatherByCityNameAsync(string cityName);
+        Task<CurrentWeatherResponse> GetWeatherByCityNameAsync(string cityName);
     }
 }

@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="OpenWeatherMap.Standard" Version="0.5.1" />
+    <PackageReference Include="OpenWeatherMap.Net" Version="1.0.0" />
   </ItemGroup>
 
 </Project>

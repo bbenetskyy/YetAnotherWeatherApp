@@ -1,40 +1,50 @@
-using FakeItEasy;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OpenWeatherMap.Standard;
+using AutoFixture;
+using FluentAssertions;
+using Moq;
+using Moq.Protected;
+using Newtonsoft.Json;
+using OpenWeatherMap;
+using System.Net;
+using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace API.UnitTests
 {
-    [TestClass]
     public class ApiClientTests
     {
-        [TestMethod]
-        public void Call_api_with_correct_city_name_should_return_weather_data()
+        [Fact]
+        public async Task Call_api_with_correct_city_name_should_return_weather_data()
         {
             //Arrange
-            var fake = A.Fake<IRestService>();
-            var expect = new WeatherData();
-            var apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=FakeCity,us&appid=UnitTest&units=Standard";
-
-            expect.weather = new Weather[]
-            {
-                new Weather
+            var fixture = new Fixture();
+            var city = "FakeCity";
+            var apiKey = "123";
+            var apiUrl = $"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={apiKey}&units=Standard";
+            var handlerMock = new Mock<HttpMessageHandler>(MockBehavior.Strict);
+            handlerMock
+                .Protected()
+                .Setup<Task<HttpResponseMessage>>("SendAsync",
+                    ItExpr.IsAny<HttpRequestMessage>(),
+                    ItExpr.IsAny<CancellationToken>())
+                .ReturnsAsync(new HttpResponseMessage
                 {
-                    description = "few clouds"
-                }
-            };
-            A.CallTo(() => fake
-                    .GetAsync(apiUrl))
-                    .Returns(Task.FromResult(expect));
-            var weather = new ApiClient(fake) { ApiKey = "UnitTest" };
+                    StatusCode = HttpStatusCode.OK,
+                    Content = new StringContent(JsonConvert.SerializeObject(fixture.Create<CurrentWeatherResponse>()))
+                })
+                .Verifiable();
+            var apiClient = new ApiClient(apiKey);
+
 
             //Act
-            var actual = weather.GetWeatherByCityNameAsync("FakeCity")
-                .Result.weather[0].description;
+            var weather = await apiClient.GetWeatherByCityNameAsync("FakeCity");
 
             //Assert
-            A.CallTo(() => fake.GetAsync(apiUrl)).MustHaveHappened();
-            Assert.AreEqual("few clouds", actual);
+            weather.Should().NotBeNull();
+            weather.City.Should().NotBeNull();
+            weather.City.Name.Should().Be(cityName);
+            weather.Weather.Should().NotBeNull();
         }
     }
 }

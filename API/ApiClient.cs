@@ -1,23 +1,22 @@
-﻿using OpenWeatherMap.Standard;
+﻿using OpenWeatherMap;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace API
 {
     public class ApiClient : IApiClient
     {
-        private readonly Forecast forecast;
-        public string ApiKey { get; set; } = "adb608d1b4b3a21dc16c85c499bf535f";
+        private readonly OpenWeatherMapClient client;
 
-        public ApiClient(IRestService service = null)
+        public ApiClient(string apiKey = null, HttpMessageHandler handler = null)
         {
-            forecast = service == null
-                ? new Forecast()
-                : new Forecast(service);
+            client = new OpenWeatherMapClient(apiKey ?? "adb608d1b4b3a21dc16c85c499bf535f",
+                handler);
         }
 
-        public Task<WeatherData> GetWeatherByCityNameAsync(string cityName)
+        public Task<CurrentWeatherResponse> GetWeatherByCityNameAsync(string cityName)
         {
-            return forecast.GetWeatherDataByCityNameAsync(ApiKey, cityName);
+            return client.CurrentWeather.GetByName(cityName);
         }
     }
 }
