@@ -11,7 +11,7 @@ namespace API.IntegrationTests
         [TestCase("London")]
         [TestCase("Rzeszow")]
         [TestCase("Kalush")]
-        public async Task Call_api_with_correct_city_name_should_return_weather_data(string cityName)
+        public async Task Api_Should_Return_Weather_Data_for_Correct_City_Name(string cityName)
         {
             //Arrange
             var apiClient = new ApiClient();
@@ -29,7 +29,7 @@ namespace API.IntegrationTests
 
         [TestCase("London2")]
         [TestCase("asdasda")]
-        public void Call_api_with_invalid_city_name_should_trow_error(string cityName)
+        public void Api_Should_Throw_Error_for_Invalid_City_Name(string cityName)
         {
             //Arrange
             var apiClient = new ApiClient();
@@ -41,25 +41,11 @@ namespace API.IntegrationTests
             });
         }
 
-        [Test]
-        public void Call_api_with_empty_city_name_should_trow_error()
+        [TestCase("")]
+        [TestCase(null)]
+        public void Api_Should_Throw_Error_for_Empty_Or_Null_City_Name(string cityName)
         {
             //Arrange
-            var cityName = string.Empty;
-            var apiClient = new ApiClient();
-
-            //Act & Assert
-            Should.Throw<ArgumentException>(() =>
-            {
-                var weatherData = apiClient.GetWeatherByCityNameAsync(cityName).Result;
-            });
-        }
-
-        [Test]
-        public void Call_api_with_null_city_name_should_trow_error()
-        {
-            //Arrange
-            string cityName = null;
             var apiClient = new ApiClient();
 
             //Act & Assert
