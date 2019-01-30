@@ -3,11 +3,11 @@ using MvvmCross.ViewModels;
 
 namespace Core.ViewModels
 {
-    public class WeatherViewModel : MvxViewModel
+    public class SearchViewModel : MvxViewModel
     {
         private readonly IApiClient apiClient;
 
-        public WeatherViewModel(IApiClient apiClient)
+        public SearchViewModel(IApiClient apiClient)
         {
             this.apiClient = apiClient;
         }
