@@ -28,7 +28,7 @@ namespace Core.UnitTests.ViewModels
             {
                 Weather = new Weather
                 {
-                    Value = "CityName"
+                    Value = "Weather"
                 }
             };
             var apiMock = new Mock<IApiClient>();
@@ -44,7 +44,7 @@ namespace Core.UnitTests.ViewModels
         }
 
         [Test]
-        public void SomeTest()
+        public void CheckWeatherCommand_Should_RaisedCanExecuteChanged_When_CityName_Changed()
         {
             //Arrange
             base.Setup();
