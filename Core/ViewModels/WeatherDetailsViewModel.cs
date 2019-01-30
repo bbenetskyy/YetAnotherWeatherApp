@@ -1,46 +1,33 @@
 ﻿using API;
 using AutoMapper;
+using Core.Models;
+using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 
 namespace Core.ViewModels
 {
-    public class WeatherDetailsViewModel : MvxViewModel
+    public class WeatherDetailsViewModel : MvxViewModel<WeatherDetails>
     {
         private readonly IMapper mapper;
         private readonly IApiClient apiClient;
+        private readonly IMvxNavigationService navigationService;
+        private WeatherDetails weatherDetails;
 
-        public WeatherDetailsViewModel(IApiClient apiClient, IMapper mapper)
+        public WeatherDetailsViewModel(IApiClient apiClient, IMapper mapper, IMvxNavigationService navigationService)
         {
             this.mapper = mapper;
             this.apiClient = apiClient;
+            this.navigationService = navigationService;
         }
 
-        private string description;
-        public string Description
-        {
-            get => description;
-            set => SetProperty(ref description, value);
-        }
+        public string Description => weatherDetails.Description;
+        public string CurrentTemperature => weatherDetails.CurrentTemperature;
+        public string MinTemperature => weatherDetails.MinTemperature;
+        public string MaxTemperature => weatherDetails.MaxTemperature;
 
-        private string currentTemperature;
-        public string CurrentTemperature
+        public override void Prepare(WeatherDetails parameter)
         {
-            get => currentTemperature;
-            set => SetProperty(ref currentTemperature, value);
-        }
-
-        private string minTemperature;
-        public string MinTemperature
-        {
-            get => minTemperature;
-            set => SetProperty(ref minTemperature, value);
-        }
-
-        private string maxTemperature;
-        public string MaxTemperature
-        {
-            get => maxTemperature;
-            set => SetProperty(ref maxTemperature, value);
+            weatherDetails = parameter;
         }
     }
 }
