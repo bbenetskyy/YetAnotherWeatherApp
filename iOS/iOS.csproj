@@ -63,11 +63,15 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="Setup.cs" />
+    <Compile Include="Views\MainViewController.cs" />
+    <Compile Include="Views\MainViewController.designer.cs">
+      <DependentUpon>MainViewController.cs</DependentUpon>
+    </Compile>
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Entitlements.plist" />
     <None Include="packages.config" />
+    <InterfaceDefinition Include="Views\MainViewController.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="InteractiveAlert, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
