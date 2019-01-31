@@ -28,11 +28,15 @@ namespace Blank
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UILabel maxLabel { get; set; }
+        UIKit.UILabel maxTemperatureLabel { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UILabel minLabel { get; set; }
+        UIKit.UILabel minTemperatureLabel { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton refreshButton { get; set; }
 
         void ReleaseDesignerOutlets ()
         {
@@ -51,14 +55,19 @@ namespace Blank
                 descriptionLabel = null;
             }
 
-            if (maxLabel != null) {
-                maxLabel.Dispose ();
-                maxLabel = null;
+            if (maxTemperatureLabel != null) {
+                maxTemperatureLabel.Dispose ();
+                maxTemperatureLabel = null;
             }
 
-            if (minLabel != null) {
-                minLabel.Dispose ();
-                minLabel = null;
+            if (minTemperatureLabel != null) {
+                minTemperatureLabel.Dispose ();
+                minTemperatureLabel = null;
+            }
+
+            if (refreshButton != null) {
+                refreshButton.Dispose ();
+                refreshButton = null;
             }
         }
     }

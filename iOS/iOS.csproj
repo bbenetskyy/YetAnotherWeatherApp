@@ -63,9 +63,13 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="Views\MainViewController.cs" />
-    <Compile Include="Views\MainViewController.designer.cs">
-      <DependentUpon>MainViewController.cs</DependentUpon>
+    <Compile Include="Views\SearchView.cs" />
+    <Compile Include="Views\SearchView.designer.cs">
+      <DependentUpon>SearchView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WeatherDetailsView.cs" />
+    <Compile Include="Views\WeatherDetailsView.designer.cs">
+      <DependentUpon>WeatherDetailsView.cs</DependentUpon>
     </Compile>
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
