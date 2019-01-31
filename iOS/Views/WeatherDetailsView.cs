@@ -3,8 +3,9 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Ios.Views;
 using System;
 
-namespace Blank
+namespace iOS.Views
 {
+    [MvxFromStoryboard("WeatherDetailsView")]
     public partial class WeatherDetailsView : MvxViewController<WeatherDetailsViewModel>
     {
         public WeatherDetailsView(IntPtr handle) : base(handle)

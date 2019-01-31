@@ -3,7 +3,7 @@ using Foundation;
 using MvvmCross.Platforms.Ios.Core;
 using UIKit;
 
-namespace Blank
+namespace iOS
 {
     [Register("AppDelegate")]
     public class AppDelegate : MvxApplicationDelegate<MvxIosSetup<App>, App>

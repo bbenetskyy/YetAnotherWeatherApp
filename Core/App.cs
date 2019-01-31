@@ -14,7 +14,7 @@ namespace Core
             Mvx.IoCProvider.RegisterSingleton(MapService.ConfigureMapper);
             Mvx.IoCProvider.RegisterSingleton(InteractiveAlerts.Instance);
             Mvx.IoCProvider.RegisterType<IApiClient, ApiClient>();
-            RegisterAppStart<SearchViewModel>();
+            RegisterCustomAppStart<CustomMvxAppStart<SearchViewModel>>();
         }
     }
 }

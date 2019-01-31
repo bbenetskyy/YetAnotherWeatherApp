@@ -1,11 +1,13 @@
-﻿
-using Core.ViewModels;
+﻿using Core.ViewModels;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Ios.Views;
 using System;
+using MvvmCross.Platforms.Ios.Presenters.Attributes;
 
-namespace Blank.Views
+namespace iOS.Views
 {
+    [MvxFromStoryboard("SearchView")]
+    [MvxRootPresentation]
     public partial class SearchView : MvxViewController<SearchViewModel>
     {
         public SearchView(IntPtr handle) : base(handle)

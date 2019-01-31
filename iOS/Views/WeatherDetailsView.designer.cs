@@ -7,9 +7,8 @@
 using Foundation;
 using System;
 using System.CodeDom.Compiler;
-using UIKit;
 
-namespace Blank
+namespace iOS.Views
 {
     [Register ("WeatherDetailsView")]
     partial class WeatherDetailsView

@@ -8,7 +8,7 @@ using Foundation;
 using System;
 using System.CodeDom.Compiler;
 
-namespace Blank.Views
+namespace iOS.Views
 {
     [Register ("SearchView")]
     partial class SearchView
