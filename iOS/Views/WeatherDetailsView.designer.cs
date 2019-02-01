@@ -15,6 +15,10 @@ namespace iOS.Views
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIBarButtonItem backButton { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel cityNameLabel { get; set; }
 
         [Outlet]
@@ -39,6 +43,11 @@ namespace iOS.Views
 
         void ReleaseDesignerOutlets ()
         {
+            if (backButton != null) {
+                backButton.Dispose ();
+                backButton = null;
+            }
+
             if (cityNameLabel != null) {
                 cityNameLabel.Dispose ();
                 cityNameLabel = null;

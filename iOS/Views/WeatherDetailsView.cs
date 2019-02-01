@@ -1,11 +1,13 @@
 using Core.ViewModels;
 using MvvmCross.Binding.BindingContext;
+using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
 using System;
 
 namespace iOS.Views
 {
     [MvxFromStoryboard]
+    [MvxModalPresentation]
     public partial class WeatherDetailsView : MvxViewController<WeatherDetailsViewModel>
     {
         public WeatherDetailsView(IntPtr handle) : base(handle)
@@ -24,6 +26,7 @@ namespace iOS.Views
             set.Bind(minTemperatureLabel).To(vm => vm.MinTemperature);
             set.Bind(maxTemperatureLabel).To(vm => vm.MaxTemperature);
             set.Bind(refreshButton).To(vm => vm.RefreshWeatherCommand);
+            set.Bind(backButton).To(vm => vm.BackCommand);
 
             set.Apply();
         }

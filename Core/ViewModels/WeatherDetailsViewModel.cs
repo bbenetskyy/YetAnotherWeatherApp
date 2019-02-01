@@ -54,6 +54,7 @@ namespace Core.ViewModels
                     {
                         var currentWeather = await apiClient.GetWeatherByCityNameAsync(weatherDetails?.CityName);
                         weatherDetails = mapper.Map<CurrentWeatherResponse, WeatherDetails>(currentWeather);
+                        await RaiseAllPropertiesChanged();
                     }
                     catch (Exception ex) when (ex is AggregateException || ex is ArgumentException)
                     {
@@ -72,6 +73,17 @@ namespace Core.ViewModels
                     {
                         IsLoading = false;
                     }
+                }));
+            }
+        }
+        private IMvxAsyncCommand backCommand;
+        public IMvxAsyncCommand BackCommand
+        {
+            get
+            {
+                return backCommand ?? (backCommand = new MvxAsyncCommand(async () =>
+                {
+                    await navigationService.Navigate<SearchViewModel>();
                 }));
             }
         }

@@ -111,5 +111,23 @@ namespace Core.UnitTests.ViewModels
             interactiveMock.Verify(i => i.ShowAlert(It.IsAny<InteractiveAlertConfig>()), Times.Once);
         }
 
+        [Test]
+        public async Task BackCommand_Should_Navigate_To_SearchViewModel()
+        {
+
+            //Arrange
+            base.Setup();
+            var vm = Ioc.IoCConstruct<WeatherDetailsViewModel>();
+
+            //Act
+            await vm.BackCommand.ExecuteAsync();
+
+            //Assert
+            apiMock.Verify(a => a.GetWeatherByCityNameAsync(vm.CityName), Times.Never);
+            navigationMock.Verify(n => n.Navigate<SearchViewModel>(null, default(CancellationToken)),
+                Times.Once);
+            interactiveMock.Verify(i => i.ShowAlert(It.IsAny<InteractiveAlertConfig>()), Times.Never);
+        }
+
     }
 }
