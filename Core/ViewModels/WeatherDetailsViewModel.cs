@@ -60,7 +60,7 @@ namespace Core.ViewModels
                         var alertConfig = new InteractiveAlertConfig
                         {
                             OkButton = new InteractiveActionButton(),
-                            Title = "Error During Weather Checking",
+                            Title = "Error",
                             Message = "Something is going wrong, don't worry we will navigate you to Search again!",
                             Style = InteractiveAlertStyle.Error,
                             IsCancellable = false

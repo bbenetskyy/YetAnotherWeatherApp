@@ -18,12 +18,12 @@ namespace iOS.Views
         {
             base.ViewDidLoad();
 
-            //var set = this.CreateBindingSet<SearchView, SearchViewModel>();
+            var set = this.CreateBindingSet<SearchView, SearchViewModel>();
 
-            //set.Bind(searchTextField).To(vm => vm.CityName);
-            //set.Bind(searchButton).To(vm => vm.CheckWeatherCommand);
+            set.Bind(searchTextField).To(vm => vm.CityName);
+            set.Bind(searchButton).To(vm => vm.CheckWeatherCommand);
 
-            //set.Apply();
+            set.Apply();
         }
     }
 }
