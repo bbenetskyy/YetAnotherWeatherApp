@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hhP-hi-JfS">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Search View-->
+        <!--View Controller-->
+        <scene sceneID="vaj-tv-Yfv">
+            <objects>
+                <viewController id="hhP-hi-JfS" sceneMemberID="viewController" customClass="SearchView" storyboardIdentifier="SearchView">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HaF-73-5SK"/>
+                        <viewControllerLayoutGuide type="bottom" id="Wwm-OV-EMe"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Mxh-Du-VSW">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="500" fixedFrame="YES">
+                                <rect key="frame" x="16" y="177" width="288" height="29"/>
+                                <color key="tintColor" colorSpace="calibratedWhite" white="0" alpha="0"/>
+                                <color key="backgroundColor" colorSpace="calibratedRGB" red="0.14509803921568629" green="0.47843137254901963" blue="0.97254901960784312" alpha="1"/>
+                                <state key="normal" title="Search">
+                                    <color key="titleColor" colorSpace="calibratedWhite" white="1" alpha="1"/>
+                                </state>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="1863" translatesAutoresizingMaskIntoConstraints="NO" placeholder="Enter City name" fixedFrame="YES">
+                                <rect key="frame" x="16" y="138" width="288" height="31"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" searchField="YES"/>
+                                </accessibility>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </textField>
+                            <navigationBar contentMode="scaleToFill" id="2094" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                                <rect key="frame" x="0.0" y="6" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Check Weather" id="2095"/>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="searchButton" destination="500" id="name-outlet-500"/>
+                        <outlet property="searchTextField" destination="1863" id="name-outlet-1863"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aYG-jL-vDV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1081" y="-352"/>
+        </scene>
+        <!--Navigation Controller-->
+    </scenes>
+</document>

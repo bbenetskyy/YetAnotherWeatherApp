@@ -54,13 +54,14 @@ namespace Core.ViewModels
                     {
                         var currentWeather = await apiClient.GetWeatherByCityNameAsync(weatherDetails?.CityName);
                         weatherDetails = mapper.Map<CurrentWeatherResponse, WeatherDetails>(currentWeather);
+                        await RaiseAllPropertiesChanged();
                     }
                     catch (Exception ex) when (ex is AggregateException || ex is ArgumentException)
                     {
                         var alertConfig = new InteractiveAlertConfig
                         {
                             OkButton = new InteractiveActionButton(),
-                            Title = "Error During Weather Checking",
+                            Title = "Error",
                             Message = "Something is going wrong, don't worry we will navigate you to Search again!",
                             Style = InteractiveAlertStyle.Error,
                             IsCancellable = false
@@ -72,6 +73,17 @@ namespace Core.ViewModels
                     {
                         IsLoading = false;
                     }
+                }));
+            }
+        }
+        private IMvxAsyncCommand backCommand;
+        public IMvxAsyncCommand BackCommand
+        {
+            get
+            {
+                return backCommand ?? (backCommand = new MvxAsyncCommand(async () =>
+                {
+                    await navigationService.Navigate<SearchViewModel>();
                 }));
             }
         }

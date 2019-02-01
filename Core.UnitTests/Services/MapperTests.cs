@@ -32,9 +32,9 @@ namespace Core.UnitTests.Services
             weatherDetails.ShouldNotBeNull();
             weatherDetails.CityName.ShouldBe(currentWeather.City.Name);
             weatherDetails.Description.ShouldBe(currentWeather.Weather.Value);
-            weatherDetails.CurrentTemperature.ShouldBe($"{currentWeather.Temperature.Value} {currentWeather.Temperature.Unit}");
-            weatherDetails.MinTemperature.ShouldBe($"{currentWeather.Temperature.Min} {currentWeather.Temperature.Unit}");
-            weatherDetails.MaxTemperature.ShouldBe($"{currentWeather.Temperature.Max} {currentWeather.Temperature.Unit}");
+            weatherDetails.CurrentTemperature.ShouldBe($"{currentWeather.Temperature.Value} °C");
+            weatherDetails.MinTemperature.ShouldBe($"{currentWeather.Temperature.Min} °C");
+            weatherDetails.MaxTemperature.ShouldBe($"{currentWeather.Temperature.Max} °C");
         }
     }
 }

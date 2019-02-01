@@ -15,7 +15,7 @@ namespace Core.UnitTests.TestData
                 Value = 10,
                 Max = 12,
                 Min = 9,
-                Unit = "°C"
+                Unit = "metric"
             },
             City = new City
             {

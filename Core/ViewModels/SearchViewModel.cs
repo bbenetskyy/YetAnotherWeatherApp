@@ -64,13 +64,15 @@ namespace Core.ViewModels
                         await navigationService.Navigate<WeatherDetailsViewModel, WeatherDetails>(
                             mapper.Map<CurrentWeatherResponse, WeatherDetails>(currentWeather));
                     }
-                    catch (Exception ex) when (ex is AggregateException || ex is ArgumentException)
+                    catch (Exception ex) when (ex is AggregateException
+                                               || ex is ArgumentException
+                                               || ex is OpenWeatherMapException)
                     {
                         var alertConfig = new InteractiveAlertConfig
                         {
                             OkButton = new InteractiveActionButton(),
-                            Title = "Error During Weather Checking",
-                            Message = "City Name is incorrect!",
+                            Title = "Error",
+                            Message = "City name is incorrect!",
                             Style = InteractiveAlertStyle.Error,
                             IsCancellable = false
                         };

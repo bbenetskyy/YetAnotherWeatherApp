@@ -16,11 +16,11 @@ namespace Core.Services
                     .ForMember(dest => dest.Description,
                         m => m.MapFrom(src => src.Weather.Value))
                     .ForMember(dest => dest.CurrentTemperature,
-                        m => m.MapFrom(src => $"{src.Temperature.Value} {src.Temperature.Unit}"))
+                        m => m.MapFrom(src => $"{src.Temperature.Value} °C"))
                     .ForMember(dest => dest.MinTemperature,
-                        m => m.MapFrom(src => $"{src.Temperature.Min} {src.Temperature.Unit}"))
+                        m => m.MapFrom(src => $"{src.Temperature.Min} °C"))
                     .ForMember(dest => dest.MaxTemperature,
-                        m => m.MapFrom(src => $"{src.Temperature.Max} {src.Temperature.Unit}"));
+                        m => m.MapFrom(src => $"{src.Temperature.Max} °C"));
             });
             config.AssertConfigurationIsValid();
             return config.CreateMapper();

@@ -16,7 +16,7 @@ namespace API
 
         public Task<CurrentWeatherResponse> GetWeatherByCityNameAsync(string cityName)
         {
-            return client.CurrentWeather.GetByName(cityName);
+            return client.CurrentWeather.GetByName(cityName,MetricSystem.Metric);
         }
     }
 }

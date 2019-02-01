@@ -70,13 +70,11 @@ namespace Core.UnitTests.ViewModels
             vm.MaxTemperature.ShouldBe(WeatherDetailsTestData.FakeWeatherDetails.MaxTemperature);
             vm.MinTemperature.ShouldBe(WeatherDetailsTestData.FakeWeatherDetails.MinTemperature);
             vm.Description.ShouldBe(WeatherDetailsTestData.FakeWeatherDetails.Description);
-
         }
 
         [Test]
         public async Task RefreshWeatherCommand_Should_Call_Api_With_Same_CityName()
         {
-
             //Arrange
             base.Setup();
             var vm = Ioc.IoCConstruct<WeatherDetailsViewModel>();
@@ -92,11 +90,9 @@ namespace Core.UnitTests.ViewModels
             interactiveMock.Verify(i => i.ShowAlert(It.IsAny<InteractiveAlertConfig>()), Times.Never);
         }
 
-
         [Test]
         public async Task RefreshWeatherCommand_Should_Navigate_To_SearchViewModel_If_Api_Throw_An_Error()
         {
-
             //Arrange
             base.Setup();
             var vm = Ioc.IoCConstruct<WeatherDetailsViewModel>();
@@ -109,6 +105,23 @@ namespace Core.UnitTests.ViewModels
             navigationMock.Verify(n => n.Navigate<SearchViewModel>(null, default(CancellationToken)),
                 Times.Once);
             interactiveMock.Verify(i => i.ShowAlert(It.IsAny<InteractiveAlertConfig>()), Times.Once);
+        }
+
+        [Test]
+        public async Task BackCommand_Should_Navigate_To_SearchViewModel()
+        {
+            //Arrange
+            base.Setup();
+            var vm = Ioc.IoCConstruct<WeatherDetailsViewModel>();
+
+            //Act
+            await vm.BackCommand.ExecuteAsync();
+
+            //Assert
+            apiMock.Verify(a => a.GetWeatherByCityNameAsync(vm.CityName), Times.Never);
+            navigationMock.Verify(n => n.Navigate<SearchViewModel>(null, default(CancellationToken)),
+                Times.Once);
+            interactiveMock.Verify(i => i.ShowAlert(It.IsAny<InteractiveAlertConfig>()), Times.Never);
         }
 
     }
