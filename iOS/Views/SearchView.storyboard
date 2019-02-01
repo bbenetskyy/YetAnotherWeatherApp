@@ -11,7 +11,7 @@
         <!--Search View-->
         <scene sceneID="8D2-Ie-ca2">
             <objects>
-                <viewController id="pTA-rc-DD1" customClass="SearchView" sceneMemberID="viewController" storyboardIdentifier="SearchView">
+                <viewController id="pTA-rc-DD1" customClass="SearchView" sceneMemberID="viewController" storyboardIdentifier="SearchView" useStoryboardIdentifierAsRestorationIdentifier="YES">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UzT-9b-Z31"/>
                         <viewControllerLayoutGuide type="bottom" id="1ft-Pj-osX"/>
@@ -19,36 +19,15 @@
                     <view key="view" contentMode="scaleToFill" id="GTi-us-rcK" customClass="SearchView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8or-hI-NFw" fixedFrame="YES">
-                                <rect key="frame" x="16" y="138" width="343" height="30"/>
-                                <color key="tintColor" colorSpace="calibratedWhite" white="0" alpha="0"/>
-                                <color key="backgroundColor" colorSpace="calibratedRGB" red="0.082352941176470587" green="0.52549019607843139" blue="1" alpha="1"/>
-                                <state key="normal" title="Check Weather">
-                                    <color key="titleColor" colorSpace="calibratedWhite" white="1" alpha="1"/>
-                                </state>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pV6-D9-0SP" placeholder="Enter City name">
-                                <rect key="frame" x="16" y="92" width="343" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint id="252" firstItem="pV6-D9-0SP" firstAttribute="centerX" secondItem="GTi-us-rcK" secondAttribute="centerX"/>
-                            <constraint id="253" firstAttribute="centerY" secondItem="pV6-D9-0SP" secondAttribute="centerY" constant="226"/>
-                            <constraint id="254" firstItem="pV6-D9-0SP" firstAttribute="leading" secondItem="GTi-us-rcK" secondAttribute="leadingMargin"/>
-                            <constraint id="255" firstItem="pV6-D9-0SP" firstAttribute="trailing" secondItem="GTi-us-rcK" secondAttribute="trailingMargin"/>
-                        </constraints>
+                        <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="526" fixedFrame="YES">
+                                <rect key="frame" x="178" y="275" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
+                        </subviews>
                     </view>
                     <navigationItem key="navigationItem" id="jFd-lR-cwB" title="Search"/>
-                    <connections>
-                        <outlet property="searchTextField" destination="pV6-D9-0SP" id="name-outlet-pV6-D9-0SP"/>
-                        <outlet property="searchButton" destination="8or-hI-NFw" id="name-outlet-8or-hI-NFw"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xry-Ad-dLw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

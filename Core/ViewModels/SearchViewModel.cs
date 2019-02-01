@@ -1,5 +1,4 @@
-﻿using System;
-using API;
+﻿using API;
 using AutoMapper;
 using Core.Models;
 using InteractiveAlert;
@@ -7,6 +6,7 @@ using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using OpenWeatherMap;
+using System;
 
 namespace Core.ViewModels
 {
@@ -18,10 +18,10 @@ namespace Core.ViewModels
         private readonly IInteractiveAlerts interactiveAlerts;
 
         public SearchViewModel(
-        IApiClient apiClient,
-        IMapper mapper,
-        IMvxNavigationService navigationService,
-        IInteractiveAlerts interactiveAlerts)
+            IApiClient apiClient,
+            IMapper mapper,
+            IMvxNavigationService navigationService,
+            IInteractiveAlerts interactiveAlerts)
         {
             this.mapper = mapper;
             this.apiClient = apiClient;

@@ -13,25 +13,8 @@ namespace iOS.Views
     [Register ("SearchView")]
     partial class SearchView
     {
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton searchButton { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField searchTextField { get; set; }
-
         void ReleaseDesignerOutlets ()
         {
-            if (searchButton != null) {
-                searchButton.Dispose ();
-                searchButton = null;
-            }
-
-            if (searchTextField != null) {
-                searchTextField.Dispose ();
-                searchTextField = null;
-            }
         }
     }
 }
