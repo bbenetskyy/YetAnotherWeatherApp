@@ -75,7 +75,6 @@ namespace Core.UnitTests.ViewModels
         [Test]
         public async Task RefreshWeatherCommand_Should_Call_Api_With_Same_CityName()
         {
-
             //Arrange
             base.Setup();
             var vm = Ioc.IoCConstruct<WeatherDetailsViewModel>();
@@ -91,11 +90,9 @@ namespace Core.UnitTests.ViewModels
             interactiveMock.Verify(i => i.ShowAlert(It.IsAny<InteractiveAlertConfig>()), Times.Never);
         }
 
-
         [Test]
         public async Task RefreshWeatherCommand_Should_Navigate_To_SearchViewModel_If_Api_Throw_An_Error()
         {
-
             //Arrange
             base.Setup();
             var vm = Ioc.IoCConstruct<WeatherDetailsViewModel>();
@@ -113,7 +110,6 @@ namespace Core.UnitTests.ViewModels
         [Test]
         public async Task BackCommand_Should_Navigate_To_SearchViewModel()
         {
-
             //Arrange
             base.Setup();
             var vm = Ioc.IoCConstruct<WeatherDetailsViewModel>();
