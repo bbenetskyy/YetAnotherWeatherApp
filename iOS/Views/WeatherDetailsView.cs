@@ -5,7 +5,7 @@ using System;
 
 namespace iOS.Views
 {
-    [MvxFromStoryboard("WeatherDetailsView")]
+    [MvxFromStoryboard]
     public partial class WeatherDetailsView : MvxViewController<WeatherDetailsViewModel>
     {
         public WeatherDetailsView(IntPtr handle) : base(handle)

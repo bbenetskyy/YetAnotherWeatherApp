@@ -1,25 +1,32 @@
-﻿using MvvmCross.Commands;
+﻿using System;
+using API;
+using AutoMapper;
+using Core.Models;
+using InteractiveAlert;
+using MvvmCross.Commands;
+using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
+using OpenWeatherMap;
 
 namespace Core.ViewModels
 {
     public class SearchViewModel : MvxViewModel
     {
-        //private readonly IMapper mapper;
-        //private readonly IApiClient apiClient;
-        //private readonly IMvxNavigationService navigationService;
-        //private readonly IInteractiveAlerts interactiveAlerts;
+        private readonly IMapper mapper;
+        private readonly IApiClient apiClient;
+        private readonly IMvxNavigationService navigationService;
+        private readonly IInteractiveAlerts interactiveAlerts;
 
-        public SearchViewModel()
-        //IApiClient apiClient,
-        //IMapper mapper,
-        //IMvxNavigationService navigationService,
-        //IInteractiveAlerts interactiveAlerts)
+        public SearchViewModel(
+        IApiClient apiClient,
+        IMapper mapper,
+        IMvxNavigationService navigationService,
+        IInteractiveAlerts interactiveAlerts)
         {
-            //this.mapper = mapper;
-            //this.apiClient = apiClient;
-            //this.navigationService = navigationService;
-            //this.interactiveAlerts = interactiveAlerts;
+            this.mapper = mapper;
+            this.apiClient = apiClient;
+            this.navigationService = navigationService;
+            this.interactiveAlerts = interactiveAlerts;
         }
 
         private string cityName;
@@ -51,28 +58,28 @@ namespace Core.ViewModels
                 return checkWeatherCommand ?? (checkWeatherCommand = new MvxAsyncCommand(async () =>
                 {
                     IsLoading = true;
-                    //try
-                    //{
-                    //    var currentWeather = await apiClient.GetWeatherByCityNameAsync(cityName);
-                    //    await navigationService.Navigate<WeatherDetailsViewModel, WeatherDetails>(
-                    //        mapper.Map<CurrentWeatherResponse, WeatherDetails>(currentWeather));
-                    //}
-                    //catch (Exception ex) when (ex is AggregateException || ex is ArgumentException)
-                    //{
-                    //    var alertConfig = new InteractiveAlertConfig
-                    //    {
-                    //        OkButton = new InteractiveActionButton(),
-                    //        Title = "Error During Weather Checking",
-                    //        Message = "City Name is incorrect!",
-                    //        Style = InteractiveAlertStyle.Error,
-                    //        IsCancellable = false
-                    //    };
-                    //    interactiveAlerts.ShowAlert(alertConfig);
-                    //}
-                    //finally
-                    //{
-                    //    IsLoading = false;
-                    //}
+                    try
+                    {
+                        var currentWeather = await apiClient.GetWeatherByCityNameAsync(cityName);
+                        await navigationService.Navigate<WeatherDetailsViewModel, WeatherDetails>(
+                            mapper.Map<CurrentWeatherResponse, WeatherDetails>(currentWeather));
+                    }
+                    catch (Exception ex) when (ex is AggregateException || ex is ArgumentException)
+                    {
+                        var alertConfig = new InteractiveAlertConfig
+                        {
+                            OkButton = new InteractiveActionButton(),
+                            Title = "Error During Weather Checking",
+                            Message = "City Name is incorrect!",
+                            Style = InteractiveAlertStyle.Error,
+                            IsCancellable = false
+                        };
+                        interactiveAlerts.ShowAlert(alertConfig);
+                    }
+                    finally
+                    {
+                        IsLoading = false;
+                    }
                 }, () => !string.IsNullOrEmpty(CityName)));
             }
         }
