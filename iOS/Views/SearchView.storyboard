@@ -22,15 +22,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="500" misplaced="YES">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="500" fixedFrame="YES">
                                 <rect key="frame" x="16" y="177" width="288" height="29"/>
                                 <color key="tintColor" colorSpace="calibratedWhite" white="0" alpha="0"/>
-                                <color key="backgroundColor" colorSpace="calibratedRGB" red="0.082352941176470587" green="0.52549019607843139" blue="1" alpha="1"/>
-                                <state key="normal" title="Refresh">
+                                <color key="backgroundColor" colorSpace="calibratedRGB" red="0.14509803921568629" green="0.47843137254901963" blue="0.97254901960784312" alpha="1"/>
+                                <state key="normal" title="Search">
                                     <color key="titleColor" colorSpace="calibratedWhite" white="1" alpha="1"/>
                                 </state>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="1863" translatesAutoresizingMaskIntoConstraints="NO" placeholder="Enter City name" misplaced="YES">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="1863" translatesAutoresizingMaskIntoConstraints="NO" placeholder="Enter City name" fixedFrame="YES">
                                 <rect key="frame" x="16" y="138" width="288" height="31"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -38,18 +39,9 @@
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" searchField="YES"/>
                                 </accessibility>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             </textField>
                         </subviews>
-                        <constraints>
-                            <constraint id="3022" firstItem="1863" firstAttribute="leading" secondItem="Mxh-Du-VSW" secondAttribute="leadingMargin"/>
-                            <constraint id="3023" firstItem="1863" firstAttribute="trailing" secondItem="Mxh-Du-VSW" secondAttribute="trailingMargin"/>
-                            <constraint id="3027" firstItem="1863" firstAttribute="centerX" secondItem="Mxh-Du-VSW" secondAttribute="centerX"/>
-                            <constraint id="3030" firstItem="500" firstAttribute="leading" secondItem="Mxh-Du-VSW" secondAttribute="leadingMargin"/>
-                            <constraint id="3031" firstItem="500" firstAttribute="trailing" secondItem="Mxh-Du-VSW" secondAttribute="trailingMargin"/>
-                            <constraint id="3032" firstItem="500" firstAttribute="top" secondItem="1863" secondAttribute="bottom" constant="8"/>
-                            <constraint id="3033" firstItem="500" firstAttribute="height" secondItem="1863" secondAttribute="height"/>
-                            <constraint id="3553" firstItem="1863" firstAttribute="top" secondItem="HaF-73-5SK" secondAttribute="bottom" constant="118"/>
-                        </constraints>
                     </view>
                     <connections>
                         <outlet property="searchButton" destination="500" id="name-outlet-500"/>
