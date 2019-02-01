@@ -24,7 +24,6 @@ namespace API.IntegrationTests
             weatherData.City.ShouldNotBeNull();
             weatherData.City.Name.ShouldBe(cityName);
             weatherData.Weather.ShouldNotBeNull();
-
         }
 
         [TestCase("London2")]

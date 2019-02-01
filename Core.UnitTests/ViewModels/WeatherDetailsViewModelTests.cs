@@ -70,7 +70,6 @@ namespace Core.UnitTests.ViewModels
             vm.MaxTemperature.ShouldBe(WeatherDetailsTestData.FakeWeatherDetails.MaxTemperature);
             vm.MinTemperature.ShouldBe(WeatherDetailsTestData.FakeWeatherDetails.MinTemperature);
             vm.Description.ShouldBe(WeatherDetailsTestData.FakeWeatherDetails.Description);
-
         }
 
         [Test]
