@@ -24,16 +24,6 @@ namespace Android
     {
         protected override void InitializePlatformServices()
         {
-            var s1 = Mvx.IoCProvider.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
-            var s2 = (AppCompatActivity)s1;
-            base.InitializePlatformServices();
-            InteractiveAlerts.Init(() =>s2);
         }
-
-        protected override IMvxAndroidViewPresenter CreateViewPresenter()
-        {
-            return new MvxAppCompatViewPresenter(AndroidViewAssemblies);
-        }
-
     }
 }

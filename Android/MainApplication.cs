@@ -1,6 +1,7 @@
 ﻿using System;
 using Android.App;
 using Android.Runtime;
+using Android.Support.V7.App;
 using Android.Views;
 using InteractiveAlert;
 using MvvmCross;
@@ -16,7 +17,8 @@ namespace Android
     {
         public MainApplication(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {
+        {   
         }
+        
     }
 }

@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Core.ViewModels;
+using InteractiveAlert;
 using MvvmCross.Droid.Support.V7.AppCompat;
 
 namespace Android.Views
@@ -19,6 +20,7 @@ namespace Android.Views
     {
         protected override void OnCreate(Bundle bundle)
         {
+            InteractiveAlerts.Init(() => this);
             base.OnCreate(bundle);
 #pragma warning disable CS0436 // Type conflicts with imported type
             SetContentView(Resource.Layout.SearchView);
