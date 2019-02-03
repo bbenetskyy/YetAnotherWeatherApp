@@ -9,13 +9,13 @@
 		android:paddingTop="100"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:id="@+id/editText1" 
+		android:id="@+id/searchEditText" 
 		local:MvxBind="Text CityName"
 		android:hint="Enter City name"/>
 	<Button
 		android:text="Search"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:id="@+id/button1"
+		android:id="@+id/searchButton"
 		local:MvxBind="Click CheckWeatherCommand"/>
 </LinearLayout>
