@@ -11,7 +11,9 @@ using Android.Views;
 using Android.Widget;
 using Core.ViewModels;
 using InteractiveAlert;
+using MvvmCross;
 using MvvmCross.Droid.Support.V7.AppCompat;
+using MvvmCross.ViewModels;
 
 namespace Android.Views
 {
