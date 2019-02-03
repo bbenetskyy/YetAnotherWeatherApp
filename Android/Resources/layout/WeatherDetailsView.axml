@@ -2,7 +2,7 @@
 <GridLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:local="http://schemas.android.com/apk/res-auto"
-	android:paddingTop="25"
+	android:paddingTop="25px"
 	android:layout_width="fill_parent"
 	android:layout_height="wrap_content"
 	android:rowCount="6"
@@ -18,12 +18,10 @@
 		android:textStyle="bold"
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"
+		android:textAlignment="center"
 		local:MvxBind="Text CityName"
-		android:layout_marginBottom="10"
-		android:id="@+id/cityNameText"
-		local:MvxBind="Text CityName"
-		android:gravity="center_horizontal"
-		android:layout_gravity="center_vertical"/>
+		android:layout_marginBottom="10px"
+		android:id="@+id/cityNameText"/>
 
 	<TextView
 		android:text="Description:"
@@ -33,8 +31,8 @@
 		android:layout_height="fill_parent"
 		android:layout_gravity="fill"
 		android:layout_columnWeight="1"
-		android:layout_marginBottom="10"
-		android:layout_marginRight="10"
+		android:layout_marginBottom="10px"
+		android:layout_marginRight="10px"
 		android:textAlignment="textEnd"/>
 	<TextView
 		android:text="Niew Weather"
@@ -44,7 +42,7 @@
 		android:layout_height="fill_parent"
 		android:layout_gravity="fill"
 		android:layout_columnWeight="1"
-		android:layout_marginLeft="10"
+		android:layout_marginLeft="10px"
 		local:MvxBind="Text Description"
 		android:id="@+id/descriptionText"/>
 
@@ -56,8 +54,8 @@
 		android:layout_height="fill_parent"
 		android:layout_gravity="fill"
 		android:layout_columnWeight="1"
-		android:layout_marginBottom="10"
-		android:layout_marginRight="10"
+		android:layout_marginBottom="10px"
+		android:layout_marginRight="10px"
 		android:textAlignment="textEnd"/>
 	<TextView
 		android:text="10 °C"
@@ -67,7 +65,7 @@
 		android:layout_height="fill_parent"
 		android:layout_gravity="fill"
 		android:layout_columnWeight="1"
-		android:layout_marginLeft="10"
+		android:layout_marginLeft="10px"
 		local:MvxBind="Text CurrentTemperature"
 		android:id="@+id/currentTemperatureText"/>
 
@@ -79,8 +77,8 @@
 		android:layout_height="fill_parent"
 		android:layout_gravity="fill"
 		android:layout_columnWeight="1"
-		android:layout_marginBottom="10"
-		android:layout_marginRight="10"
+		android:layout_marginBottom="10px"
+		android:layout_marginRight="10px"
 		android:textAlignment="textEnd"/>
 	<TextView
 		android:text="9 °C"
@@ -90,7 +88,7 @@
 		android:layout_height="fill_parent"
 		android:layout_gravity="fill"
 		android:layout_columnWeight="1"
-		android:layout_marginLeft="10"
+		android:layout_marginLeft="10px"
 		local:MvxBind="Text MinTemperature"
 		android:id="@+id/minTemperatureText"/>
 
@@ -102,8 +100,8 @@
 		android:layout_height="fill_parent"
 		android:layout_gravity="fill"
 		android:layout_columnWeight="1"
-		android:layout_marginBottom="10"
-		android:layout_marginRight="10"
+		android:layout_marginBottom="10px"
+		android:layout_marginRight="10px"
 		android:textAlignment="textEnd"/>
 	<TextView
 		android:text="12 °C"
@@ -113,7 +111,7 @@
 		android:layout_height="fill_parent"
 		android:layout_gravity="fill"
 		android:layout_columnWeight="1"
-		android:layout_marginLeft="10"
+		android:layout_marginLeft="10px"
 		local:MvxBind="Text MaxTemperature"
 		android:id="@+id/maxTemperatureText"/>
 

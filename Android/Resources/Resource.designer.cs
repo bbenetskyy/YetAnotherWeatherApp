@@ -8074,9 +8074,6 @@ namespace Android
 			// aapt resource value: 0x7f09003f
 			public const int bottom = 2131296319;
 			
-			// aapt resource value: 0x7f0900b6
-			public const int button1 = 2131296438;
-			
 			// aapt resource value: 0x7f090065
 			public const int buttonPanel = 2131296357;
 			
@@ -8098,6 +8095,9 @@ namespace Android
 			// aapt resource value: 0x7f0900ae
 			public const int chronometer = 2131296430;
 			
+			// aapt resource value: 0x7f0900c0
+			public const int cityNameText = 2131296448;
+			
 			// aapt resource value: 0x7f090050
 			public const int clip_horizontal = 2131296336;
 			
@@ -8116,6 +8116,9 @@ namespace Android
 			// aapt resource value: 0x7f090095
 			public const int coordinator = 2131296405;
 			
+			// aapt resource value: 0x7f0900c2
+			public const int currentTemperatureText = 2131296450;
+			
 			// aapt resource value: 0x7f09006f
 			public const int custom = 2131296367;
 			
@@ -8127,6 +8130,9 @@ namespace Android
 			
 			// aapt resource value: 0x7f090062
 			public const int default_activity_button = 2131296354;
+			
+			// aapt resource value: 0x7f0900c1
+			public const int descriptionText = 2131296449;
 			
 			// aapt resource value: 0x7f090097
 			public const int design_bottom_sheet = 2131296407;
@@ -8145,9 +8151,6 @@ namespace Android
 			
 			// aapt resource value: 0x7f090022
 			public const int disableHome = 2131296290;
-			
-			// aapt resource value: 0x7f0900b5
-			public const int editText1 = 2131296437;
 			
 			// aapt resource value: 0x7f090080
 			public const int edit_query = 2131296384;
@@ -8245,8 +8248,14 @@ namespace Android
 			// aapt resource value: 0x7f09008d
 			public const int loading = 2131296397;
 			
-			// aapt resource value: 0x7f0900c0
-			public const int masked = 2131296448;
+			// aapt resource value: 0x7f0900bf
+			public const int mainGrid = 2131296447;
+			
+			// aapt resource value: 0x7f0900c7
+			public const int masked = 2131296455;
+			
+			// aapt resource value: 0x7f0900c4
+			public const int maxTemperatureText = 2131296452;
 			
 			// aapt resource value: 0x7f0900a8
 			public const int media_actions = 2131296424;
@@ -8256,6 +8265,9 @@ namespace Android
 			
 			// aapt resource value: 0x7f090033
 			public const int middle = 2131296307;
+			
+			// aapt resource value: 0x7f0900c3
+			public const int minTemperatureText = 2131296451;
 			
 			// aapt resource value: 0x7f090055
 			public const int mini = 2131296341;
@@ -8305,6 +8317,9 @@ namespace Android
 			// aapt resource value: 0x7f090077
 			public const int radio = 2131296375;
 			
+			// aapt resource value: 0x7f0900c5
+			public const int refreshButton = 2131296453;
+			
 			// aapt resource value: 0x7f09004c
 			public const int right = 2131296332;
 			
@@ -8340,6 +8355,12 @@ namespace Android
 			
 			// aapt resource value: 0x7f090057
 			public const int scrollable = 2131296343;
+			
+			// aapt resource value: 0x7f0900b6
+			public const int searchButton = 2131296438;
+			
+			// aapt resource value: 0x7f0900b5
+			public const int searchEditText = 2131296437;
 			
 			// aapt resource value: 0x7f090082
 			public const int search_badge = 2131296386;
@@ -8512,8 +8533,8 @@ namespace Android
 			// aapt resource value: 0x7f090016
 			public const int view_offset_helper = 2131296278;
 			
-			// aapt resource value: 0x7f0900bf
-			public const int visible = 2131296447;
+			// aapt resource value: 0x7f0900c6
+			public const int visible = 2131296454;
 			
 			// aapt resource value: 0x7f0900bc
 			public const int wait_top_frame = 2131296444;
@@ -8786,6 +8807,9 @@ namespace Android
 			
 			// aapt resource value: 0x7f040042
 			public const int warning_top_view = 2130968642;
+			
+			// aapt resource value: 0x7f040043
+			public const int WeatherDetailsView = 2130968643;
 			
 			static Layout()
 			{
