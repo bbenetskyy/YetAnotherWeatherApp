@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:local="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:local="http://schemas.android.com/apk/res-auto"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
 	<EditText
+		android:paddingTop="100"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		local:MvxBind="Text CityName"/>
+		android:layout_height="wrap_content"
+		android:id="@+id/editText1" 
+		local:MvxBind="Text CityName"
+		android:hint="Enter City name"/>
 	<Button
+		android:text="Search"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent" 
-	    local:MvxBind="Click CheckWeatherCommand"/>
+		android:layout_height="wrap_content"
+		android:id="@+id/button1"
+		local:MvxBind="Click CheckWeatherCommand"/>
 </LinearLayout>

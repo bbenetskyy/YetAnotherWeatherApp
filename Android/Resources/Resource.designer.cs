@@ -8074,6 +8074,9 @@ namespace Android
 			// aapt resource value: 0x7f09003f
 			public const int bottom = 2131296319;
 			
+			// aapt resource value: 0x7f0900b6
+			public const int button1 = 2131296438;
+			
 			// aapt resource value: 0x7f090065
 			public const int buttonPanel = 2131296357;
 			
@@ -8142,6 +8145,9 @@ namespace Android
 			
 			// aapt resource value: 0x7f090022
 			public const int disableHome = 2131296290;
+			
+			// aapt resource value: 0x7f0900b5
+			public const int editText1 = 2131296437;
 			
 			// aapt resource value: 0x7f090080
 			public const int edit_query = 2131296384;
@@ -8239,14 +8245,14 @@ namespace Android
 			// aapt resource value: 0x7f09008d
 			public const int loading = 2131296397;
 			
-			// aapt resource value: 0x7f0900be
-			public const int masked = 2131296446;
+			// aapt resource value: 0x7f0900c0
+			public const int masked = 2131296448;
 			
 			// aapt resource value: 0x7f0900a8
 			public const int media_actions = 2131296424;
 			
-			// aapt resource value: 0x7f0900b9
-			public const int message = 2131296441;
+			// aapt resource value: 0x7f0900bb
+			public const int message = 2131296443;
 			
 			// aapt resource value: 0x7f090033
 			public const int middle = 2131296307;
@@ -8419,17 +8425,17 @@ namespace Android
 			// aapt resource value: 0x7f090089
 			public const int submit_area = 2131296393;
 			
-			// aapt resource value: 0x7f0900b5
-			public const int success_top_frame = 2131296437;
-			
 			// aapt resource value: 0x7f0900b7
-			public const int success_top_mask_left = 2131296439;
+			public const int success_top_frame = 2131296439;
 			
-			// aapt resource value: 0x7f0900b6
-			public const int success_top_mask_right = 2131296438;
+			// aapt resource value: 0x7f0900b9
+			public const int success_top_mask_left = 2131296441;
 			
 			// aapt resource value: 0x7f0900b8
-			public const int success_top_tick = 2131296440;
+			public const int success_top_mask_right = 2131296440;
+			
+			// aapt resource value: 0x7f0900ba
+			public const int success_top_tick = 2131296442;
 			
 			// aapt resource value: 0x7f090021
 			public const int tabMode = 2131296289;
@@ -8506,17 +8512,17 @@ namespace Android
 			// aapt resource value: 0x7f090016
 			public const int view_offset_helper = 2131296278;
 			
-			// aapt resource value: 0x7f0900bd
-			public const int visible = 2131296445;
-			
-			// aapt resource value: 0x7f0900ba
-			public const int wait_top_frame = 2131296442;
-			
-			// aapt resource value: 0x7f0900bb
-			public const int wait_top_progressWheel = 2131296443;
+			// aapt resource value: 0x7f0900bf
+			public const int visible = 2131296447;
 			
 			// aapt resource value: 0x7f0900bc
-			public const int warning_top_frame = 2131296444;
+			public const int wait_top_frame = 2131296444;
+			
+			// aapt resource value: 0x7f0900bd
+			public const int wait_top_progressWheel = 2131296445;
+			
+			// aapt resource value: 0x7f0900be
+			public const int warning_top_frame = 2131296446;
 			
 			// aapt resource value: 0x7f09003e
 			public const int withText = 2131296318;
