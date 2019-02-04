@@ -15,18 +15,15 @@ namespace Core.ViewModels
         private readonly IMapper mapper;
         private readonly IApiClient apiClient;
         private readonly IMvxNavigationService navigationService;
-        private readonly IInteractiveAlerts interactiveAlerts;
         private WeatherDetails weatherDetails;
 
         public WeatherDetailsViewModel(IApiClient apiClient,
             IMapper mapper,
-            IMvxNavigationService navigationService,
-            IInteractiveAlerts interactiveAlerts)
+            IMvxNavigationService navigationService)
         {
             this.mapper = mapper;
             this.apiClient = apiClient;
             this.navigationService = navigationService;
-            this.interactiveAlerts = interactiveAlerts;
         }
 
         public string CityName => weatherDetails?.CityName;
@@ -58,6 +55,7 @@ namespace Core.ViewModels
                     }
                     catch (Exception ex) when (ex is AggregateException || ex is ArgumentException)
                     {
+                        var interactiveAlerts = MvvmCross.Mvx.IoCProvider.Resolve<IInteractiveAlerts>();
                         var alertConfig = new InteractiveAlertConfig
                         {
                             OkButton = new InteractiveActionButton(),

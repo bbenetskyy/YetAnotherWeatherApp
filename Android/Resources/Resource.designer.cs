@@ -7830,26 +7830,26 @@ namespace Android
 			// aapt resource value: 0x7f020053
 			public const int avd_hide_password = 2130837587;
 			
-			// aapt resource value: 0x7f020072
-			public const int avd_hide_password_1 = 2130837618;
-			
 			// aapt resource value: 0x7f020073
-			public const int avd_hide_password_2 = 2130837619;
+			public const int avd_hide_password_1 = 2130837619;
 			
 			// aapt resource value: 0x7f020074
-			public const int avd_hide_password_3 = 2130837620;
+			public const int avd_hide_password_2 = 2130837620;
+			
+			// aapt resource value: 0x7f020075
+			public const int avd_hide_password_3 = 2130837621;
 			
 			// aapt resource value: 0x7f020054
 			public const int avd_show_password = 2130837588;
 			
-			// aapt resource value: 0x7f020075
-			public const int avd_show_password_1 = 2130837621;
-			
 			// aapt resource value: 0x7f020076
-			public const int avd_show_password_2 = 2130837622;
+			public const int avd_show_password_1 = 2130837622;
 			
 			// aapt resource value: 0x7f020077
-			public const int avd_show_password_3 = 2130837623;
+			public const int avd_show_password_2 = 2130837623;
+			
+			// aapt resource value: 0x7f020078
+			public const int avd_show_password_3 = 2130837624;
 			
 			// aapt resource value: 0x7f020055
 			public const int design_bottom_navigation_item_background = 2130837589;
@@ -7908,11 +7908,11 @@ namespace Android
 			// aapt resource value: 0x7f020067
 			public const int notification_icon_background = 2130837607;
 			
-			// aapt resource value: 0x7f020070
-			public const int notification_template_icon_bg = 2130837616;
-			
 			// aapt resource value: 0x7f020071
-			public const int notification_template_icon_low_bg = 2130837617;
+			public const int notification_template_icon_bg = 2130837617;
+			
+			// aapt resource value: 0x7f020072
+			public const int notification_template_icon_low_bg = 2130837618;
 			
 			// aapt resource value: 0x7f020068
 			public const int notification_tile_bg = 2130837608;
@@ -7927,16 +7927,19 @@ namespace Android
 			public const int success_circle = 2130837611;
 			
 			// aapt resource value: 0x7f02006c
-			public const int tooltip_frame_dark = 2130837612;
+			public const int temperature = 2130837612;
 			
 			// aapt resource value: 0x7f02006d
-			public const int tooltip_frame_light = 2130837613;
+			public const int tooltip_frame_dark = 2130837613;
 			
 			// aapt resource value: 0x7f02006e
-			public const int warning_circle = 2130837614;
+			public const int tooltip_frame_light = 2130837614;
 			
 			// aapt resource value: 0x7f02006f
-			public const int warning_sigh = 2130837615;
+			public const int warning_circle = 2130837615;
+			
+			// aapt resource value: 0x7f020070
+			public const int warning_sigh = 2130837616;
 			
 			static Drawable()
 			{
@@ -8806,22 +8809,25 @@ namespace Android
 			public const int select_dialog_singlechoice_material = 2130968637;
 			
 			// aapt resource value: 0x7f04003e
-			public const int success_top_view = 2130968638;
+			public const int SplashScreen = 2130968638;
 			
 			// aapt resource value: 0x7f04003f
-			public const int support_simple_spinner_dropdown_item = 2130968639;
+			public const int success_top_view = 2130968639;
 			
 			// aapt resource value: 0x7f040040
-			public const int tooltip = 2130968640;
+			public const int support_simple_spinner_dropdown_item = 2130968640;
 			
 			// aapt resource value: 0x7f040041
-			public const int wait_top_view = 2130968641;
+			public const int tooltip = 2130968641;
 			
 			// aapt resource value: 0x7f040042
-			public const int warning_top_view = 2130968642;
+			public const int wait_top_view = 2130968642;
 			
 			// aapt resource value: 0x7f040043
-			public const int WeatherDetailsView = 2130968643;
+			public const int warning_top_view = 2130968643;
+			
+			// aapt resource value: 0x7f040044
+			public const int WeatherDetailsView = 2130968644;
 			
 			static Layout()
 			{
@@ -8981,11 +8987,17 @@ namespace Android
 			// aapt resource value: 0x7f0a0011
 			public const int search_menu_title = 2131361809;
 			
+			// aapt resource value: 0x7f0a002b
+			public const int search_view = 2131361835;
+			
 			// aapt resource value: 0x7f0a0026
 			public const int status_bar_notification_info_overflow = 2131361830;
 			
 			// aapt resource value: 0x7f0a0028
 			public const int view_scroll_translation_autohide_behavior = 2131361832;
+			
+			// aapt resource value: 0x7f0a002c
+			public const int weather_details_view = 2131361836;
 			
 			static String()
 			{
@@ -9599,6 +9611,9 @@ namespace Android
 			
 			// aapt resource value: 0x7f0b0038
 			public const int RtlUnderlay_Widget_AppCompat_ActionButton_Overflow = 2131427384;
+			
+			// aapt resource value: 0x7f0b0184
+			public const int SplashScreen = 2131427716;
 			
 			// aapt resource value: 0x7f0b00c7
 			public const int TextAppearance_AppCompat = 2131427527;
