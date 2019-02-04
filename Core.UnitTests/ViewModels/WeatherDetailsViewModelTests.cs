@@ -21,7 +21,6 @@ namespace Core.UnitTests.ViewModels
     public class WeatherDetailsViewModelTests : MvxIoCSupportingTest
     {
         private Mock<IApiClient> apiMock;
-        private readonly Mock<IMapper> mapperMock;
         private Mock<IMvxNavigationService> navigationMock;
         private Mock<IInteractiveAlerts> interactiveMock;
 
