@@ -7,6 +7,7 @@ using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using OpenWeatherMap;
 using System;
+using System.Threading.Tasks;
 
 namespace Core.ViewModels
 {
@@ -46,34 +47,11 @@ namespace Core.ViewModels
             {
                 return refreshWeatherCommand ?? (refreshWeatherCommand = new MvxAsyncCommand(async () =>
                 {
-                    IsLoading = true;
-                    try
-                    {
-                        var currentWeather = await apiClient.GetWeatherByCityNameAsync(weatherDetails?.CityName);
-                        weatherDetails = mapper.Map<CurrentWeatherResponse, WeatherDetails>(currentWeather);
-                        await RaiseAllPropertiesChanged();
-                    }
-                    catch (Exception ex) when (ex is AggregateException || ex is ArgumentException)
-                    {
-                        var interactiveAlerts = MvvmCross.Mvx.IoCProvider.Resolve<IInteractiveAlerts>();
-                        var alertConfig = new InteractiveAlertConfig
-                        {
-                            OkButton = new InteractiveActionButton(),
-                            Title = "Error",
-                            Message = "Something is going wrong, don't worry we will navigate you to Search again!",
-                            Style = InteractiveAlertStyle.Error,
-                            IsCancellable = false
-                        };
-                        interactiveAlerts.ShowAlert(alertConfig);
-                        await navigationService.Navigate<SearchViewModel>();
-                    }
-                    finally
-                    {
-                        IsLoading = false;
-                    }
+                    await GetWeather();
                 }));
             }
         }
+
         private IMvxAsyncCommand backCommand;
         public IMvxAsyncCommand BackCommand
         {
@@ -89,6 +67,37 @@ namespace Core.ViewModels
         public override void Prepare(WeatherDetails parameter)
         {
             weatherDetails = parameter;
+        }
+
+        private async Task GetWeather()
+        {
+            IsLoading = true;
+            try
+            {
+                var currentWeather = await apiClient.GetWeatherByCityNameAsync(weatherDetails?.CityName);
+                weatherDetails = mapper.Map<CurrentWeatherResponse, WeatherDetails>(currentWeather);
+                await RaiseAllPropertiesChanged();
+            }
+            catch (Exception ex) when (ex is AggregateException
+                                       || ex is ArgumentException
+                                       || ex is OpenWeatherMapException)
+            {
+                var interactiveAlerts = MvvmCross.Mvx.IoCProvider.Resolve<IInteractiveAlerts>();
+                var alertConfig = new InteractiveAlertConfig
+                {
+                    OkButton = new InteractiveActionButton(),
+                    Title = "Error",
+                    Message = "Something is going wrong, don't worry we will navigate you to Search again!",
+                    Style = InteractiveAlertStyle.Error,
+                    IsCancellable = false
+                };
+                interactiveAlerts.ShowAlert(alertConfig);
+                await navigationService.Navigate<SearchViewModel>();
+            }
+            finally
+            {
+                IsLoading = false;
+            }
         }
     }
 }
