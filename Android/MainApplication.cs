@@ -1,14 +1,7 @@
-﻿using System;
-using Android.App;
+﻿using Android.App;
 using Android.Runtime;
-using Android.Support.V7.App;
-using Android.Views;
-using InteractiveAlert;
-using MvvmCross;
 using MvvmCross.Droid.Support.V7.AppCompat;
-using MvvmCross.Platforms.Android;
-using MvvmCross.Platforms.Android.Core;
-using MvvmCross.Platforms.Android.Views;
+using System;
 
 namespace Android
 {
@@ -17,8 +10,7 @@ namespace Android
     {
         public MainApplication(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {   
+        {
         }
-        
     }
 }

@@ -1,5 +1,4 @@
-﻿
-using Android.App;
+﻿using Android.App;
 using Android.OS;
 using Core.ViewModels;
 using MvvmCross.Droid.Support.V7.AppCompat;
@@ -9,7 +8,6 @@ namespace Android.Views
     [Activity(Label = "Weather Details")]
     public class WeatherDetailsView : MvxAppCompatActivity<WeatherDetailsViewModel>
     {
-
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);

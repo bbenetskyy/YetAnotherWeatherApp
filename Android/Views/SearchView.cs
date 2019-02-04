@@ -1,24 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
+﻿using Android.App;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Core.ViewModels;
 using InteractiveAlert;
-using MvvmCross;
 using MvvmCross.Droid.Support.V7.AppCompat;
-using MvvmCross.ViewModels;
 
 namespace Android.Views
 {
     [Activity(Label = "Search", MainLauncher = true)]
-    public class SearchView: MvxAppCompatActivity<SearchViewModel>
+    public class SearchView : MvxAppCompatActivity<SearchViewModel>
     {
         protected override void OnCreate(Bundle bundle)
         {
