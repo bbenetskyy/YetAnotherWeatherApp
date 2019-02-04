@@ -108,6 +108,9 @@
     <Reference Include="MvvmCross, Version=6.2.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmCross.6.2.2\lib\xamarinios10\MvvmCross.dll</HintPath>
     </Reference>
+    <Reference Include="MvvmCross.Plugin.Visibility, Version=6.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmCross.Plugin.Visibility.6.2.2\lib\xamarinios10\MvvmCross.Plugin.Visibility.dll</HintPath>
+    </Reference>
     <Reference Include="OpenWeatherMap, Version=1.0.0.29399, Culture=neutral, PublicKeyToken=daba274d5eb90e24, processorArchitecture=MSIL">
       <HintPath>..\packages\OpenWeatherMap.Net.1.0.0\lib\portable-net45+netcore45+wp8+Xamarin.iOS10+MonoAndroid23+uwp10\OpenWeatherMap.dll</HintPath>
     </Reference>

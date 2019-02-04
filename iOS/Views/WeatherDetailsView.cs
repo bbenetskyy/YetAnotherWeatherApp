@@ -28,6 +28,11 @@ namespace iOS.Views
             set.Bind(refreshButton).To(vm => vm.RefreshWeatherCommand);
             set.Bind(backButton).To(vm => vm.BackCommand);
 
+            set.Bind(loadingIndicator)
+                .For("Visibility")
+                .To(vm => vm.IsLoading)
+                .WithConversion("Visibility");
+
             set.Apply();
         }
     }

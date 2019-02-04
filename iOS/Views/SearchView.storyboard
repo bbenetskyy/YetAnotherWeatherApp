@@ -48,11 +48,16 @@
                                     <navigationItem title="Check Weather" id="2095"/>
                                 </items>
                             </navigationBar>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="2327" fixedFrame="YES" animating="YES" hidesWhenStopped="YES">
+                                <rect key="frame" x="150" y="274" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinX="YES" flexibleMaxY="YES" flexibleMinY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="searchButton" destination="500" id="name-outlet-500"/>
                         <outlet property="searchTextField" destination="1863" id="name-outlet-1863"/>
+                        <outlet property="loadingIndicator" destination="2327" id="name-outlet-2327"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aYG-jL-vDV" userLabel="First Responder" sceneMemberID="firstResponder"/>
