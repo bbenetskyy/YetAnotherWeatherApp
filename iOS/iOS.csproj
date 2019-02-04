@@ -79,10 +79,12 @@
     <Compile Include="Views\WeatherDetailsView.designer.cs">
       <DependentUpon>WeatherDetailsView.cs</DependentUpon>
     </Compile>
+    <BundleResource Include="temperature.png" />
     <InterfaceDefinition Include="Views\WeatherDetailsView.storyboard" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Entitlements.plist" />
+    <InterfaceDefinition Include="LunchScreen.storyboard" />
     <None Include="packages.config" />
     <InterfaceDefinition Include="Views\SearchView.storyboard" />
   </ItemGroup>
