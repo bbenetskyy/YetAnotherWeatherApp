@@ -123,6 +123,5 @@ namespace Core.UnitTests.ViewModels
                 Times.Once);
             interactiveMock.Verify(i => i.ShowAlert(It.IsAny<InteractiveAlertConfig>()), Times.Never);
         }
-
     }
 }

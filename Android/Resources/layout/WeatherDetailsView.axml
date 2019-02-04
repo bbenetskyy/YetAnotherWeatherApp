@@ -5,7 +5,7 @@
     android:paddingTop="25px"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:rowCount="6"
+    android:rowCount="7"
     android:columnCount="2"
     android:id="@+id/mainGrid">
     <TextView
@@ -111,6 +111,14 @@
         android:layout_width="fill_parent"
         android:layout_marginTop="50px"
         local:MvxBind="Click RefreshWeatherCommand"
-        android:layout_gravity="top"
         android:id="@+id/refreshButton" />
+    <ProgressBar
+        android:layout_row="5"
+        android:layout_columnSpan="2"
+        android:layout_width="fill_parent"
+        android:id="@+id/weatherDetailsActivityIndicator"
+        android:indeterminateOnly="true"
+        android:keepScreenOn="true"
+        android:layout_gravity="top"
+        local:MvxBind="Visibility Visibility(IsLoading)"/>
 </GridLayout>
