@@ -6,7 +6,7 @@ using UIKit;
 namespace iOS
 {
     [Register("AppDelegate")]
-    public class AppDelegate : MvxApplicationDelegate<MvxIosSetup<App>, App>
+    public class AppDelegate : MvxApplicationDelegate<Setup, App>
     {
         public override UIWindow Window { get; set; }
 

@@ -15,18 +15,15 @@ namespace Core.ViewModels
         private readonly IMapper mapper;
         private readonly IApiClient apiClient;
         private readonly IMvxNavigationService navigationService;
-        private readonly IInteractiveAlerts interactiveAlerts;
 
         public SearchViewModel(
             IApiClient apiClient,
             IMapper mapper,
-            IMvxNavigationService navigationService,
-            IInteractiveAlerts interactiveAlerts)
+            IMvxNavigationService navigationService)
         {
             this.mapper = mapper;
             this.apiClient = apiClient;
             this.navigationService = navigationService;
-            this.interactiveAlerts = interactiveAlerts;
         }
 
         private string cityName;
@@ -68,6 +65,7 @@ namespace Core.ViewModels
                                                || ex is ArgumentException
                                                || ex is OpenWeatherMapException)
                     {
+                        var interactiveAlerts = MvvmCross.Mvx.IoCProvider.Resolve<IInteractiveAlerts>();
                         var alertConfig = new InteractiveAlertConfig
                         {
                             OkButton = new InteractiveActionButton(),

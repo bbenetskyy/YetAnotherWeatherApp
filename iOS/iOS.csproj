@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Setup.cs" />
     <Compile Include="Views\SearchView.cs" />
     <Compile Include="Views\SearchView.designer.cs">
       <DependentUpon>SearchView.cs</DependentUpon>
