@@ -5,7 +5,7 @@ using MvvmCross.Droid.Support.V7.AppCompat;
 
 namespace Android.Views
 {
-    [Activity(Label = "Weather Details")]
+    [Activity(Label = "@string/weather_details_view")]
     public class WeatherDetailsView : MvxAppCompatActivity<WeatherDetailsViewModel>
     {
         protected override void OnCreate(Bundle bundle)
