@@ -7,10 +7,6 @@
     <style name="SplashScreen" parent ="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/temperature</item>
         <item name="android:windowFullscreen">true</item>
-        <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center</item>
     </style>
 </resources>
