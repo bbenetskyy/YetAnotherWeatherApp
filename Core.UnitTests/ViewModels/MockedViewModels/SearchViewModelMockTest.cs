@@ -1,6 +1,4 @@
-﻿
-
-using AutoMapper;
+﻿using AutoMapper;
 using Core.Services;
 using Core.UnitTests.TestData;
 using Core.ViewModels;
@@ -16,7 +14,6 @@ using System.Threading.Tasks;
 
 namespace Core.UnitTests.ViewModels.MockedViewModels
 {
-
     [TestFixture]
     public class SearchViewModelTests : MvxIoCSupportingTest
     {
@@ -51,7 +48,6 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
             searchMock.Protected()
                 .Setup("NavigateToWeatherDetails", ItExpr.IsAny<CurrentWeatherResponse>())
                 .Verifiable();
-
         }
 
         [Test]
