@@ -22,6 +22,7 @@ This project use **ZenHub** as issue tracker, please use it during checking issu
 * **NUnit** -  features a fluent assert syntax, parameterized, generic and theory tests and is user-extensible.
 * **OpenWeatherMap .Net** - OpenWeatherMap-Api-Net compatible with Xamarin Platforms
 * **Shouldly**- Assertion framework for .NET. The way asserting *Should* be
+* **Xam.Plugin.Connectivity** - Get network connectivity information such as network type, speeds, and if connection is available
 
 ## Yet Another Weather App Solution Structure
 
