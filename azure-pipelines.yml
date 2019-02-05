@@ -29,8 +29,9 @@ steps:
     packageApp: false
     runNugetRestore: false 
 
-- task: DotNetCoreCLI@2
+- task: VSTest@2
   inputs:
-    command: test
-    projects: '**/*Tests*.csproj'
-    arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
+    testSelector: 'testAssemblies'
+    testAssemblyVer2: '**\*test*.dll'
+    configuration: $(buildConfiguration)
+    codeCoverageEnabled: true
