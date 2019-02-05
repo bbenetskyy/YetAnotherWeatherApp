@@ -23,7 +23,7 @@ steps:
 
 - task: XamariniOS@2
   inputs:
-    projectFile: '**/iOS.csproj'
+    solutionFile: '**/*.sln'
     configuration: '$(buildConfiguration)'
     buildForSimulator: true
     packageApp: false
