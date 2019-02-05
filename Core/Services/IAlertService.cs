@@ -6,6 +6,6 @@ namespace Core.Services
     public interface IAlertService
     {
         Task<CurrentWeatherResponse> GetWeatherAsync(string cityName, string errorMessage);
-        Task<bool> CheckInternetConnectionAsync();
+        bool IsInternetConnection();
     }
 }

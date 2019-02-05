@@ -69,7 +69,9 @@ namespace Core.ViewModels
         protected virtual async Task<CurrentWeatherResponse> GetWeather()
         {
             IsLoading = true;
-            var currentWeather = await alertService.GetWeatherAsync(cityName, "City name is incorrect!");
+            var currentWeather = alertService.IsInternetConnection()
+                ? await alertService.GetWeatherAsync(cityName, "City name is incorrect!")
+                : null;
             IsLoading = false;
             return currentWeather;
         }
