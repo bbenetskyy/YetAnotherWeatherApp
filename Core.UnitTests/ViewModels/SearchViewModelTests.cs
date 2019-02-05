@@ -105,7 +105,6 @@ namespace Core.UnitTests.ViewModels
                     Times.Never);
         }
 
-
         [Test]
         public async Task CheckWeatherCommand_Should_Call_Api_And_If_No_Internet_Show_Warning_Alert()
         {
