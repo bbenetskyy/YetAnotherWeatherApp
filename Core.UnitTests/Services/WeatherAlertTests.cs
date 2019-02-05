@@ -50,7 +50,7 @@ namespace Core.UnitTests.Services
             var cityName = CurrentWeatherTestData.FakeCurrentWeather.City.Name;
 
             //Act
-            var currentWeather = await alertService.GetWeather(cityName, null);
+            var currentWeather = await alertService.GetWeatherAsync(cityName, null);
 
             //Assert
             currentWeather.ShouldNotBeNull();
@@ -68,7 +68,7 @@ namespace Core.UnitTests.Services
             var alertService = new WeatherAlertService();
 
             //Act
-            var currentWeather = await alertService.GetWeather(cityName, null);
+            var currentWeather = await alertService.GetWeatherAsync(cityName, null);
 
             //Assert
             currentWeather.ShouldBeNull();

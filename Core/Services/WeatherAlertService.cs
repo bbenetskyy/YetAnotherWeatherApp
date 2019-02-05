@@ -2,6 +2,7 @@
 using InteractiveAlert;
 using MvvmCross;
 using OpenWeatherMap;
+using Plugin.Connectivity;
 using System;
 using System.Threading.Tasks;
 
@@ -9,7 +10,7 @@ namespace Core.Services
 {
     public class WeatherAlertService : IAlertService
     {
-        public async Task<CurrentWeatherResponse> GetWeather(string cityName, string errorMessage)
+        public async Task<CurrentWeatherResponse> GetWeatherAsync(string cityName, string errorMessage)
         {
             try
             {
@@ -32,6 +33,25 @@ namespace Core.Services
                 interactiveAlerts.ShowAlert(alertConfig);
             }
             return null;
+        }
+
+        public bool IsInternetConnection()
+        {
+            if (!CrossConnectivity.Current.IsConnected)
+            {
+                var interactiveAlerts = Mvx.IoCProvider.Resolve<IInteractiveAlerts>();
+                var alertConfig = new InteractiveAlertConfig
+                {
+                    OkButton = new InteractiveActionButton(),
+                    Title = "Warning",
+                    Message = "Please check your internet connection",
+                    Style = InteractiveAlertStyle.Warning,
+                    IsCancellable = false
+                };
+                interactiveAlerts.ShowAlert(alertConfig);
+                return false;
+            }
+            return true;
         }
     }
 }
