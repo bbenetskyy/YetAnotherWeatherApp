@@ -27,6 +27,7 @@ steps:
     configuration: '$(buildConfiguration)'
     buildForSimulator: true
     packageApp: false
+    runNugetRestore: false 
 
 - task: DotNetCoreCLI@2
   inputs:
