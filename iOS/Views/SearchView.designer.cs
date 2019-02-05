@@ -15,6 +15,10 @@ namespace iOS.Views
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIActivityIndicatorView loadingIndicator { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton searchButton { get; set; }
 
         [Outlet]
@@ -23,6 +27,11 @@ namespace iOS.Views
 
         void ReleaseDesignerOutlets ()
         {
+            if (loadingIndicator != null) {
+                loadingIndicator.Dispose ();
+                loadingIndicator = null;
+            }
+
             if (searchButton != null) {
                 searchButton.Dispose ();
                 searchButton = null;

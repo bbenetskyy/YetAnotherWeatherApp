@@ -31,6 +31,10 @@ namespace iOS.Views
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIActivityIndicatorView loadingIndicator { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel maxTemperatureLabel { get; set; }
 
         [Outlet]
@@ -61,6 +65,11 @@ namespace iOS.Views
             if (descriptionLabel != null) {
                 descriptionLabel.Dispose ();
                 descriptionLabel = null;
+            }
+
+            if (loadingIndicator != null) {
+                loadingIndicator.Dispose ();
+                loadingIndicator = null;
             }
 
             if (maxTemperatureLabel != null) {

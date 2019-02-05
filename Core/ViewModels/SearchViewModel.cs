@@ -55,19 +55,26 @@ namespace Core.ViewModels
             {
                 return checkWeatherCommand ?? (checkWeatherCommand = new MvxAsyncCommand(async () =>
                 {
-                    await GetWeatherAndNavigate();
+                    var currentWeather = await GetWeather();
+                    if (currentWeather != null)
+                        await NavigateToWeatherDetails(currentWeather);
                 }, () => !string.IsNullOrEmpty(CityName)));
             }
         }
 
-        protected async Task GetWeatherAndNavigate()
+        private Task NavigateToWeatherDetails(CurrentWeatherResponse currentWeather)
+        {
+            return navigationService.Navigate<WeatherDetailsViewModel, WeatherDetails>(
+                mapper.Map<CurrentWeatherResponse, WeatherDetails>(currentWeather));
+        }
+
+        protected async Task<CurrentWeatherResponse> GetWeather()
         {
             IsLoading = true;
             try
             {
                 var currentWeather = await apiClient.GetWeatherByCityNameAsync(cityName);
-                await navigationService.Navigate<WeatherDetailsViewModel, WeatherDetails>(
-                    mapper.Map<CurrentWeatherResponse, WeatherDetails>(currentWeather));
+                return currentWeather;
             }
             catch (Exception ex) when (ex is AggregateException
                                        || ex is ArgumentException
@@ -83,6 +90,7 @@ namespace Core.ViewModels
                     IsCancellable = false
                 };
                 interactiveAlerts.ShowAlert(alertConfig);
+                return null;
             }
             finally
             {
