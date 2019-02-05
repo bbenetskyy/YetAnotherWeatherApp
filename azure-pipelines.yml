@@ -20,3 +20,10 @@ steps:
     projectFile: '**/Android.csproj'
     outputDirectory: '$(outputDirectory)'
     configuration: '$(buildConfiguration)'
+
+- task: XamariniOS@2
+  inputs:
+    projectFile: '**/iOS.csproj'
+    configuration: '$(buildConfiguration)'
+    buildForSimulator: true
+    packageApp: false
