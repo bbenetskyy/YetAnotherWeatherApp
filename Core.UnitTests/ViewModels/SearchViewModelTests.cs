@@ -1,17 +1,15 @@
-﻿using API;
-using AutoMapper;
+﻿using AutoMapper;
 using Core.Models;
 using Core.Services;
 using Core.UnitTests.TestData;
 using Core.ViewModels;
-using InteractiveAlert;
 using Moq;
 using MvvmCross.Base;
 using MvvmCross.Navigation;
 using MvvmCross.Tests;
 using NUnit.Framework;
+using OpenWeatherMap;
 using Shouldly;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using IMvxCommandHelper = MvvmCross.Commands.IMvxCommandHelper;
@@ -21,10 +19,9 @@ namespace Core.UnitTests.ViewModels
     [TestFixture]
     public class SearchViewModelTests : MvxIoCSupportingTest
     {
-        private Mock<IApiClient> apiMock;
         private Mock<IMapper> mapperMock;
+        private Mock<IAlertService> alertMock;
         private Mock<IMvxNavigationService> navigationMock;
-        private Mock<IInteractiveAlerts> interactiveMock;
 
         protected override void AdditionalSetup()
         {
@@ -35,15 +32,6 @@ namespace Core.UnitTests.ViewModels
             var helper = new MvxUnitTestCommandHelper();
             Ioc.RegisterSingleton<IMvxCommandHelper>(helper);
 
-            apiMock = new Mock<IApiClient>();
-            apiMock.Setup(a => a.GetWeatherByCityNameAsync(It.IsAny<string>()))
-                .Throws<AggregateException>();
-            apiMock.Setup(a => a.GetWeatherByCityNameAsync(null))
-                .Throws<ArgumentException>();
-            apiMock.Setup(a => a.GetWeatherByCityNameAsync(CurrentWeatherTestData.FakeCurrentWeather.City.Name))
-                .ReturnsAsync(CurrentWeatherTestData.FakeCurrentWeather);
-            Ioc.RegisterSingleton<IApiClient>(apiMock.Object);
-
             mapperMock = new Mock<IMapper>();
             Ioc.RegisterSingleton<IMapper>(mapperMock.Object);
 
@@ -53,10 +41,12 @@ namespace Core.UnitTests.ViewModels
                 .ReturnsAsync(true);
             Ioc.RegisterSingleton<IMvxNavigationService>(navigationMock.Object);
 
-            interactiveMock = new Mock<IInteractiveAlerts>();
-            Ioc.RegisterSingleton<IInteractiveAlerts>(interactiveMock.Object);
-
-            Ioc.RegisterSingleton<IAlertService>(new WeatherAlertService());
+            alertMock = new Mock<IAlertService>();
+            alertMock.Setup(a => a.GetWeather(It.IsAny<string>(), It.IsAny<string>()))
+                .ReturnsAsync((CurrentWeatherResponse)null);
+            alertMock.Setup(a => a.GetWeather(CurrentWeatherTestData.FakeCurrentWeather.City.Name, It.IsAny<string>()))
+                .ReturnsAsync(CurrentWeatherTestData.FakeCurrentWeather);
+            Ioc.RegisterSingleton<IAlertService>(alertMock.Object);
         }
 
         [Test]
@@ -86,11 +76,10 @@ namespace Core.UnitTests.ViewModels
             await vm.CheckWeatherCommand.ExecuteAsync();
 
             //Assert
-            apiMock.Verify(a => a.GetWeatherByCityNameAsync(vm.CityName), Times.Once);
+            alertMock.Verify(a => a.GetWeather(vm.CityName, It.IsAny<string>()), Times.Once);
             navigationMock.Verify(n => n.Navigate<WeatherDetailsViewModel, WeatherDetails>(
                 It.IsAny<WeatherDetails>(), null, default(CancellationToken)),
                 Times.Once);
-            interactiveMock.Verify(i => i.ShowAlert(It.IsAny<InteractiveAlertConfig>()), Times.Never);
         }
 
         [TestCase("London2")]
@@ -106,11 +95,10 @@ namespace Core.UnitTests.ViewModels
             await vm.CheckWeatherCommand.ExecuteAsync();
 
             //Assert
-            apiMock.Verify(a => a.GetWeatherByCityNameAsync(vm.CityName), Times.Once);
+            alertMock.Verify(a => a.GetWeather(vm.CityName, It.IsAny<string>()), Times.Once);
             navigationMock.Verify(n => n.Navigate<WeatherDetailsViewModel, WeatherDetails>(
                     It.IsAny<WeatherDetails>(), null, default(CancellationToken)),
                     Times.Never);
-            interactiveMock.Verify(i => i.ShowAlert(It.IsAny<InteractiveAlertConfig>()), Times.Once);
         }
     }
 }

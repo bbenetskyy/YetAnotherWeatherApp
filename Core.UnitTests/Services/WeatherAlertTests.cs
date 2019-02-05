@@ -61,7 +61,6 @@ namespace Core.UnitTests.Services
 
         [TestCase("London2")]
         [TestCase("asdasd")]
-        [TestCase("")]
         public async Task GetWeather_Should_Call_Api_And_Show_Error_Alert(string cityName)
         {
             //Arrange 
