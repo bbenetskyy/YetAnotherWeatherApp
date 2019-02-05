@@ -17,6 +17,7 @@ namespace Core
                 .RegisterAsLazySingleton();
             Mvx.IoCProvider.RegisterSingleton(MapService.ConfigureMapper);
             Mvx.IoCProvider.RegisterType<IApiClient, ApiClient>();
+            Mvx.IoCProvider.RegisterType<IAlertService, WeatherAlertService>();
             RegisterAppStart<SearchViewModel>();
         }
     }

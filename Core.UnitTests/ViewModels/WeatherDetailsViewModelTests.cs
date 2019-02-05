@@ -1,17 +1,15 @@
-﻿using API;
-using AutoMapper;
+﻿using AutoMapper;
 using Core.Services;
 using Core.UnitTests.TestData;
 using Core.ViewModels;
-using InteractiveAlert;
 using Moq;
 using MvvmCross.Base;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using MvvmCross.Tests;
 using NUnit.Framework;
+using OpenWeatherMap;
 using Shouldly;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -20,9 +18,8 @@ namespace Core.UnitTests.ViewModels
     [TestFixture]
     public class WeatherDetailsViewModelTests : MvxIoCSupportingTest
     {
-        private Mock<IApiClient> apiMock;
+        private Mock<IAlertService> alertMock;
         private Mock<IMvxNavigationService> navigationMock;
-        private Mock<IInteractiveAlerts> interactiveMock;
 
         protected override void AdditionalSetup()
         {
@@ -33,24 +30,19 @@ namespace Core.UnitTests.ViewModels
             var helper = new MvxUnitTestCommandHelper();
             Ioc.RegisterSingleton<IMvxCommandHelper>(helper);
 
-            apiMock = new Mock<IApiClient>();
-            apiMock.Setup(a => a.GetWeatherByCityNameAsync(It.IsAny<string>()))
-                .Throws<AggregateException>();
-            apiMock.Setup(a => a.GetWeatherByCityNameAsync(null))
-                .Throws<ArgumentException>();
-            apiMock.Setup(a => a.GetWeatherByCityNameAsync(CurrentWeatherTestData.FakeCurrentWeather.City.Name))
+            alertMock = new Mock<IAlertService>();
+            alertMock.Setup(a => a.GetWeather(It.IsAny<string>(), It.IsAny<string>()))
+                .ReturnsAsync((CurrentWeatherResponse)null);
+            alertMock.Setup(a => a.GetWeather(CurrentWeatherTestData.FakeCurrentWeather.City.Name, It.IsAny<string>()))
                 .ReturnsAsync(CurrentWeatherTestData.FakeCurrentWeather);
-            Ioc.RegisterSingleton<IApiClient>(apiMock.Object);
-
-            Ioc.RegisterSingleton<IMapper>(MapService.ConfigureMapper);
+            Ioc.RegisterSingleton<IAlertService>(alertMock.Object);
 
             navigationMock = new Mock<IMvxNavigationService>();
             navigationMock.Setup(n => n.Navigate<SearchViewModel>(null, default(CancellationToken)))
                 .ReturnsAsync(true);
             Ioc.RegisterSingleton<IMvxNavigationService>(navigationMock.Object);
 
-            interactiveMock = new Mock<IInteractiveAlerts>();
-            Ioc.RegisterSingleton<IInteractiveAlerts>(interactiveMock.Object);
+            Ioc.RegisterSingleton<IMapper>(MapService.ConfigureMapper);
         }
 
         [Test]
@@ -83,10 +75,9 @@ namespace Core.UnitTests.ViewModels
             await vm.RefreshWeatherCommand.ExecuteAsync();
 
             //Assert
-            apiMock.Verify(a => a.GetWeatherByCityNameAsync(vm.CityName), Times.Once);
+            alertMock.Verify(a => a.GetWeather(vm.CityName, It.IsAny<string>()), Times.Once);
             navigationMock.Verify(n => n.Navigate<SearchViewModel>(null, default(CancellationToken)),
                 Times.Never);
-            interactiveMock.Verify(i => i.ShowAlert(It.IsAny<InteractiveAlertConfig>()), Times.Never);
         }
 
         [Test]
@@ -100,10 +91,9 @@ namespace Core.UnitTests.ViewModels
             await vm.RefreshWeatherCommand.ExecuteAsync();
 
             //Assert
-            apiMock.Verify(a => a.GetWeatherByCityNameAsync(vm.CityName), Times.Once);
+            alertMock.Verify(a => a.GetWeather(vm.CityName, It.IsAny<string>()), Times.Once);
             navigationMock.Verify(n => n.Navigate<SearchViewModel>(null, default(CancellationToken)),
                 Times.Once);
-            interactiveMock.Verify(i => i.ShowAlert(It.IsAny<InteractiveAlertConfig>()), Times.Once);
         }
 
         [Test]
@@ -117,10 +107,9 @@ namespace Core.UnitTests.ViewModels
             await vm.BackCommand.ExecuteAsync();
 
             //Assert
-            apiMock.Verify(a => a.GetWeatherByCityNameAsync(vm.CityName), Times.Never);
+            alertMock.Verify(a => a.GetWeather(vm.CityName, It.IsAny<string>()), Times.Never);
             navigationMock.Verify(n => n.Navigate<SearchViewModel>(null, default(CancellationToken)),
                 Times.Once);
-            interactiveMock.Verify(i => i.ShowAlert(It.IsAny<InteractiveAlertConfig>()), Times.Never);
         }
     }
 }
