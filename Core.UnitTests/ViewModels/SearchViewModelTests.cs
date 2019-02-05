@@ -42,9 +42,11 @@ namespace Core.UnitTests.ViewModels
             Ioc.RegisterSingleton<IMvxNavigationService>(navigationMock.Object);
 
             alertMock = new Mock<IAlertService>();
-            alertMock.Setup(a => a.GetWeather(It.IsAny<string>(), It.IsAny<string>()))
+            alertMock.Setup(a => a.GetWeatherAsync(It.IsAny<string>(), It.IsAny<string>()))
                 .ReturnsAsync((CurrentWeatherResponse)null);
-            alertMock.Setup(a => a.GetWeather(CurrentWeatherTestData.FakeCurrentWeather.City.Name, It.IsAny<string>()))
+            alertMock.Setup(a => a.IsInternetConnection())
+                .Returns(true);
+            alertMock.Setup(a => a.GetWeatherAsync(CurrentWeatherTestData.FakeCurrentWeather.City.Name, It.IsAny<string>()))
                 .ReturnsAsync(CurrentWeatherTestData.FakeCurrentWeather);
             Ioc.RegisterSingleton<IAlertService>(alertMock.Object);
         }
@@ -76,7 +78,8 @@ namespace Core.UnitTests.ViewModels
             await vm.CheckWeatherCommand.ExecuteAsync();
 
             //Assert
-            alertMock.Verify(a => a.GetWeather(vm.CityName, It.IsAny<string>()), Times.Once);
+            alertMock.Verify(a => a.IsInternetConnection(), Times.Once);
+            alertMock.Verify(a => a.GetWeatherAsync(vm.CityName, It.IsAny<string>()), Times.Once);
             navigationMock.Verify(n => n.Navigate<WeatherDetailsViewModel, WeatherDetails>(
                 It.IsAny<WeatherDetails>(), null, default(CancellationToken)),
                 Times.Once);
@@ -95,10 +98,32 @@ namespace Core.UnitTests.ViewModels
             await vm.CheckWeatherCommand.ExecuteAsync();
 
             //Assert
-            alertMock.Verify(a => a.GetWeather(vm.CityName, It.IsAny<string>()), Times.Once);
+            alertMock.Verify(a => a.IsInternetConnection(), Times.Once);
+            alertMock.Verify(a => a.GetWeatherAsync(vm.CityName, It.IsAny<string>()), Times.Once);
             navigationMock.Verify(n => n.Navigate<WeatherDetailsViewModel, WeatherDetails>(
                     It.IsAny<WeatherDetails>(), null, default(CancellationToken)),
                     Times.Never);
+        }
+
+        [Test]
+        public async Task CheckWeatherCommand_Should_Call_Api_And_If_No_Internet_Show_Warning_Alert()
+        {
+            //Arrange
+            base.Setup();
+            alertMock.Setup(a => a.IsInternetConnection())
+                .Returns(false);
+            var vm = Ioc.IoCConstruct<SearchViewModel>();
+
+            //Act
+            vm.CityName = CurrentWeatherTestData.FakeCurrentWeather.City.Name;
+            await vm.CheckWeatherCommand.ExecuteAsync();
+
+            //Assert
+            alertMock.Verify(a => a.IsInternetConnection(), Times.Once);
+            alertMock.Verify(a => a.GetWeatherAsync(vm.CityName, It.IsAny<string>()), Times.Never);
+            navigationMock.Verify(n => n.Navigate<WeatherDetailsViewModel, WeatherDetails>(
+                    It.IsAny<WeatherDetails>(), null, default(CancellationToken)),
+                Times.Never);
         }
     }
 }
