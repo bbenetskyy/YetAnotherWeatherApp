@@ -1,5 +1,4 @@
 ﻿using Core.ViewModels;
-using iOS.Converters;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
@@ -25,8 +24,9 @@ namespace iOS.Views
             set.Bind(searchButton).To(vm => vm.CheckWeatherCommand);
 
             set.Bind(loadingIndicator)
+                .For("Visibility")
                 .To(vm => vm.IsLoading)
-                .WithConversion(new ActivityIndicatorVisibilityConverter());
+                .WithConversion("Visibility");
 
             set.Apply();
         }
