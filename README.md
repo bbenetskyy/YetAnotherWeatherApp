@@ -2,6 +2,8 @@
 
 This one more Weather application written in C# with Xamarin.Native **Android** & **iOS** based on **Open Weather API**
 
+This project use **ZenHub** as issue tracker, please use it during checking issues actual state.
+
 ## Checker Status
 
 [![Build Status](https://dev.azure.com/bbenetskyy/Yet%20Another%20Weather%20App/_apis/build/status/bbenetskyy.YetAnotherWeatherApp?branchName=master)](https://dev.azure.com/bbenetskyy/Yet%20Another%20Weather%20App/_build/latest?definitionId=3&branchName=master)
