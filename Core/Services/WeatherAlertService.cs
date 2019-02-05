@@ -2,7 +2,7 @@
 using InteractiveAlert;
 using MvvmCross;
 using OpenWeatherMap;
-using Plugin.Connectivity;
+using Plugin.Connectivity.Abstractions;
 using System;
 using System.Threading.Tasks;
 
@@ -37,7 +37,8 @@ namespace Core.Services
 
         public bool IsInternetConnection()
         {
-            if (!CrossConnectivity.Current.IsConnected)
+            var crossConnectivity = Mvx.IoCProvider.Resolve<IConnectivity>();
+            if (!crossConnectivity.IsConnected)
             {
                 var interactiveAlerts = Mvx.IoCProvider.Resolve<IInteractiveAlerts>();
                 var alertConfig = new InteractiveAlertConfig

@@ -7,6 +7,7 @@ using MvvmCross.Base;
 using MvvmCross.Commands;
 using MvvmCross.Tests;
 using NUnit.Framework;
+using Plugin.Connectivity.Abstractions;
 using Shouldly;
 using System;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace Core.UnitTests.Services
     {
         private Mock<IApiClient> apiMock;
         private Mock<IInteractiveAlerts> interactiveMock;
+        private Mock<IConnectivity> connectivityMock;
 
         protected override void AdditionalSetup()
         {
@@ -36,6 +38,11 @@ namespace Core.UnitTests.Services
             apiMock.Setup(a => a.GetWeatherByCityNameAsync(CurrentWeatherTestData.FakeCurrentWeather.City.Name))
                 .ReturnsAsync(CurrentWeatherTestData.FakeCurrentWeather);
             Ioc.RegisterSingleton<IApiClient>(apiMock.Object);
+
+            connectivityMock = new Mock<IConnectivity>();
+            connectivityMock.Setup(c => c.IsConnected)
+                .Returns(true);
+            Ioc.RegisterSingleton<IConnectivity>(connectivityMock.Object);
 
             interactiveMock = new Mock<IInteractiveAlerts>();
             Ioc.RegisterSingleton<IInteractiveAlerts>(interactiveMock.Object);
@@ -73,6 +80,42 @@ namespace Core.UnitTests.Services
             //Assert
             currentWeather.ShouldBeNull();
             apiMock.Verify(a => a.GetWeatherByCityNameAsync(cityName), Times.Once);
+            interactiveMock.Verify(i => i.ShowAlert(It.IsAny<InteractiveAlertConfig>()), Times.Once);
+        }
+
+        [Test]
+        public void IsInternetConnection_Should_Call_Return_True_If_Interntet_Available()
+        {
+            //Arrange 
+            base.Setup();
+            var alertService = new WeatherAlertService();
+
+            //Act
+            var isInternet = alertService.IsInternetConnection();
+
+            //Assert
+            isInternet.ShouldBeTrue();
+            connectivityMock.Verify(c => c.IsConnected, Times.Once);
+            apiMock.Verify(a => a.GetWeatherByCityNameAsync(It.IsAny<string>()), Times.Never);
+            interactiveMock.Verify(i => i.ShowAlert(It.IsAny<InteractiveAlertConfig>()), Times.Never);
+        }
+
+        [Test]
+        public void IsInternetConnection_Should_Call_Return_False_And_Warning_Alert_If_No_Interntet()
+        {
+            //Arrange 
+            base.Setup();
+            connectivityMock.Setup(c => c.IsConnected)
+                .Returns(false);
+            var alertService = new WeatherAlertService();
+
+            //Act
+            var isInternet = alertService.IsInternetConnection();
+
+            //Assert
+            isInternet.ShouldBeFalse();
+            connectivityMock.Verify(c => c.IsConnected, Times.Once);
+            apiMock.Verify(a => a.GetWeatherByCityNameAsync(It.IsAny<string>()), Times.Never);
             interactiveMock.Verify(i => i.ShowAlert(It.IsAny<InteractiveAlertConfig>()), Times.Once);
         }
     }

@@ -4,6 +4,7 @@ using Core.ViewModels;
 using MvvmCross;
 using MvvmCross.IoC;
 using MvvmCross.ViewModels;
+using Plugin.Connectivity;
 
 namespace Core
 {
@@ -16,6 +17,7 @@ namespace Core
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
             Mvx.IoCProvider.RegisterSingleton(MapService.ConfigureMapper);
+            Mvx.IoCProvider.RegisterSingleton(CrossConnectivity.Current);
             Mvx.IoCProvider.RegisterType<IApiClient, ApiClient>();
             Mvx.IoCProvider.RegisterType<IAlertService, WeatherAlertService>();
             RegisterAppStart<SearchViewModel>();
