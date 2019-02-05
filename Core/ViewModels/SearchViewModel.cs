@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Core.Models;
 using Core.Services;
+using MvvmCross;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
@@ -58,6 +59,24 @@ namespace Core.ViewModels
                         NavigateToWeatherDetails(currentWeather);
                 }, () => !string.IsNullOrEmpty(CityName)));
             }
+        }
+
+        private IMvxAsyncCommand getLocationCityNameCommand;
+        public IMvxAsyncCommand GetLocationCityNameCommand
+        {
+            get
+            {
+                return getLocationCityNameCommand ?? (getLocationCityNameCommand = new MvxAsyncCommand(async () =>
+                {
+                    await GetLocationCityName();
+                }));
+            }
+        }
+
+        protected virtual async Task GetLocationCityName()
+        {
+            var locationService = Mvx.IoCProvider.Resolve<ILocationService>();
+            CityName = await locationService.GetLocationCityNameAsync();
         }
 
         protected virtual void NavigateToWeatherDetails(CurrentWeatherResponse currentWeather)

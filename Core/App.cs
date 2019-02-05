@@ -20,6 +20,7 @@ namespace Core
             Mvx.IoCProvider.RegisterSingleton(CrossConnectivity.Current);
             Mvx.IoCProvider.RegisterType<IApiClient, ApiClient>();
             Mvx.IoCProvider.RegisterType<IAlertService, WeatherAlertService>();
+            Mvx.IoCProvider.RegisterType<ILocationService, LocationService>();
             RegisterAppStart<SearchViewModel>();
         }
     }

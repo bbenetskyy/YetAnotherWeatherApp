@@ -28,7 +28,7 @@ namespace Core.Services
                     Title = "Error",
                     Message = errorMessage,
                     Style = InteractiveAlertStyle.Error,
-                    IsCancellable = false
+                    IsCancellable = true
                 };
                 interactiveAlerts.ShowAlert(alertConfig);
             }
@@ -47,7 +47,7 @@ namespace Core.Services
                     Title = "Warning",
                     Message = "Please check your internet connection",
                     Style = InteractiveAlertStyle.Warning,
-                    IsCancellable = false
+                    IsCancellable = true
                 };
                 interactiveAlerts.ShowAlert(alertConfig);
                 return false;

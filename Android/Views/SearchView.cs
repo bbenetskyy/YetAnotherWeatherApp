@@ -13,6 +13,7 @@ namespace Android.Views
         protected override void OnCreate(Bundle bundle)
         {
             InteractiveAlerts.Init(() => this);
+            Xamarin.Essentials.Platform.Init(this, bundle);
             Mvx.IoCProvider.RegisterSingleton(InteractiveAlerts.Instance);
             base.OnCreate(bundle);
 #pragma warning disable CS0436 // Type conflicts with imported type
