@@ -48,9 +48,9 @@ namespace Core.ViewModels
                 {
                     var currentWeather = await GetWeather();
                     if (currentWeather != null)
-                        await MapWeatherToProperties(currentWeather);
+                        MapWeatherToProperties(currentWeather);
                     else
-                        await NavigateToSearch();
+                        NavigateToSearch();
                 }));
             }
         }
@@ -61,9 +61,9 @@ namespace Core.ViewModels
             get
             {
                 return backCommand ?? (backCommand = new MvxAsyncCommand(async () =>
-                {
-                    await navigationService.Navigate<SearchViewModel>();
-                }));
+                           {
+                               NavigateToSearch();
+                           }));
             }
         }
 
@@ -72,7 +72,7 @@ namespace Core.ViewModels
             weatherDetails = parameter;
         }
 
-        protected async Task<CurrentWeatherResponse> GetWeather()
+        protected virtual async Task<CurrentWeatherResponse> GetWeather()
         {
             IsLoading = true;
             var currentWeather = await alertService.GetWeather(weatherDetails?.CityName,
@@ -81,15 +81,15 @@ namespace Core.ViewModels
             return currentWeather;
         }
 
-        protected async Task MapWeatherToProperties(CurrentWeatherResponse currentWeather)
+        protected virtual void MapWeatherToProperties(CurrentWeatherResponse currentWeather)
         {
             weatherDetails = mapper.Map<CurrentWeatherResponse, WeatherDetails>(currentWeather);
-            await RaiseAllPropertiesChanged();
+            RaiseAllPropertiesChanged();
         }
 
-        protected Task NavigateToSearch()
+        protected virtual void NavigateToSearch()
         {
-            return navigationService.Navigate<SearchViewModel>();
+            navigationService.Navigate<SearchViewModel>();
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿
 
 using AutoMapper;
-using Core.Models;
 using Core.Services;
 using Core.UnitTests.TestData;
 using Core.ViewModels;
@@ -13,7 +12,6 @@ using MvvmCross.Navigation;
 using MvvmCross.Tests;
 using NUnit.Framework;
 using OpenWeatherMap;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Core.UnitTests.ViewModels.MockedViewModels
@@ -40,17 +38,9 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
             Ioc.RegisterSingleton<IMapper>(mapperMock.Object);
 
             navigationMock = new Mock<IMvxNavigationService>();
-            navigationMock.Setup(n => n.Navigate<WeatherDetailsViewModel, WeatherDetails>(
-                    It.IsAny<WeatherDetails>(), null, default(CancellationToken)))
-                .ReturnsAsync(true);
             Ioc.RegisterSingleton<IMvxNavigationService>(navigationMock.Object);
 
             alertMock = new Mock<IAlertService>();
-            alertMock.Setup(a => a.GetWeather(It.IsAny<string>(), It.IsAny<string>()))
-                .ReturnsAsync((CurrentWeatherResponse)null);
-            alertMock.Setup(a => a.GetWeather(CurrentWeatherTestData.FakeCurrentWeather.City.Name,
-                    It.IsAny<string>()))
-                .ReturnsAsync(CurrentWeatherTestData.FakeCurrentWeather);
             Ioc.RegisterSingleton<IAlertService>(alertMock.Object);
 
             searchMock = new Mock<SearchViewModel>(MockBehavior.Loose,
