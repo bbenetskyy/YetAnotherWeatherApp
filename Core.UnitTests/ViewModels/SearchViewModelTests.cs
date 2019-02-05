@@ -1,6 +1,7 @@
 ﻿using API;
 using AutoMapper;
 using Core.Models;
+using Core.Services;
 using Core.UnitTests.TestData;
 using Core.ViewModels;
 using InteractiveAlert;
@@ -54,6 +55,8 @@ namespace Core.UnitTests.ViewModels
 
             interactiveMock = new Mock<IInteractiveAlerts>();
             Ioc.RegisterSingleton<IInteractiveAlerts>(interactiveMock.Object);
+
+            Ioc.RegisterSingleton<IAlertService>(new WeatherAlertService());
         }
 
         [Test]

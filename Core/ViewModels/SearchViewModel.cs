@@ -1,12 +1,10 @@
-﻿using API;
-using AutoMapper;
+﻿using AutoMapper;
 using Core.Models;
-using InteractiveAlert;
+using Core.Services;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using OpenWeatherMap;
-using System;
 using System.Threading.Tasks;
 
 namespace Core.ViewModels
@@ -14,17 +12,17 @@ namespace Core.ViewModels
     public class SearchViewModel : MvxViewModel
     {
         private readonly IMapper mapper;
-        private readonly IApiClient apiClient;
         private readonly IMvxNavigationService navigationService;
+        private readonly IAlertService alertService;
 
         public SearchViewModel(
-            IApiClient apiClient,
             IMapper mapper,
-            IMvxNavigationService navigationService)
+            IMvxNavigationService navigationService,
+            IAlertService alertService)
         {
             this.mapper = mapper;
-            this.apiClient = apiClient;
             this.navigationService = navigationService;
+            this.alertService = alertService;
         }
 
         private string cityName;
@@ -62,7 +60,7 @@ namespace Core.ViewModels
             }
         }
 
-        private Task NavigateToWeatherDetails(CurrentWeatherResponse currentWeather)
+        protected Task NavigateToWeatherDetails(CurrentWeatherResponse currentWeather)
         {
             return navigationService.Navigate<WeatherDetailsViewModel, WeatherDetails>(
                 mapper.Map<CurrentWeatherResponse, WeatherDetails>(currentWeather));
@@ -71,31 +69,9 @@ namespace Core.ViewModels
         protected async Task<CurrentWeatherResponse> GetWeather()
         {
             IsLoading = true;
-            try
-            {
-                var currentWeather = await apiClient.GetWeatherByCityNameAsync(cityName);
-                return currentWeather;
-            }
-            catch (Exception ex) when (ex is AggregateException
-                                       || ex is ArgumentException
-                                       || ex is OpenWeatherMapException)
-            {
-                var interactiveAlerts = MvvmCross.Mvx.IoCProvider.Resolve<IInteractiveAlerts>();
-                var alertConfig = new InteractiveAlertConfig
-                {
-                    OkButton = new InteractiveActionButton(),
-                    Title = "Error",
-                    Message = "City name is incorrect!",
-                    Style = InteractiveAlertStyle.Error,
-                    IsCancellable = false
-                };
-                interactiveAlerts.ShowAlert(alertConfig);
-                return null;
-            }
-            finally
-            {
-                IsLoading = false;
-            }
+            var currentWeather = await alertService.GetWeather(cityName, "City name is incorrect!");
+            IsLoading = false;
+            return currentWeather;
         }
     }
 }

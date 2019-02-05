@@ -42,8 +42,6 @@ namespace Core.UnitTests.ViewModels
                 .ReturnsAsync(CurrentWeatherTestData.FakeCurrentWeather);
             Ioc.RegisterSingleton<IApiClient>(apiMock.Object);
 
-            Ioc.RegisterSingleton<IMapper>(MapService.ConfigureMapper);
-
             navigationMock = new Mock<IMvxNavigationService>();
             navigationMock.Setup(n => n.Navigate<SearchViewModel>(null, default(CancellationToken)))
                 .ReturnsAsync(true);
@@ -51,6 +49,9 @@ namespace Core.UnitTests.ViewModels
 
             interactiveMock = new Mock<IInteractiveAlerts>();
             Ioc.RegisterSingleton<IInteractiveAlerts>(interactiveMock.Object);
+
+            Ioc.RegisterSingleton<IMapper>(MapService.ConfigureMapper);
+            Ioc.RegisterSingleton<IAlertService>(new WeatherAlertService());
         }
 
         [Test]

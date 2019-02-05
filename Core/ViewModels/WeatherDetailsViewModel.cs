@@ -1,12 +1,10 @@
-﻿using API;
-using AutoMapper;
+﻿using AutoMapper;
 using Core.Models;
-using InteractiveAlert;
+using Core.Services;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using OpenWeatherMap;
-using System;
 using System.Threading.Tasks;
 
 namespace Core.ViewModels
@@ -14,17 +12,18 @@ namespace Core.ViewModels
     public class WeatherDetailsViewModel : MvxViewModel<WeatherDetails>
     {
         private readonly IMapper mapper;
-        private readonly IApiClient apiClient;
+        private readonly IAlertService alertService;
         private readonly IMvxNavigationService navigationService;
         private WeatherDetails weatherDetails;
 
-        public WeatherDetailsViewModel(IApiClient apiClient,
+        public WeatherDetailsViewModel(
             IMapper mapper,
-            IMvxNavigationService navigationService)
+            IMvxNavigationService navigationService,
+            IAlertService alertService)
         {
             this.mapper = mapper;
-            this.apiClient = apiClient;
             this.navigationService = navigationService;
+            this.alertService = alertService;
         }
 
         public string CityName => weatherDetails?.CityName;
@@ -47,7 +46,11 @@ namespace Core.ViewModels
             {
                 return refreshWeatherCommand ?? (refreshWeatherCommand = new MvxAsyncCommand(async () =>
                 {
-                    await GetWeather();
+                    var currentWeather = await GetWeather();
+                    if (currentWeather != null)
+                        await MapWeatherToProperties(currentWeather);
+                    else
+                        await NavigateToSearch();
                 }));
             }
         }
@@ -69,35 +72,24 @@ namespace Core.ViewModels
             weatherDetails = parameter;
         }
 
-        private async Task GetWeather()
+        protected async Task<CurrentWeatherResponse> GetWeather()
         {
             IsLoading = true;
-            try
-            {
-                var currentWeather = await apiClient.GetWeatherByCityNameAsync(weatherDetails?.CityName);
-                weatherDetails = mapper.Map<CurrentWeatherResponse, WeatherDetails>(currentWeather);
-                await RaiseAllPropertiesChanged();
-            }
-            catch (Exception ex) when (ex is AggregateException
-                                       || ex is ArgumentException
-                                       || ex is OpenWeatherMapException)
-            {
-                var interactiveAlerts = MvvmCross.Mvx.IoCProvider.Resolve<IInteractiveAlerts>();
-                var alertConfig = new InteractiveAlertConfig
-                {
-                    OkButton = new InteractiveActionButton(),
-                    Title = "Error",
-                    Message = "Something is going wrong, don't worry we will navigate you to Search again!",
-                    Style = InteractiveAlertStyle.Error,
-                    IsCancellable = false
-                };
-                interactiveAlerts.ShowAlert(alertConfig);
-                await navigationService.Navigate<SearchViewModel>();
-            }
-            finally
-            {
-                IsLoading = false;
-            }
+            var currentWeather = await alertService.GetWeather(weatherDetails?.CityName,
+                "Something is going wrong, don't worry we will navigate you to Search again!");
+            IsLoading = false;
+            return currentWeather;
+        }
+
+        protected async Task MapWeatherToProperties(CurrentWeatherResponse currentWeather)
+        {
+            weatherDetails = mapper.Map<CurrentWeatherResponse, WeatherDetails>(currentWeather);
+            await RaiseAllPropertiesChanged();
+        }
+
+        protected Task NavigateToSearch()
+        {
+            return navigationService.Navigate<SearchViewModel>();
         }
     }
 }
