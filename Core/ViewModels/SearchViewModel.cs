@@ -55,18 +55,18 @@ namespace Core.ViewModels
                 {
                     var currentWeather = await GetWeather();
                     if (currentWeather != null)
-                        await NavigateToWeatherDetails(currentWeather);
+                        NavigateToWeatherDetails(currentWeather);
                 }, () => !string.IsNullOrEmpty(CityName)));
             }
         }
 
-        protected Task NavigateToWeatherDetails(CurrentWeatherResponse currentWeather)
+        protected virtual void NavigateToWeatherDetails(CurrentWeatherResponse currentWeather)
         {
-            return navigationService.Navigate<WeatherDetailsViewModel, WeatherDetails>(
+            navigationService.Navigate<WeatherDetailsViewModel, WeatherDetails>(
                 mapper.Map<CurrentWeatherResponse, WeatherDetails>(currentWeather));
         }
 
-        protected async Task<CurrentWeatherResponse> GetWeather()
+        protected virtual async Task<CurrentWeatherResponse> GetWeather()
         {
             IsLoading = true;
             var currentWeather = await alertService.GetWeather(cityName, "City name is incorrect!");
