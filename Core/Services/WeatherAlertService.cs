@@ -5,6 +5,7 @@ using OpenWeatherMap;
 using Plugin.Connectivity.Abstractions;
 using System;
 using System.Threading.Tasks;
+using Core.Services.Interfaces;
 
 namespace Core.Services
 {
@@ -28,7 +29,7 @@ namespace Core.Services
                     Title = "Error",
                     Message = errorMessage,
                     Style = InteractiveAlertStyle.Error,
-                    IsCancellable = false
+                    IsCancellable = true
                 };
                 interactiveAlerts.ShowAlert(alertConfig);
             }
@@ -47,7 +48,7 @@ namespace Core.Services
                     Title = "Warning",
                     Message = "Please check your internet connection",
                     Style = InteractiveAlertStyle.Warning,
-                    IsCancellable = false
+                    IsCancellable = true
                 };
                 interactiveAlerts.ShowAlert(alertConfig);
                 return false;

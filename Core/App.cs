@@ -1,5 +1,6 @@
 ﻿using API;
 using Core.Services;
+using Core.Services.Interfaces;
 using Core.ViewModels;
 using MvvmCross;
 using MvvmCross.IoC;
@@ -20,6 +21,9 @@ namespace Core
             Mvx.IoCProvider.RegisterSingleton(CrossConnectivity.Current);
             Mvx.IoCProvider.RegisterType<IApiClient, ApiClient>();
             Mvx.IoCProvider.RegisterType<IAlertService, WeatherAlertService>();
+            Mvx.IoCProvider.RegisterType<ILocationService, LocationService>();
+            Mvx.IoCProvider.RegisterType<IGeolocationService, Geolocation>();
+            Mvx.IoCProvider.RegisterType<IGeocodingService, Geocoding>();
             RegisterAppStart<SearchViewModel>();
         }
     }

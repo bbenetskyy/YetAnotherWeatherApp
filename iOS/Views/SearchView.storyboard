@@ -49,15 +49,21 @@
                                 </items>
                             </navigationBar>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="2327" fixedFrame="YES" animating="YES">
-                                <rect key="frame" x="150" y="213.5" width="20" height="20"/>
+                                <rect key="frame" x="150" y="241.5" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinX="YES" flexibleMaxY="YES" flexibleMinY="YES"/>
                             </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2562" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                                <rect key="frame" x="164" y="214" width="140" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Get Your City Name"/>
+                            </button>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="searchButton" destination="500" id="name-outlet-500"/>
                         <outlet property="searchTextField" destination="1863" id="name-outlet-1863"/>
                         <outlet property="loadingIndicator" destination="2327" id="name-outlet-2327"/>
+                        <outlet property="getLocationButton" destination="2562" id="name-outlet-2562"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aYG-jL-vDV" userLabel="First Responder" sceneMemberID="firstResponder"/>

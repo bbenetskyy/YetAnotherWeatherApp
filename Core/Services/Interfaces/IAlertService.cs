@@ -1,7 +1,7 @@
 ﻿using OpenWeatherMap;
 using System.Threading.Tasks;
 
-namespace Core.Services
+namespace Core.Services.Interfaces
 {
     public interface IAlertService
     {

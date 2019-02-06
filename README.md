@@ -23,6 +23,7 @@ This project use **ZenHub** as issue tracker, please use it during checking issu
 * **OpenWeatherMap .Net** - OpenWeatherMap-Api-Net compatible with Xamarin Platforms
 * **Shouldly**- Assertion framework for .NET. The way asserting *Should* be
 * **Xam.Plugin.Connectivity** - Get network connectivity information such as network type, speeds, and if connection is available
+* **Xamarin.Essentials** - a kit of essential API's for your apps
 
 ## Yet Another Weather App Solution Structure
 
@@ -35,5 +36,9 @@ This project use **ZenHub** as issue tracker, please use it during checking issu
 * **Tests Folder**
     - **API.IntegrationTests** - integration tests with **NUnit** on real Open Weather API, here we testing how works **OpenWeatherMap .Net** NuGet.
     - **Core.UnitTests** - unit tests with **NUnit** where we check our mapper service and view models
+
+## Code Coverage Status
+
+![Selected Color Scheme](https://github.com/bbenetskyy/YetAnotherWeatherApp/blob/master/CodeCoverage.png)
 
 

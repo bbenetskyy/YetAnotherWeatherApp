@@ -22,6 +22,7 @@ namespace iOS.Views
 
             set.Bind(searchTextField).To(vm => vm.CityName);
             set.Bind(searchButton).To(vm => vm.CheckWeatherCommand);
+            set.Bind(getLocationButton).To(vm => vm.GetLocationCityNameCommand);
 
             set.Bind(loadingIndicator)
                 .For("Visibility")
