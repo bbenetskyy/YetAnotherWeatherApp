@@ -10,6 +10,8 @@ using MvvmCross.Navigation;
 using MvvmCross.Tests;
 using NUnit.Framework;
 using OpenWeatherMap;
+using Shouldly;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Core.UnitTests.ViewModels.MockedViewModels
@@ -61,7 +63,28 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
         }
 
         [Test]
-        public async Task CheckWeatherCommand_Should_Call_GetWeather_And_NavigateToWeatherDetails()
+        public async Task CheckWeatherCommand_Should_Call_CheckWeather()
+        {
+            //Arrange
+            base.Setup();
+            searchMock.Protected()
+                .Setup<Task>("CheckWeather")
+                .Returns(Task.FromResult("Some Result"));
+            var vm = searchMock.Object;
+
+            //Act
+            vm.CityName = CurrentWeatherTestData.FakeCurrentWeather.City.Name;
+            await vm.CheckWeatherCommand.ExecuteAsync();
+
+            //Assert
+            searchMock.Protected().Verify("CheckWeather",
+                Times.Once());
+            searchMock.Protected().Verify("GetLocationCityName",
+                Times.Never());
+        }
+
+        [Test]
+        public void CheckWeather_Should_Call_GetWeather_And_NavigateToWeatherDetails()
         {
             //Arrange
             base.Setup();
@@ -70,20 +93,23 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
                 .ReturnsAsync(CurrentWeatherTestData.FakeCurrentWeather)
                 .Verifiable();
             var vm = searchMock.Object;
+            MethodInfo checkWeather = vm.GetType().GetMethod("CheckWeather",
+                BindingFlags.NonPublic | BindingFlags.Instance);
 
             //Act
             vm.CityName = CurrentWeatherTestData.FakeCurrentWeather.City.Name;
-            await vm.CheckWeatherCommand.ExecuteAsync();
+            checkWeather.Invoke(vm, null);
 
             //Assert
-            searchMock.Protected().Verify("GetWeather", Times.Once());
+            searchMock.Protected().Verify("GetWeather",
+                Times.Once());
             searchMock.Protected().Verify("NavigateToWeatherDetails",
                 Times.Once(), ItExpr.IsAny<CurrentWeatherResponse>());
         }
 
         [TestCase("London2")]
         [TestCase("asdasd")]
-        public async Task CheckWeatherCommand_Should_Call_Only_GetWeather(string cityName)
+        public void CheckWeather_Should_Call_Only_GetWeather(string cityName)
         {
             //Arrange
             base.Setup();
@@ -92,19 +118,22 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
                 .ReturnsAsync((CurrentWeatherResponse)null)
                 .Verifiable();
             var vm = searchMock.Object;
+            MethodInfo checkWeather = vm.GetType().GetMethod("CheckWeather",
+                BindingFlags.NonPublic | BindingFlags.Instance);
 
             //Act
             vm.CityName = CurrentWeatherTestData.FakeCurrentWeather.City.Name;
-            await vm.CheckWeatherCommand.ExecuteAsync();
+            checkWeather.Invoke(vm, null);
 
             //Assert
-            searchMock.Protected().Verify("GetWeather", Times.Once());
+            searchMock.Protected().Verify("GetWeather",
+                Times.Once());
             searchMock.Protected().Verify("NavigateToWeatherDetails",
                 Times.Never(), ItExpr.IsAny<CurrentWeatherResponse>());
         }
 
         [Test]
-        public async Task CheckWeatherCommand_Should_Call_GetLocationCityName()
+        public async Task GetLocationCityNameCommand_Should_Call_GetLocationCityName()
         {
             //Arrange
             base.Setup();
@@ -114,7 +143,90 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
             await vm.GetLocationCityNameCommand.ExecuteAsync();
 
             //Assert
-            searchMock.Protected().Verify("GetLocationCityName", Times.Once());
+            searchMock.Protected().Verify("GetLocationCityName",
+                Times.Once());
+        }
+
+        [Test]
+        public void GetLocationCityName_Should_Call_GetLocationCityNameAsync_And_ActivityIndicators_And_Update_CityName()
+        {
+            //Arrange
+            base.Setup();
+            searchMock.Protected()
+                .Setup<Task>("GetLocationCityName")
+                .CallBase();
+            var vm = searchMock.Object;
+            MethodInfo getLocationCityName = vm.GetType().GetMethod("GetLocationCityName",
+                BindingFlags.NonPublic | BindingFlags.Instance);
+
+            //Act
+            vm.CityName = string.Empty;
+            getLocationCityName.Invoke(vm, null);
+
+            //Assert
+            vm.CityName.ShouldBe(WeatherDetailsTestData.FakeWeatherDetails.CityName);
+            searchMock.Protected().Verify("ShowActivityIndicator",
+                Times.Once());
+            searchMock.Protected().Verify("HideActivityIndicator",
+                Times.Once());
+            locationMock.Verify(l => l.GetLocationCityNameAsync(),
+                Times.Once());
+        }
+
+        [Test]
+        public void ShowActivityIndicator_Should_Set_IsLoading_To_True()
+        {
+            //Arrange
+            base.Setup();
+            searchMock.Protected()
+                .Setup("ShowActivityIndicator")
+                .CallBase();
+            var vm = searchMock.Object;
+            MethodInfo showActivityIndicator = vm.GetType().GetMethod("ShowActivityIndicator",
+                BindingFlags.NonPublic | BindingFlags.Instance);
+
+            //Act
+            vm.IsLoading = false;
+            showActivityIndicator.Invoke(vm, null);
+
+            //Assert
+            vm.IsLoading.ShouldBeTrue();
+            searchMock.Protected().Verify("GetLocationCityName",
+                Times.Never());
+            searchMock.Protected().Verify("HideActivityIndicator",
+                Times.Never());
+            searchMock.Protected().Verify("GetWeather",
+                Times.Never());
+            searchMock.Protected().Verify("NavigateToWeatherDetails",
+                Times.Never(), ItExpr.IsAny<CurrentWeatherResponse>());
+        }
+
+        [Test]
+        public void HideActivityIndicator_Should_Set_IsLoading_To_False()
+        {
+            //Arrange
+            base.Setup();
+            searchMock.Protected()
+                .Setup("HideActivityIndicator")
+                .CallBase();
+            var vm = searchMock.Object;
+            MethodInfo hideActivityIndicator = vm.GetType().GetMethod("HideActivityIndicator",
+                BindingFlags.NonPublic | BindingFlags.Instance);
+
+            //Act
+            vm.IsLoading = true;
+            hideActivityIndicator.Invoke(vm, null);
+
+            //Assert
+            vm.IsLoading.ShouldBeFalse();
+            searchMock.Protected().Verify("GetLocationCityName",
+                Times.Never());
+            searchMock.Protected().Verify("ShowActivityIndicator",
+                Times.Never());
+            searchMock.Protected().Verify("GetWeather",
+                Times.Never());
+            searchMock.Protected().Verify("NavigateToWeatherDetails",
+                Times.Never(), ItExpr.IsAny<CurrentWeatherResponse>());
         }
     }
 }

@@ -27,6 +27,16 @@ namespace Core.ViewModels
             this.navigationService = navigationService;
             this.alertService = alertService;
             this.locationService = locationService;
+
+            CheckWeatherCommand = new MvxAsyncCommand(async () =>
+            {
+                await CheckWeather();
+            }, () => !string.IsNullOrEmpty(CityName));
+
+            GetLocationCityNameCommand = new MvxAsyncCommand(async () =>
+            {
+                await GetLocationCityName();
+            });
         }
 
         private string cityName;
@@ -50,53 +60,47 @@ namespace Core.ViewModels
             set => SetProperty(ref isLoading, value);
         }
 
-        private IMvxAsyncCommand checkWeatherCommand;
-        public IMvxAsyncCommand CheckWeatherCommand
-        {
-            get
-            {
-                return checkWeatherCommand ?? (checkWeatherCommand = new MvxAsyncCommand(async () =>
-                {
-                    var currentWeather = await GetWeather();
-                    if (currentWeather != null)
-                        NavigateToWeatherDetails(currentWeather);
-                }, () => !string.IsNullOrEmpty(CityName)));
-            }
-        }
-
-        private IMvxAsyncCommand getLocationCityNameCommand;
-        public IMvxAsyncCommand GetLocationCityNameCommand
-        {
-            get
-            {
-                return getLocationCityNameCommand ?? (getLocationCityNameCommand = new MvxAsyncCommand(async () =>
-                {
-                    await GetLocationCityName();
-                }));
-            }
-        }
+        public IMvxAsyncCommand CheckWeatherCommand { get; }
+        public IMvxAsyncCommand GetLocationCityNameCommand { get; }
 
         protected virtual async Task GetLocationCityName()
         {
-            IsLoading = true;
+            ShowActivityIndicator();
             CityName = await locationService.GetLocationCityNameAsync();
-            IsLoading = false;
+            HideActivityIndicator();
         }
 
-        protected virtual void NavigateToWeatherDetails(CurrentWeatherResponse currentWeather)
+        protected virtual async Task CheckWeather()
         {
-            navigationService.Navigate<WeatherDetailsViewModel, WeatherDetails>(
+            var currentWeather = await GetWeather();
+            if (currentWeather != null)
+                await NavigateToWeatherDetails(currentWeather);
+        }
+
+        protected virtual Task NavigateToWeatherDetails(CurrentWeatherResponse currentWeather)
+        {
+            return navigationService.Navigate<WeatherDetailsViewModel, WeatherDetails>(
                 mapper.Map<CurrentWeatherResponse, WeatherDetails>(currentWeather));
         }
 
         protected virtual async Task<CurrentWeatherResponse> GetWeather()
         {
-            IsLoading = true;
+            ShowActivityIndicator();
             var currentWeather = alertService.IsInternetConnection()
                 ? await alertService.GetWeatherAsync(cityName, AppResources.CityNameIsIncorrect)
                 : null;
-            IsLoading = false;
+            HideActivityIndicator();
             return currentWeather;
+        }
+
+        protected virtual void ShowActivityIndicator()
+        {
+            IsLoading = true;
+        }
+
+        protected virtual void HideActivityIndicator()
+        {
+            IsLoading = false;
         }
     }
 }

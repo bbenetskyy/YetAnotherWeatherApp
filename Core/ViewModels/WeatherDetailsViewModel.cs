@@ -50,8 +50,8 @@ namespace Core.ViewModels
             set => SetProperty(ref isLoading, value);
         }
 
-        public IMvxAsyncCommand RefreshWeatherCommand;
-        public IMvxAsyncCommand BackCommand;
+        public IMvxAsyncCommand RefreshWeatherCommand { get; }
+        public IMvxAsyncCommand BackCommand { get; }
 
         public override void Prepare(WeatherDetails parameter)
         {
