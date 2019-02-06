@@ -25,6 +25,16 @@ namespace Core.ViewModels
             this.mapper = mapper;
             this.navigationService = navigationService;
             this.alertService = alertService;
+
+            RefreshWeatherCommand = new MvxAsyncCommand(async () =>
+            {
+                await RefreshWeather();
+            });
+
+            BackCommand = new MvxAsyncCommand(async () =>
+            {
+                await NavigateToSearch();
+            });
         }
 
         public string CityName => weatherDetails?.CityName;
@@ -40,33 +50,8 @@ namespace Core.ViewModels
             set => SetProperty(ref isLoading, value);
         }
 
-        private IMvxAsyncCommand refreshWeatherCommand;
-        public IMvxAsyncCommand RefreshWeatherCommand
-        {
-            get
-            {
-                return refreshWeatherCommand ?? (refreshWeatherCommand = new MvxAsyncCommand(async () =>
-                {
-                    var currentWeather = await GetWeather();
-                    if (currentWeather != null)
-                        MapWeatherToProperties(currentWeather);
-                    else
-                        NavigateToSearch();
-                }));
-            }
-        }
-
-        private IMvxAsyncCommand backCommand;
-        public IMvxAsyncCommand BackCommand
-        {
-            get
-            {
-                return backCommand ?? (backCommand = new MvxAsyncCommand(async () =>
-                           {
-                               NavigateToSearch();
-                           }));
-            }
-        }
+        public IMvxAsyncCommand RefreshWeatherCommand { get; }
+        public IMvxAsyncCommand BackCommand { get; }
 
         public override void Prepare(WeatherDetails parameter)
         {
@@ -75,23 +60,42 @@ namespace Core.ViewModels
 
         protected virtual async Task<CurrentWeatherResponse> GetWeather()
         {
-            IsLoading = true;
+            ShowActivityIndicator();
             var currentWeather = alertService.IsInternetConnection()
                 ? await alertService.GetWeatherAsync(weatherDetails?.CityName, AppResources.SomethingIsWrong)
                 : null;
-            IsLoading = false;
+            HideActivityIndicator();
             return currentWeather;
         }
 
-        protected virtual void MapWeatherToProperties(CurrentWeatherResponse currentWeather)
+        protected virtual void ShowActivityIndicator()
         {
-            weatherDetails = mapper.Map<CurrentWeatherResponse, WeatherDetails>(currentWeather);
-            RaiseAllPropertiesChanged();
+            IsLoading = true;
         }
 
-        protected virtual void NavigateToSearch()
+        protected virtual void HideActivityIndicator()
         {
-            navigationService.Navigate<SearchViewModel>();
+            IsLoading = false;
+        }
+
+        protected virtual async Task RefreshWeather()
+        {
+            var currentWeather = await GetWeather();
+            if (currentWeather != null)
+                await MapWeatherToProperties(currentWeather);
+            else
+                await NavigateToSearch();
+        }
+
+        protected virtual Task MapWeatherToProperties(CurrentWeatherResponse currentWeather)
+        {
+            weatherDetails = mapper.Map<CurrentWeatherResponse, WeatherDetails>(currentWeather);
+            return RaiseAllPropertiesChanged();
+        }
+
+        protected virtual Task NavigateToSearch()
+        {
+            return navigationService.Navigate<SearchViewModel>();
         }
     }
 }
