@@ -37,4 +37,8 @@ This project use **ZenHub** as issue tracker, please use it during checking issu
     - **API.IntegrationTests** - integration tests with **NUnit** on real Open Weather API, here we testing how works **OpenWeatherMap .Net** NuGet.
     - **Core.UnitTests** - unit tests with **NUnit** where we check our mapper service and view models
 
+## Code Coverage Status
+
+![Selected Color Scheme](https://github.com/bbenetskyy/YetAnotherWeatherApp/blob/master/CodeCoverage.png)
+
 
