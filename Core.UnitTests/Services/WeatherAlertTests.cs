@@ -53,7 +53,7 @@ namespace Core.UnitTests.Services
         {
             //Arrange 
             base.Setup();
-            var alertService = new WeatherAlertService();
+            var alertService = Ioc.IoCConstruct<WeatherAlertService>();
             var cityName = CurrentWeatherTestData.FakeCurrentWeather.City.Name;
 
             //Act
@@ -72,7 +72,7 @@ namespace Core.UnitTests.Services
         {
             //Arrange 
             base.Setup();
-            var alertService = new WeatherAlertService();
+            var alertService = Ioc.IoCConstruct<WeatherAlertService>();
 
             //Act
             var currentWeather = await alertService.GetWeatherAsync(cityName, null);
@@ -88,7 +88,7 @@ namespace Core.UnitTests.Services
         {
             //Arrange 
             base.Setup();
-            var alertService = new WeatherAlertService();
+            var alertService = Ioc.IoCConstruct<WeatherAlertService>();
 
             //Act
             var isInternet = alertService.IsInternetConnection();
@@ -107,7 +107,7 @@ namespace Core.UnitTests.Services
             base.Setup();
             connectivityMock.Setup(c => c.IsConnected)
                 .Returns(false);
-            var alertService = new WeatherAlertService();
+            var alertService = Ioc.IoCConstruct<WeatherAlertService>();
 
             //Act
             var isInternet = alertService.IsInternetConnection();
