@@ -103,7 +103,6 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
                 Times.Never(), ItExpr.IsAny<CurrentWeatherResponse>());
         }
 
-
         [Test]
         public async Task CheckWeatherCommand_Should_Call_GetLocationCityName()
         {
