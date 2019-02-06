@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using Core.Models;
-using Core.Services;
+using Core.Resources;
+using Core.Services.Interfaces;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using OpenWeatherMap;
 using System.Threading.Tasks;
-using Core.Services.Interfaces;
 
 namespace Core.ViewModels
 {
@@ -77,8 +77,7 @@ namespace Core.ViewModels
         {
             IsLoading = true;
             var currentWeather = alertService.IsInternetConnection()
-                ? await alertService.GetWeatherAsync(weatherDetails?.CityName,
-                    "Something is going wrong, don't worry we will navigate you to Search again!")
+                ? await alertService.GetWeatherAsync(weatherDetails?.CityName, AppResources.SomethingIsWrong)
                 : null;
             IsLoading = false;
             return currentWeather;

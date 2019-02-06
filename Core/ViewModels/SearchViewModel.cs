@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Core.Models;
+using Core.Resources;
 using Core.Services.Interfaces;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
@@ -92,7 +93,7 @@ namespace Core.ViewModels
         {
             IsLoading = true;
             var currentWeather = alertService.IsInternetConnection()
-                ? await alertService.GetWeatherAsync(cityName, "City name is incorrect!")
+                ? await alertService.GetWeatherAsync(cityName, AppResources.CityNameIsIncorrect)
                 : null;
             IsLoading = false;
             return currentWeather;
