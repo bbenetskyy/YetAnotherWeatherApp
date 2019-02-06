@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Core.Services;
+using Core.Services.Interfaces;
 using Core.UnitTests.TestData;
 using Core.ViewModels;
 using Moq;
@@ -10,8 +10,9 @@ using MvvmCross.Navigation;
 using MvvmCross.Tests;
 using NUnit.Framework;
 using OpenWeatherMap;
+using Shouldly;
+using System.Reflection;
 using System.Threading.Tasks;
-using Core.Services.Interfaces;
 
 namespace Core.UnitTests.ViewModels.MockedViewModels
 {
@@ -47,27 +48,37 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
                 CallBase = true
             };
             weatherMock.Protected()
-                .Setup("NavigateToSearch")
+                .Setup<Task>("NavigateToSearch")
+                .Returns(Task.FromResult("Some Result"))
                 .Verifiable();
             weatherMock.Protected()
-                .Setup("MapWeatherToProperties", ItExpr.IsAny<CurrentWeatherResponse>())
+                .Setup<Task>("MapWeatherToProperties", ItExpr.IsAny<CurrentWeatherResponse>())
+                .Returns(Task.FromResult("Some Result"))
                 .Verifiable();
             weatherMock.Protected()
                 .Setup<Task<CurrentWeatherResponse>>("GetWeather")
                 .ReturnsAsync(CurrentWeatherTestData.FakeCurrentWeather)
                 .Verifiable();
+            weatherMock.Protected()
+                .Setup("ShowActivityIndicator")
+                .Verifiable();
+            weatherMock.Protected()
+                .Setup("HideActivityIndicator")
+                .Verifiable();
         }
 
         [Test]
-        public async Task RefreshWeatherCommand_Should_Call_GetWeather_And_MapWeatherToProperties()
+        public void RefreshWeather_Should_Call_GetWeather_And_MapWeatherToProperties_And_ActivityIndicators()
         {
             //Arrange
             base.Setup();
             var vm = weatherMock.Object;
-            vm.Prepare(WeatherDetailsTestData.FakeWeatherDetails);
+            MethodInfo refreshWeather = vm.GetType().GetMethod("RefreshWeather",
+                BindingFlags.NonPublic | BindingFlags.Instance);
 
             //Act
-            await vm.RefreshWeatherCommand.ExecuteAsync();
+            vm.Prepare(WeatherDetailsTestData.FakeWeatherDetails);
+            refreshWeather.Invoke(vm, null);
 
             //Assert
             weatherMock.Protected().Verify("GetWeather",
@@ -79,7 +90,7 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
         }
 
         [Test]
-        public async Task RefreshWeatherCommand_Should_Call_GetWeather_And_NavigateToSearch()
+        public void RefreshWeather_Should_Call_GetWeather_And_NavigateToSearch_And_ActivityIndicators()
         {
             //Arrange
             base.Setup();
@@ -88,9 +99,11 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
                 .ReturnsAsync((CurrentWeatherResponse)null)
                 .Verifiable();
             var vm = weatherMock.Object;
+            MethodInfo refreshWeather = vm.GetType().GetMethod("RefreshWeather",
+                BindingFlags.NonPublic | BindingFlags.Instance);
 
             //Act
-            await vm.RefreshWeatherCommand.ExecuteAsync();
+            refreshWeather.Invoke(vm, null);
 
             //Assert
             weatherMock.Protected().Verify("GetWeather",
@@ -118,6 +131,87 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
                 Times.Never(), ItExpr.IsAny<CurrentWeatherResponse>());
             weatherMock.Protected().Verify("NavigateToSearch",
                 Times.Once());
+            weatherMock.Protected().Verify("ShowActivityIndicator",
+                Times.Never());
+            weatherMock.Protected().Verify("HideActivityIndicator",
+                Times.Never());
+        }
+
+        [Test]
+        public void ShowActivityIndicator_Should_Set_IsLoading_To_True()
+        {
+            //Arrange
+            base.Setup();
+            weatherMock.Protected()
+                .Setup("ShowActivityIndicator")
+                .CallBase();
+            var vm = weatherMock.Object;
+            MethodInfo showActivityIndicator = vm.GetType().GetMethod("ShowActivityIndicator",
+                BindingFlags.NonPublic | BindingFlags.Instance);
+
+            //Act
+            vm.IsLoading = false;
+            showActivityIndicator.Invoke(vm, null);
+
+            //Assert
+            vm.IsLoading.ShouldBeTrue();
+            weatherMock.Protected().Verify("GetWeather",
+                Times.Never());
+            weatherMock.Protected().Verify("MapWeatherToProperties",
+                Times.Never(), ItExpr.IsAny<CurrentWeatherResponse>());
+            weatherMock.Protected().Verify("NavigateToSearch",
+                Times.Never());
+            weatherMock.Protected().Verify("HideActivityIndicator",
+                Times.Never());
+        }
+
+        [Test]
+        public void HideActivityIndicator_Should_Set_IsLoading_To_False()
+        {
+            //Arrange
+            base.Setup();
+            weatherMock.Protected()
+                .Setup("HideActivityIndicator")
+                .CallBase();
+            var vm = weatherMock.Object;
+            MethodInfo hideActivityIndicator = vm.GetType().GetMethod("HideActivityIndicator",
+                BindingFlags.NonPublic | BindingFlags.Instance);
+
+            //Act
+            vm.IsLoading = true;
+            hideActivityIndicator.Invoke(vm, null);
+
+            //Assert
+            vm.IsLoading.ShouldBeFalse();
+            weatherMock.Protected().Verify("GetWeather",
+                Times.Never());
+            weatherMock.Protected().Verify("MapWeatherToProperties",
+                Times.Never(), ItExpr.IsAny<CurrentWeatherResponse>());
+            weatherMock.Protected().Verify("NavigateToSearch",
+                Times.Never());
+            weatherMock.Protected().Verify("ShowActivityIndicator",
+                Times.Never());
+        }
+
+        [Test]
+        public async Task RefreshWeatherCommand_Should_Call_RefreshWeather()
+        {
+            //Arrange
+            base.Setup();
+            weatherMock.Protected()
+                .Setup<Task>("RefreshWeather")
+                .Returns(Task.FromResult("Some Result"))
+                .Verifiable();
+            var vm = weatherMock.Object;
+
+            //Act
+            await vm.RefreshWeatherCommand.ExecuteAsync();
+
+            //Assert
+            weatherMock.Protected().Verify("RefreshWeather",
+                Times.Once());
+            weatherMock.Protected().Verify("NavigateToSearch",
+                Times.Never());
         }
     }
 }
