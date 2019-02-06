@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Core.Services;
+using Core.Services.Interfaces;
 using Core.UnitTests.TestData;
 using Core.ViewModels;
 using Moq;
@@ -11,7 +11,6 @@ using MvvmCross.Tests;
 using NUnit.Framework;
 using OpenWeatherMap;
 using System.Threading.Tasks;
-using Core.Services.Interfaces;
 
 namespace Core.UnitTests.ViewModels.MockedViewModels
 {
@@ -20,6 +19,7 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
     {
         private Mock<IMapper> mapperMock;
         private Mock<IAlertService> alertMock;
+        private Mock<ILocationService> locationMock;
         private Mock<IMvxNavigationService> navigationMock;
         private Mock<SearchViewModel> searchMock;
 
@@ -41,13 +41,22 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
             alertMock = new Mock<IAlertService>();
             Ioc.RegisterSingleton<IAlertService>(alertMock.Object);
 
+            locationMock = new Mock<ILocationService>();
+            locationMock.Setup(l => l.GetLocationCityNameAsync())
+                .ReturnsAsync(WeatherDetailsTestData.FakeWeatherDetails.CityName);
+            Ioc.RegisterSingleton<ILocationService>(locationMock.Object);
+
             searchMock = new Mock<SearchViewModel>(MockBehavior.Loose,
-                mapperMock.Object, navigationMock.Object, alertMock.Object)
+                mapperMock.Object, navigationMock.Object, alertMock.Object, locationMock.Object)
             {
                 CallBase = true
             };
             searchMock.Protected()
                 .Setup("NavigateToWeatherDetails", ItExpr.IsAny<CurrentWeatherResponse>())
+                .Verifiable();
+            searchMock.Protected()
+                .Setup<Task>("GetLocationCityName")
+                .Returns(Task.FromResult("Some Result"))
                 .Verifiable();
         }
 
@@ -92,6 +101,21 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
             searchMock.Protected().Verify("GetWeather", Times.Once());
             searchMock.Protected().Verify("NavigateToWeatherDetails",
                 Times.Never(), ItExpr.IsAny<CurrentWeatherResponse>());
+        }
+
+
+        [Test]
+        public async Task CheckWeatherCommand_Should_Call_GetLocationCityName()
+        {
+            //Arrange
+            base.Setup();
+            var vm = searchMock.Object;
+
+            //Act
+            await vm.GetLocationCityNameCommand.ExecuteAsync();
+
+            //Assert
+            searchMock.Protected().Verify("GetLocationCityName", Times.Once());
         }
     }
 }

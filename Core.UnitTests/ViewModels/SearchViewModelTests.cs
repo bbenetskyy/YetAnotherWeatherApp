@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Core.Models;
-using Core.Services;
+using Core.Services.Interfaces;
 using Core.UnitTests.TestData;
 using Core.ViewModels;
 using Moq;
@@ -12,7 +12,6 @@ using OpenWeatherMap;
 using Shouldly;
 using System.Threading;
 using System.Threading.Tasks;
-using Core.Services.Interfaces;
 using IMvxCommandHelper = MvvmCross.Commands.IMvxCommandHelper;
 
 namespace Core.UnitTests.ViewModels
@@ -23,6 +22,7 @@ namespace Core.UnitTests.ViewModels
         private Mock<IMapper> mapperMock;
         private Mock<IAlertService> alertMock;
         private Mock<IMvxNavigationService> navigationMock;
+        private Mock<ILocationService> locationMock;
 
         protected override void AdditionalSetup()
         {
@@ -50,6 +50,11 @@ namespace Core.UnitTests.ViewModels
             alertMock.Setup(a => a.GetWeatherAsync(CurrentWeatherTestData.FakeCurrentWeather.City.Name, It.IsAny<string>()))
                 .ReturnsAsync(CurrentWeatherTestData.FakeCurrentWeather);
             Ioc.RegisterSingleton<IAlertService>(alertMock.Object);
+
+            locationMock = new Mock<ILocationService>();
+            locationMock.Setup(l => l.GetLocationCityNameAsync())
+                .ReturnsAsync(WeatherDetailsTestData.FakeWeatherDetails.CityName);
+            Ioc.RegisterSingleton<ILocationService>(locationMock.Object);
         }
 
         [Test]
@@ -125,6 +130,23 @@ namespace Core.UnitTests.ViewModels
             navigationMock.Verify(n => n.Navigate<WeatherDetailsViewModel, WeatherDetails>(
                     It.IsAny<WeatherDetails>(), null, default(CancellationToken)),
                 Times.Never);
+        }
+
+        [Test]
+        public async Task GetLocationCityNameCommand_Should_Call_Api_And_Update_City_Name()
+        {
+            //Arrange
+            base.Setup();
+            var vm = Ioc.IoCConstruct<SearchViewModel>();
+
+            //Act
+            vm.CityName = string.Empty;
+            await vm.GetLocationCityNameCommand.ExecuteAsync();
+
+            //Assert
+            vm.CityName.ShouldBe(WeatherDetailsTestData.FakeWeatherDetails.CityName);
+            locationMock.Verify(l => l.GetLocationCityNameAsync(),
+                Times.Once);
         }
     }
 }

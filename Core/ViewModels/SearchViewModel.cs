@@ -1,13 +1,11 @@
 ﻿using AutoMapper;
 using Core.Models;
-using Core.Services;
-using MvvmCross;
+using Core.Services.Interfaces;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using OpenWeatherMap;
 using System.Threading.Tasks;
-using Core.Services.Interfaces;
 
 namespace Core.ViewModels
 {
@@ -16,15 +14,18 @@ namespace Core.ViewModels
         private readonly IMapper mapper;
         private readonly IMvxNavigationService navigationService;
         private readonly IAlertService alertService;
+        private readonly ILocationService locationService;
 
         public SearchViewModel(
             IMapper mapper,
             IMvxNavigationService navigationService,
-            IAlertService alertService)
+            IAlertService alertService,
+            ILocationService locationService)
         {
             this.mapper = mapper;
             this.navigationService = navigationService;
             this.alertService = alertService;
+            this.locationService = locationService;
         }
 
         private string cityName;
@@ -77,7 +78,6 @@ namespace Core.ViewModels
         protected virtual async Task GetLocationCityName()
         {
             IsLoading = true;
-            var locationService = Mvx.IoCProvider.Resolve<ILocationService>();
             CityName = await locationService.GetLocationCityNameAsync();
             IsLoading = false;
         }
