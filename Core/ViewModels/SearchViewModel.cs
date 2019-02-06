@@ -7,6 +7,7 @@ using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using OpenWeatherMap;
 using System.Threading.Tasks;
+using Core.Services.Interfaces;
 
 namespace Core.ViewModels
 {
@@ -75,8 +76,10 @@ namespace Core.ViewModels
 
         protected virtual async Task GetLocationCityName()
         {
+            IsLoading = true;
             var locationService = Mvx.IoCProvider.Resolve<ILocationService>();
             CityName = await locationService.GetLocationCityNameAsync();
+            IsLoading = false;
         }
 
         protected virtual void NavigateToWeatherDetails(CurrentWeatherResponse currentWeather)

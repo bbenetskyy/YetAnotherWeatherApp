@@ -11,6 +11,7 @@ using MvvmCross.Tests;
 using NUnit.Framework;
 using OpenWeatherMap;
 using System.Threading.Tasks;
+using Core.Services.Interfaces;
 
 namespace Core.UnitTests.ViewModels.MockedViewModels
 {

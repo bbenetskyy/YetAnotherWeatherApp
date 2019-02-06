@@ -12,6 +12,7 @@ using OpenWeatherMap;
 using Shouldly;
 using System.Threading;
 using System.Threading.Tasks;
+using Core.Services.Interfaces;
 
 namespace Core.UnitTests.ViewModels
 {

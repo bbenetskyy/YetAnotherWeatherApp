@@ -5,6 +5,7 @@ using OpenWeatherMap;
 using Plugin.Connectivity.Abstractions;
 using System;
 using System.Threading.Tasks;
+using Core.Services.Interfaces;
 
 namespace Core.Services
 {

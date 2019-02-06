@@ -6,6 +6,7 @@ using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using OpenWeatherMap;
 using System.Threading.Tasks;
+using Core.Services.Interfaces;
 
 namespace Core.ViewModels
 {

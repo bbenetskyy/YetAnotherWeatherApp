@@ -12,6 +12,7 @@ using OpenWeatherMap;
 using Shouldly;
 using System.Threading;
 using System.Threading.Tasks;
+using Core.Services.Interfaces;
 using IMvxCommandHelper = MvvmCross.Commands.IMvxCommandHelper;
 
 namespace Core.UnitTests.ViewModels
