@@ -41,4 +41,12 @@ This project use **ZenHub** as issue tracker, please use it during checking issu
 
 ![Selected Color Scheme](https://github.com/bbenetskyy/YetAnotherWeatherApp/blob/master/CodeCoverage.png)
 
+### **Some Projects and files was excluded from coverage because they can not be tested.**
+Was excluded:
+* Full Tests Folder with Test Projects
+* Full Native Folder with Native Projects (but later may be added if UI tests are written)
+* From Core Project:
+    - App.cs
+    - Constants Folder
+    - Geocoding & Geolocation
 
