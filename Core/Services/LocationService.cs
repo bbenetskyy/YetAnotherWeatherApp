@@ -1,4 +1,5 @@
-﻿using Core.Services.Interfaces;
+﻿using Core.Resources;
+using Core.Services.Interfaces;
 using InteractiveAlert;
 using MvvmCross;
 using System;
@@ -50,8 +51,8 @@ namespace Core.Services
             var alertConfig = new InteractiveAlertConfig
             {
                 OkButton = new InteractiveActionButton(),
-                Title = "Warning",
-                Message = "Can't get your City name",
+                Title = AppResources.Warning,
+                Message = AppResources.CanNotGetCityName,
                 Style = InteractiveAlertStyle.Warning,
                 IsCancellable = true
             };

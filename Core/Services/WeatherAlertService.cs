@@ -1,11 +1,12 @@
 ﻿using API;
+using Core.Resources;
+using Core.Services.Interfaces;
 using InteractiveAlert;
 using MvvmCross;
 using OpenWeatherMap;
 using Plugin.Connectivity.Abstractions;
 using System;
 using System.Threading.Tasks;
-using Core.Services.Interfaces;
 
 namespace Core.Services
 {
@@ -26,7 +27,7 @@ namespace Core.Services
                 var alertConfig = new InteractiveAlertConfig
                 {
                     OkButton = new InteractiveActionButton(),
-                    Title = "Error",
+                    Title = AppResources.Error,
                     Message = errorMessage,
                     Style = InteractiveAlertStyle.Error,
                     IsCancellable = true
@@ -45,8 +46,8 @@ namespace Core.Services
                 var alertConfig = new InteractiveAlertConfig
                 {
                     OkButton = new InteractiveActionButton(),
-                    Title = "Warning",
-                    Message = "Please check your internet connection",
+                    Title = AppResources.Warning,
+                    Message = AppResources.CheckInternetConnection,
                     Style = InteractiveAlertStyle.Warning,
                     IsCancellable = true
                 };
