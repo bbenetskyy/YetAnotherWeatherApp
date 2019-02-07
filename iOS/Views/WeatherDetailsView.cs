@@ -50,7 +50,6 @@ namespace iOS.Views
                 .To(vm => vm.MaxTemperatureColor)
                 .WithConversion("NativeColor");
 
-
             set.Apply();
         }
     }
