@@ -9,6 +9,7 @@ using MvvmCross.Base;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using MvvmCross.Tests;
+using MvvmCross.UI;
 using NUnit.Framework;
 using OpenWeatherMap;
 using Shouldly;
@@ -307,6 +308,66 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
 
             //Assert
             color.ShouldBe(Colors.Hotly);
+        }
+
+        [Test]
+        public void CurrentTemperatureColor_Should_Return_Warn_Color()
+        {
+            //Arrange
+            base.Setup();
+            weatherMock.Protected()
+                .Setup<MvxColor>("GetColorByTemperature")
+                .Returns(Colors.Warm)
+                .Verifiable();
+            var vm = weatherMock.Object;
+
+            //Act
+            vm.Prepare(WeatherDetailsTestData.FakeWeatherDetails);
+
+            //Assert
+            vm.CurrentTemperatureColor.ShouldBe(Colors.Warm);
+            weatherMock.Protected().Verify("GetColorByTemperature",
+                Times.Once());
+        }
+
+        [Test]
+        public void MinTemperatureColor_Should_Return_Warn_Color()
+        {
+            //Arrange
+            base.Setup();
+            weatherMock.Protected()
+                .Setup<MvxColor>("GetColorByTemperature")
+                .Returns(Colors.Warm)
+                .Verifiable();
+            var vm = weatherMock.Object;
+
+            //Act
+            vm.Prepare(WeatherDetailsTestData.FakeWeatherDetails);
+
+            //Assert
+            vm.MinTemperatureColor.ShouldBe(Colors.Warm);
+            weatherMock.Protected().Verify("GetColorByTemperature",
+                Times.Once());
+        }
+
+        [Test]
+        public void MaxTemperatureColor_Should_Return_Warn_Color()
+        {
+            //Arrange
+            base.Setup();
+            weatherMock.Protected()
+                .Setup<MvxColor>("GetColorByTemperature")
+                .Returns(Colors.Warm)
+                .Verifiable();
+            var vm = weatherMock.Object;
+
+            //Act
+            vm.Prepare(WeatherDetailsTestData.FakeWeatherDetails);
+
+            //Assert
+            vm.MaxTemperatureColor.ShouldBe(Colors.Warm);
+            weatherMock.Protected().Verify("GetColorByTemperature",
+                Times.Once());
         }
     }
 }

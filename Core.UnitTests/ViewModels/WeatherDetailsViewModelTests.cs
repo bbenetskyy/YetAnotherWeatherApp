@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using Core.Constants;
 using Core.Services;
+using Core.Services.Interfaces;
 using Core.UnitTests.TestData;
 using Core.ViewModels;
 using Moq;
@@ -12,7 +14,6 @@ using OpenWeatherMap;
 using Shouldly;
 using System.Threading;
 using System.Threading.Tasks;
-using Core.Services.Interfaces;
 
 namespace Core.UnitTests.ViewModels
 {
@@ -135,6 +136,48 @@ namespace Core.UnitTests.ViewModels
             alertMock.Verify(a => a.GetWeatherAsync(vm.CityName, It.IsAny<string>()), Times.Never);
             navigationMock.Verify(n => n.Navigate<SearchViewModel>(null, default(CancellationToken)),
                 Times.Once);
+        }
+
+        [Test]
+        public void CurrentTemperatureColor_Should_Return_Chilly_Color()
+        {
+            //Arrange
+            base.Setup();
+            var vm = Ioc.IoCConstruct<WeatherDetailsViewModel>();
+
+            //Act
+            vm.Prepare(WeatherDetailsTestData.FakeWeatherDetails);
+
+            //Assert
+            vm.CurrentTemperatureColor.ShouldBe(Colors.Chilly);
+        }
+
+        [Test]
+        public void MinTemperatureColor_Should_Return_Chilly_Color()
+        {
+            //Arrange
+            base.Setup();
+            var vm = Ioc.IoCConstruct<WeatherDetailsViewModel>();
+
+            //Act
+            vm.Prepare(WeatherDetailsTestData.FakeWeatherDetails);
+
+            //Assert
+            vm.MinTemperatureColor.ShouldBe(Colors.Chilly);
+        }
+
+        [Test]
+        public void MaxTemperatureColor_Should_Return_Chilly_Color()
+        {
+            //Arrange
+            base.Setup();
+            var vm = Ioc.IoCConstruct<WeatherDetailsViewModel>();
+
+            //Act
+            vm.Prepare(WeatherDetailsTestData.FakeWeatherDetails);
+
+            //Assert
+            vm.MaxTemperatureColor.ShouldBe(Colors.Warm);
         }
     }
 }
