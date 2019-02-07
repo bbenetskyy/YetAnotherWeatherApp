@@ -93,7 +93,7 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
                 .ReturnsAsync(CurrentWeatherTestData.FakeCurrentWeather)
                 .Verifiable();
             var vm = searchMock.Object;
-            MethodInfo checkWeather = vm.GetType().GetMethod("CheckWeather",
+            var checkWeather = vm.GetType().GetMethod("CheckWeather",
                 BindingFlags.NonPublic | BindingFlags.Instance);
 
             //Act
@@ -118,7 +118,7 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
                 .ReturnsAsync((CurrentWeatherResponse)null)
                 .Verifiable();
             var vm = searchMock.Object;
-            MethodInfo checkWeather = vm.GetType().GetMethod("CheckWeather",
+            var checkWeather = vm.GetType().GetMethod("CheckWeather",
                 BindingFlags.NonPublic | BindingFlags.Instance);
 
             //Act
@@ -156,7 +156,7 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
                 .Setup<Task>("GetLocationCityName")
                 .CallBase();
             var vm = searchMock.Object;
-            MethodInfo getLocationCityName = vm.GetType().GetMethod("GetLocationCityName",
+            var getLocationCityName = vm.GetType().GetMethod("GetLocationCityName",
                 BindingFlags.NonPublic | BindingFlags.Instance);
 
             //Act
@@ -182,7 +182,7 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
                 .Setup("ShowActivityIndicator")
                 .CallBase();
             var vm = searchMock.Object;
-            MethodInfo showActivityIndicator = vm.GetType().GetMethod("ShowActivityIndicator",
+            var showActivityIndicator = vm.GetType().GetMethod("ShowActivityIndicator",
                 BindingFlags.NonPublic | BindingFlags.Instance);
 
             //Act
@@ -210,7 +210,7 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
                 .Setup("HideActivityIndicator")
                 .CallBase();
             var vm = searchMock.Object;
-            MethodInfo hideActivityIndicator = vm.GetType().GetMethod("HideActivityIndicator",
+            var hideActivityIndicator = vm.GetType().GetMethod("HideActivityIndicator",
                 BindingFlags.NonPublic | BindingFlags.Instance);
 
             //Act

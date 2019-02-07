@@ -37,6 +37,19 @@ namespace iOS.Views
                 .To(vm => vm.IsLoading)
                 .WithConversion("InvertedVisibility");
 
+            set.Bind(currentTemperatureLabel)
+                .For("TextColor")
+                .To(vm => vm.CurrentTemperatureColor)
+                .WithConversion("NativeColor");
+            set.Bind(minTemperatureLabel)
+                .For("TextColor")
+                .To(vm => vm.MinTemperatureColor)
+                .WithConversion("NativeColor");
+            set.Bind(maxTemperatureLabel)
+                .For("TextColor")
+                .To(vm => vm.MaxTemperatureColor)
+                .WithConversion("NativeColor");
+
             set.Apply();
         }
     }

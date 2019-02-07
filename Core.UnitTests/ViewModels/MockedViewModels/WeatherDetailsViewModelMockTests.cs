@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Constants;
 using Core.Services.Interfaces;
 using Core.UnitTests.TestData;
 using Core.ViewModels;
@@ -8,6 +9,7 @@ using MvvmCross.Base;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using MvvmCross.Tests;
+using MvvmCross.UI;
 using NUnit.Framework;
 using OpenWeatherMap;
 using Shouldly;
@@ -73,7 +75,7 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
             //Arrange
             base.Setup();
             var vm = weatherMock.Object;
-            MethodInfo refreshWeather = vm.GetType().GetMethod("RefreshWeather",
+            var refreshWeather = vm.GetType().GetMethod("RefreshWeather",
                 BindingFlags.NonPublic | BindingFlags.Instance);
 
             //Act
@@ -99,7 +101,7 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
                 .ReturnsAsync((CurrentWeatherResponse)null)
                 .Verifiable();
             var vm = weatherMock.Object;
-            MethodInfo refreshWeather = vm.GetType().GetMethod("RefreshWeather",
+            var refreshWeather = vm.GetType().GetMethod("RefreshWeather",
                 BindingFlags.NonPublic | BindingFlags.Instance);
 
             //Act
@@ -146,7 +148,7 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
                 .Setup("ShowActivityIndicator")
                 .CallBase();
             var vm = weatherMock.Object;
-            MethodInfo showActivityIndicator = vm.GetType().GetMethod("ShowActivityIndicator",
+            var showActivityIndicator = vm.GetType().GetMethod("ShowActivityIndicator",
                 BindingFlags.NonPublic | BindingFlags.Instance);
 
             //Act
@@ -174,7 +176,7 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
                 .Setup("HideActivityIndicator")
                 .CallBase();
             var vm = weatherMock.Object;
-            MethodInfo hideActivityIndicator = vm.GetType().GetMethod("HideActivityIndicator",
+            var hideActivityIndicator = vm.GetType().GetMethod("HideActivityIndicator",
                 BindingFlags.NonPublic | BindingFlags.Instance);
 
             //Act
@@ -212,6 +214,160 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
                 Times.Once());
             weatherMock.Protected().Verify("NavigateToSearch",
                 Times.Never());
+        }
+
+        [TestCase(null)]
+        [TestCase("")]
+        [TestCase("°C")]
+        [TestCase(" °C")]
+        [TestCase("text °C")]
+        public async Task GetColorByTemperature_Should_Return_Default_Color(string temperature)
+        {
+            //Arrange
+            base.Setup();
+            var vm = weatherMock.Object;
+            var getColorByTemperature = vm.GetType().GetMethod("GetColorByTemperature",
+                BindingFlags.NonPublic | BindingFlags.Instance);
+
+            //Act
+            var color = getColorByTemperature.Invoke(vm, new object[] { temperature });
+
+            //Assert
+            color.ShouldBe(Colors.Default);
+        }
+
+        [TestCase("-1 °C")]
+        [TestCase("-0.56 °C")]
+        [TestCase("0 °C")]
+        public async Task GetColorByTemperature_Should_Return_Cold_Color(string temperature)
+        {
+            //Arrange
+            base.Setup();
+            var vm = weatherMock.Object;
+            var getColorByTemperature = vm.GetType().GetMethod("GetColorByTemperature",
+                BindingFlags.NonPublic | BindingFlags.Instance);
+
+            //Act
+            var color = getColorByTemperature.Invoke(vm, new object[] { temperature });
+
+            //Assert
+            color.ShouldBe(Colors.Cold);
+        }
+
+        [TestCase("1 °C")]
+        [TestCase("0.56 °C")]
+        [TestCase("5 °C")]
+        [TestCase("10 °C")]
+        public async Task GetColorByTemperature_Should_Return_Chilly_Color(string temperature)
+        {
+            //Arrange
+            base.Setup();
+            var vm = weatherMock.Object;
+            var getColorByTemperature = vm.GetType().GetMethod("GetColorByTemperature",
+                BindingFlags.NonPublic | BindingFlags.Instance);
+
+            //Act
+            var color = getColorByTemperature.Invoke(vm, new object[] { temperature });
+
+            //Assert
+            color.ShouldBe(Colors.Chilly);
+        }
+
+        [TestCase("10.5 °C")]
+        [TestCase("15.6 °C")]
+        [TestCase("18 °C")]
+        [TestCase("20 °C")]
+        public async Task GetColorByTemperature_Should_Return_Warm_Color(string temperature)
+        {
+            //Arrange
+            base.Setup();
+            var vm = weatherMock.Object;
+            var getColorByTemperature = vm.GetType().GetMethod("GetColorByTemperature",
+                BindingFlags.NonPublic | BindingFlags.Instance);
+
+            //Act
+            var color = getColorByTemperature.Invoke(vm, new object[] { temperature });
+
+            //Assert
+            color.ShouldBe(Colors.Warm);
+        }
+
+        [TestCase("20.1 °C")]
+        [TestCase("35 °C")]
+        [TestCase("40 °C")]
+        public async Task GetColorByTemperature_Should_Return_Hotly_Color(string temperature)
+        {
+            //Arrange
+            base.Setup();
+            var vm = weatherMock.Object;
+            var getColorByTemperature = vm.GetType().GetMethod("GetColorByTemperature",
+                BindingFlags.NonPublic | BindingFlags.Instance);
+
+            //Act
+            var color = getColorByTemperature.Invoke(vm, new object[] { temperature });
+
+            //Assert
+            color.ShouldBe(Colors.Hotly);
+        }
+
+        [Test]
+        public void CurrentTemperatureColor_Should_Return_Warn_Color()
+        {
+            //Arrange
+            base.Setup();
+            weatherMock.Protected()
+                .Setup<MvxColor>("GetColorByTemperature")
+                .Returns(Colors.Warm)
+                .Verifiable();
+            var vm = weatherMock.Object;
+
+            //Act
+            vm.Prepare(WeatherDetailsTestData.FakeWeatherDetails);
+
+            //Assert
+            vm.CurrentTemperatureColor.ShouldBe(Colors.Warm);
+            weatherMock.Protected().Verify("GetColorByTemperature",
+                Times.Once());
+        }
+
+        [Test]
+        public void MinTemperatureColor_Should_Return_Warn_Color()
+        {
+            //Arrange
+            base.Setup();
+            weatherMock.Protected()
+                .Setup<MvxColor>("GetColorByTemperature")
+                .Returns(Colors.Warm)
+                .Verifiable();
+            var vm = weatherMock.Object;
+
+            //Act
+            vm.Prepare(WeatherDetailsTestData.FakeWeatherDetails);
+
+            //Assert
+            vm.MinTemperatureColor.ShouldBe(Colors.Warm);
+            weatherMock.Protected().Verify("GetColorByTemperature",
+                Times.Once());
+        }
+
+        [Test]
+        public void MaxTemperatureColor_Should_Return_Warn_Color()
+        {
+            //Arrange
+            base.Setup();
+            weatherMock.Protected()
+                .Setup<MvxColor>("GetColorByTemperature")
+                .Returns(Colors.Warm)
+                .Verifiable();
+            var vm = weatherMock.Object;
+
+            //Act
+            vm.Prepare(WeatherDetailsTestData.FakeWeatherDetails);
+
+            //Assert
+            vm.MaxTemperatureColor.ShouldBe(Colors.Warm);
+            weatherMock.Protected().Verify("GetColorByTemperature",
+                Times.Once());
         }
     }
 }

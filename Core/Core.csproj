@@ -8,6 +8,7 @@
     <PackageReference Include="AutoMapper" Version="8.0.0" />
     <PackageReference Include="InteractiveAlerts" Version="0.1.8" />
     <PackageReference Include="MvvmCross" Version="6.2.2" />
+    <PackageReference Include="MvvmCross.Plugin.Color" Version="6.2.2" />
     <PackageReference Include="OpenWeatherMap.Net" Version="1.0.0" />
     <PackageReference Include="Xam.Plugin.Connectivity" Version="3.2.0" />
     <PackageReference Include="Xamarin.Essentials" Version="1.0.1" />
