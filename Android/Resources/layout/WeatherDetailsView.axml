@@ -5,7 +5,7 @@
     android:paddingTop="25px"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:rowCount="7"
+    android:rowCount="6"
     android:columnCount="2"
     android:id="@+id/mainGrid">
     <TextView
@@ -120,5 +120,6 @@
         android:indeterminateOnly="true"
         android:keepScreenOn="true"
         android:layout_gravity="top"
+        android:layout_marginTop="50px"
         local:MvxBind="Visibility Visibility(IsLoading)"/>
 </GridLayout>

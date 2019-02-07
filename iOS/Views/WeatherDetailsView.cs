@@ -32,6 +32,10 @@ namespace iOS.Views
                 .For("Visibility")
                 .To(vm => vm.IsLoading)
                 .WithConversion("Visibility");
+            set.Bind(refreshButton)
+                .For("Visibility")
+                .To(vm => vm.IsLoading)
+                .WithConversion("InvertedVisibility");
 
             set.Apply();
         }
