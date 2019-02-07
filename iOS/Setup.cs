@@ -3,6 +3,7 @@ using InteractiveAlert;
 using MvvmCross;
 using MvvmCross.Converters;
 using MvvmCross.Platforms.Ios.Core;
+using MvvmCross.Plugin.Color;
 using MvvmCross.Plugin.Visibility;
 
 namespace iOS
@@ -19,6 +20,7 @@ namespace iOS
         {
             base.FillValueConverters(registry);
             registry.AddOrOverwrite("Visibility", new MvxVisibilityValueConverter());
+            registry.AddOrOverwrite("NativeColor", new MvxNativeColorValueConverter());
         }
     }
 }

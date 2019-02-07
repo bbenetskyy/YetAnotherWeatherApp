@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using Core.Constants;
 using Core.Models;
 using Core.Resources;
 using Core.Services.Interfaces;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
+using MvvmCross.UI;
 using MvvmCross.ViewModels;
 using OpenWeatherMap;
 using System.Threading.Tasks;
@@ -42,6 +44,9 @@ namespace Core.ViewModels
         public string CurrentTemperature => weatherDetails?.CurrentTemperature;
         public string MinTemperature => weatherDetails?.MinTemperature;
         public string MaxTemperature => weatherDetails?.MaxTemperature;
+        public MvxColor CurrentTemperatureColor => GetColorByTemperature(weatherDetails?.CurrentTemperature);
+        public MvxColor MinTemperatureColor => GetColorByTemperature(weatherDetails?.MinTemperature);
+        public MvxColor MaxTemperatureColor => GetColorByTemperature(weatherDetails?.MaxTemperature);
 
         private bool isLoading;
         public bool IsLoading
@@ -96,6 +101,31 @@ namespace Core.ViewModels
         protected virtual Task NavigateToSearch()
         {
             return navigationService.Navigate<SearchViewModel>();
+        }
+
+        protected virtual MvxColor GetColorByTemperature(string tempString)
+        {
+            if (double.TryParse(tempString.Substring(0, tempString.IndexOf(' ')), out var tempValue))
+            {
+                if (tempValue <= 0)
+                {
+                    return Colors.Cold;
+                }
+
+                if (tempValue <= 10)
+                {
+                    return Colors.Chilly;
+                }
+
+                if (tempValue <= 20)
+                {
+                    return Colors.Warm;
+                }
+
+                return Colors.Hotly;
+            }
+
+            return Colors.Default;
         }
     }
 }

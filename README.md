@@ -24,6 +24,7 @@ This project use **ZenHub** as issue tracker, please use it during checking issu
 * **Shouldly**- Assertion framework for .NET. The way asserting *Should* be
 * **Xam.Plugin.Connectivity** - Get network connectivity information such as network type, speeds, and if connection is available
 * **Xamarin.Essentials** - a kit of essential API's for your apps
+* **MvvmCross.Plugin.Color** - contains the 'Color' plugin for MvvmCross
 
 ## Yet Another Weather App Solution Structure
 
