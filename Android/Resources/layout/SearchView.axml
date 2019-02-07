@@ -9,6 +9,8 @@
         android:paddingTop="100px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:inputType="text"
         android:id="@+id/searchEditText" 
         local:MvxBind="Text CityName"
         android:hint="Enter City name"/>
