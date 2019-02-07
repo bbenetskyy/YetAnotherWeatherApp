@@ -28,6 +28,14 @@ namespace iOS.Views
                 .For("Visibility")
                 .To(vm => vm.IsLoading)
                 .WithConversion("Visibility");
+            set.Bind(searchButton)
+                .For("Visibility")
+                .To(vm => vm.IsLoading)
+                .WithConversion("InvertedVisibility");
+            set.Bind(getLocationButton)
+                .For("Visibility")
+                .To(vm => vm.IsLoading)
+                .WithConversion("InvertedVisibility");
 
             set.Apply();
         }
