@@ -17,13 +17,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/searchButton"
-        local:MvxBind="Click CheckWeatherCommand"/>
+        local:MvxBind="Click CheckWeatherCommand; Visibility InvertedVisibility(IsLoading)"/>
     <Button
         android:text="Get Your City Name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/getLocationButton"
-        local:MvxBind="Click GetLocationCityNameCommand"/>
+        local:MvxBind="Click GetLocationCityNameCommand; Visibility InvertedVisibility(IsLoading)"/>
     <ProgressBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
