@@ -39,16 +39,16 @@ namespace iOS.Views
 
             set.Bind(currentTemperatureLabel)
                 .For("TextColor")
-                .To(vm => vm.CurrentTemperature)
-                .WithConversion("TemperatureToColor");
+                .To(vm => vm.CurrentTemperatureColor)
+                .WithConversion("NativeColor");
             set.Bind(minTemperatureLabel)
                 .For("TextColor")
-                .To(vm => vm.MinTemperature)
-                .WithConversion("TemperatureToColor");
+                .To(vm => vm.MinTemperatureColor)
+                .WithConversion("NativeColor");
             set.Bind(maxTemperatureLabel)
                 .For("TextColor")
-                .To(vm => vm.MaxTemperature)
-                .WithConversion("TemperatureToColor");
+                .To(vm => vm.MaxTemperatureColor)
+                .WithConversion("NativeColor");
 
 
             set.Apply();
