@@ -105,7 +105,11 @@ namespace Core.ViewModels
 
         protected virtual MvxColor GetColorByTemperature(string tempString)
         {
-            if (double.TryParse(tempString.Substring(0, tempString.IndexOf(' ')), out var tempValue))
+            if (!string.IsNullOrEmpty(tempString)
+                && tempString.Contains(" ")
+                && double.TryParse(
+                    tempString.Substring(0, tempString.IndexOf(' ')),
+                    out var tempValue))
             {
                 if (tempValue <= 0)
                 {
