@@ -316,7 +316,7 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
             //Arrange
             base.Setup();
             weatherMock.Protected()
-                .Setup<MvxColor>("GetColorByTemperature")
+                .Setup<MvxColor>("GetColorByTemperature", ItExpr.IsAny<string>())
                 .Returns(Colors.Warm)
                 .Verifiable();
             var vm = weatherMock.Object;
@@ -327,7 +327,7 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
             //Assert
             vm.CurrentTemperatureColor.ShouldBe(Colors.Warm);
             weatherMock.Protected().Verify("GetColorByTemperature",
-                Times.Once());
+                Times.Once(), ItExpr.IsAny<string>());
         }
 
         [Test]
@@ -336,7 +336,7 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
             //Arrange
             base.Setup();
             weatherMock.Protected()
-                .Setup<MvxColor>("GetColorByTemperature")
+                .Setup<MvxColor>("GetColorByTemperature", ItExpr.IsAny<string>())
                 .Returns(Colors.Warm)
                 .Verifiable();
             var vm = weatherMock.Object;
@@ -347,7 +347,7 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
             //Assert
             vm.MinTemperatureColor.ShouldBe(Colors.Warm);
             weatherMock.Protected().Verify("GetColorByTemperature",
-                Times.Once());
+                Times.Once(), ItExpr.IsAny<string>());
         }
 
         [Test]
@@ -356,7 +356,7 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
             //Arrange
             base.Setup();
             weatherMock.Protected()
-                .Setup<MvxColor>("GetColorByTemperature")
+                .Setup<MvxColor>("GetColorByTemperature", ItExpr.IsAny<string>())
                 .Returns(Colors.Warm)
                 .Verifiable();
             var vm = weatherMock.Object;
@@ -367,7 +367,7 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
             //Assert
             vm.MaxTemperatureColor.ShouldBe(Colors.Warm);
             weatherMock.Protected().Verify("GetColorByTemperature",
-                Times.Once());
+                Times.Once(), ItExpr.IsAny<string>());
         }
     }
 }
