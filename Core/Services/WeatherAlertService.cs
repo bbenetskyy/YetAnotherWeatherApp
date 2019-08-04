@@ -27,6 +27,7 @@ namespace Core.Services
         {
             try
             {
+                await Task.Delay(TimeSpan.FromSeconds(3));
                 var currentWeather = await apiClient.GetWeatherByCityNameAsync(cityName);
                 return currentWeather;
             }
