@@ -4,7 +4,7 @@
     xmlns:local="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:background="@drawable/clouds"
+    android:background="@drawable/night"
     android:scaleType="centerCrop"
     android:padding="20dp"
     android:layout_height="match_parent"
