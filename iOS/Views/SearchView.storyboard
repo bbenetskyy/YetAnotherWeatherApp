@@ -1,5 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hhP-hi-JfS">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -14,11 +17,11 @@
                         <viewControllerLayoutGuide type="bottom" id="Wwm-OV-EMe"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Mxh-Du-VSW">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="2799" translatesAutoresizingMaskIntoConstraints="NO" image="clouds">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clouds" translatesAutoresizingMaskIntoConstraints="NO" id="2799">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="500">
                                 <rect key="frame" x="16" y="177" width="382" height="29"/>
@@ -29,17 +32,22 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter City name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1863" clearButtonMode="whileEditing" adjustsFontForContentSizeCategory="YES">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter City name" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="1863">
                                 <rect key="frame" x="16" y="138" width="382" height="31"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" searchField="YES"/>
                                 </accessibility>
-                                <color key="textColor" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace" white="1" alpha="1"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
-                                <color key="tintColor" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace" white="1" alpha="1"/>
-                                <color key="backgroundColor" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace" white="0" alpha="0"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </textField>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2094">
                                 <rect key="frame" x="0.0" y="6" width="414" height="44"/>
@@ -49,7 +57,7 @@
                                 </items>
                             </navigationBar>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="2327">
-                                <rect key="frame" x="197" y="315.5" width="20" height="20"/>
+                                <rect key="frame" x="197" y="386" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2562">
@@ -60,11 +68,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint id="2800" firstAttribute="leadingMargin" secondItem="2799" secondAttribute="leading" constant="20"/>
-                            <constraint id="2801" firstItem="2799" firstAttribute="trailing" secondItem="Mxh-Du-VSW" secondAttribute="trailingMargin" constant="20"/>
-                            <constraint id="2802" firstItem="2799" firstAttribute="centerY" secondItem="Mxh-Du-VSW" secondAttribute="centerY"/>
-                            <constraint id="2803" firstItem="2799" firstAttribute="centerX" secondItem="Mxh-Du-VSW" secondAttribute="centerX"/>
-                            <constraint id="2804" firstItem="2799" firstAttribute="bottom" secondItem="Mxh-Du-VSW" secondAttribute="bottom"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="2799" secondAttribute="leading" constant="20" id="2800"/>
+                            <constraint firstItem="2799" firstAttribute="trailing" secondItem="Mxh-Du-VSW" secondAttribute="trailingMargin" constant="20" id="2801"/>
+                            <constraint firstItem="2799" firstAttribute="centerY" secondItem="Mxh-Du-VSW" secondAttribute="centerY" id="2802"/>
+                            <constraint firstItem="2799" firstAttribute="centerX" secondItem="Mxh-Du-VSW" secondAttribute="centerX" id="2803"/>
+                            <constraint firstItem="2799" firstAttribute="bottom" secondItem="Mxh-Du-VSW" secondAttribute="bottom" id="2804"/>
                         </constraints>
                     </view>
                     <connections>
@@ -80,6 +88,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="clouds" width="213.3333" height="285.3333"/>
+        <image name="clouds" width="213.33329772949219" height="285.33331298828125"/>
     </resources>
 </document>
