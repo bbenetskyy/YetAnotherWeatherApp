@@ -27,4 +27,4 @@ steps:
     configuration: '$(buildConfiguration)'
     buildForSimulator: true
     packageApp: false
-    runNugetRestore: false 
+    runNugetRestore: false

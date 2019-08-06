@@ -55,7 +55,6 @@ namespace Core.UnitTests.ViewModels
             alertMock = new Mock<IAlertService>();
             Ioc.RegisterSingleton<IAlertService>(alertMock.Object);
 
-
             connectivityMock = new Mock<IConnectivity>();
             connectivityMock.Setup(a => a.IsConnected)
                 .Returns(true);
