@@ -5,6 +5,7 @@ using MvvmCross;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Models;
 using Xamarin.Essentials;
 
 namespace Core.Services
@@ -13,13 +14,16 @@ namespace Core.Services
     {
         private readonly IGeolocationService geolocation;
         private readonly IGeocodingService geocoding;
+        private readonly IAlertService alertService;
 
         public LocationService(
             IGeolocationService geolocation,
-            IGeocodingService geocoding)
+            IGeocodingService geocoding,
+            IAlertService alertService)
         {
             this.geolocation = geolocation;
             this.geocoding = geocoding;
+            this.alertService = alertService;
         }
 
         public async Task<string> GetLocationCityNameAsync()
@@ -47,16 +51,7 @@ namespace Core.Services
 
         private void ShowAlert()
         {
-            var interactiveAlerts = Mvx.IoCProvider.Resolve<IInteractiveAlerts>();
-            var alertConfig = new InteractiveAlertConfig
-            {
-                OkButton = new InteractiveActionButton(),
-                Title = AppResources.Warning,
-                Message = AppResources.CanNotGetCityName,
-                Style = InteractiveAlertStyle.Warning,
-                IsCancellable = true
-            };
-            interactiveAlerts.ShowAlert(alertConfig);
+            alertService.Show(AppResources.CanNotGetCityName, AlertType.Warning);
         }
     }
 }

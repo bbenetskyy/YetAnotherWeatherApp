@@ -20,7 +20,7 @@ namespace Core
             Mvx.IoCProvider.RegisterSingleton(MapService.ConfigureMapper);
             Mvx.IoCProvider.RegisterSingleton(CrossConnectivity.Current);
             Mvx.IoCProvider.RegisterType<IApiClient, ApiClient>();
-            Mvx.IoCProvider.RegisterType<IAlertService, WeatherAlertService>();
+            Mvx.IoCProvider.RegisterType<IWeatherService, WeatherService>();
             Mvx.IoCProvider.RegisterType<ILocationService, LocationService>();
             Mvx.IoCProvider.RegisterType<IGeolocationService, Geolocation>();
             Mvx.IoCProvider.RegisterType<IGeocodingService, Geocoding>();

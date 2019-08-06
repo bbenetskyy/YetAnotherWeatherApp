@@ -10,12 +10,15 @@ using MvvmCross.UI;
 using MvvmCross.ViewModels;
 using OpenWeatherMap;
 using System.Threading.Tasks;
+using Plugin.Connectivity.Abstractions;
 
 namespace Core.ViewModels
 {
     public class WeatherDetailsViewModel : MvxViewModel<WeatherDetails>
     {
         private readonly IMapper mapper;
+        private readonly IWeatherService weatherService;
+        private readonly IConnectivity connectivity;
         private readonly IAlertService alertService;
         private readonly IMvxNavigationService navigationService;
         private WeatherDetails weatherDetails;
@@ -23,10 +26,14 @@ namespace Core.ViewModels
         public WeatherDetailsViewModel(
             IMapper mapper,
             IMvxNavigationService navigationService,
+            IWeatherService weatherService,
+            IConnectivity connectivity,
             IAlertService alertService)
         {
             this.mapper = mapper;
             this.navigationService = navigationService;
+            this.weatherService = weatherService;
+            this.connectivity = connectivity;
             this.alertService = alertService;
 
             RefreshWeatherCommand = new MvxAsyncCommand(async () =>
@@ -66,10 +73,14 @@ namespace Core.ViewModels
 
         protected virtual async Task<CurrentWeatherResponse> GetWeather()
         {
+            if (!connectivity.IsConnected)
+            {
+                alertService.Show(AppResources.CheckInternetConnection, AlertType.Warning);
+                return null;
+            }
+
             ShowActivityIndicator();
-            var currentWeather = alertService.IsInternetConnection()
-                ? await alertService.GetWeatherAsync(weatherDetails?.CityName, AppResources.SomethingIsWrong)
-                : null;
+            var currentWeather = await weatherService.GetWeatherAsync(weatherDetails?.CityName, AppResources.SomethingIsWrong);
             HideActivityIndicator();
             return currentWeather;
         }

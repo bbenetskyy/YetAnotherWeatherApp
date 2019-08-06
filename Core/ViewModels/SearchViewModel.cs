@@ -7,6 +7,7 @@ using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using OpenWeatherMap;
 using System.Threading.Tasks;
+using Plugin.Connectivity.Abstractions;
 
 namespace Core.ViewModels
 {
@@ -14,19 +15,25 @@ namespace Core.ViewModels
     {
         private readonly IMapper mapper;
         private readonly IMvxNavigationService navigationService;
-        private readonly IAlertService alertService;
+        private readonly IWeatherService weatherService;
         private readonly ILocationService locationService;
+        private readonly IConnectivity connectivity;
+        private readonly IAlertService alertService;
 
         public SearchViewModel(
             IMapper mapper,
             IMvxNavigationService navigationService,
-            IAlertService alertService,
-            ILocationService locationService)
+            IWeatherService weatherService,
+            ILocationService locationService,
+            IConnectivity connectivity,
+            IAlertService alertService)
         {
             this.mapper = mapper;
             this.navigationService = navigationService;
-            this.alertService = alertService;
+            this.weatherService = weatherService;
             this.locationService = locationService;
+            this.connectivity = connectivity;
+            this.alertService = alertService;
 
             CheckWeatherCommand = new MvxAsyncCommand(async () =>
             {
@@ -85,10 +92,14 @@ namespace Core.ViewModels
 
         protected virtual async Task<CurrentWeatherResponse> GetWeather()
         {
+            if (!connectivity.IsConnected)
+            {
+                alertService.Show(AppResources.CheckInternetConnection, AlertType.Warning);
+                return null;
+            }
+
             ShowActivityIndicator();
-            var currentWeather = alertService.IsInternetConnection()
-                ? await alertService.GetWeatherAsync(cityName, AppResources.CityNameIsIncorrect)
-                : null;
+            var currentWeather = await weatherService.GetWeatherAsync(cityName, AppResources.CityNameIsIncorrect);
             HideActivityIndicator();
             return currentWeather;
         }

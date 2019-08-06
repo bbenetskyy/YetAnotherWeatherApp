@@ -1,11 +1,9 @@
-﻿using OpenWeatherMap;
-using System.Threading.Tasks;
+﻿using Core.Models;
 
 namespace Core.Services.Interfaces
 {
     public interface IAlertService
     {
-        Task<CurrentWeatherResponse> GetWeatherAsync(string cityName, string errorMessage);
-        bool IsInternetConnection();
+        void Show(string message, AlertType type);
     }
 }
