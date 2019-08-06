@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hhP-hi-JfS">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
@@ -24,23 +24,33 @@
                                 <rect key="frame" x="-4" y="0.0" width="383" height="812"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="500">
-                                <rect key="frame" x="12" y="135.5" width="351" height="29"/>
-                                <color key="backgroundColor" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace" white="0" alpha="0"/>
-                                <color key="tintColor" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace" white="1" alpha="1"/>
-                                <state key="normal" title="Search">
-                                    <color key="titleColor" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace" white="1" alpha="1"/>
-                                </state>
+                                <rect key="frame" x="12" y="159" width="351" height="29"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint id="3771" firstAttribute="height" constant="29"/>
+                                    <constraint firstAttribute="height" constant="29" id="3771"/>
                                 </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Search">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="5"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.borderWidth" value="5"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColorFromUIColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter City name" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="1863">
-                                <rect key="frame" x="12" y="96.5" width="351" height="31"/>
+                                <rect key="frame" x="12" y="120" width="351" height="31"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" searchField="YES"/>
                                 </accessibility>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31" id="3770"/>
+                                </constraints>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
@@ -49,25 +59,22 @@
                                         <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
-                                <constraints>
-                                    <constraint id="3770" firstAttribute="height" constant="31"/>
-                                </constraints>
                             </textField>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2094" fixedFrame="YES">
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2094">
                                 <rect key="frame" x="0.0" y="6" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Check Weather" id="2095"/>
                                 </items>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </navigationBar>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="2327">
-                                <rect key="frame" x="170" y="387.5" width="37" height="37"/>
+                                <rect key="frame" x="170" y="387.66666666666669" width="37" height="37"/>
                             </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2562">
-                                <rect key="frame" x="16" y="172" width="347" height="30"/>
-                                <color key="tintColor" colorSpace="calibratedRGB" red="0.0392156862745098" green="0.37647058823529411" blue="1" alpha="1"/>
+                                <rect key="frame" x="16" y="196" width="347" height="30"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Get Your City Name">
-                                    <color key="titleColor" colorSpace="calibratedRGB" red="1" green="1" blue="1" alpha="1"/>
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
                         </subviews>
@@ -78,20 +85,20 @@
                             <constraint firstItem="2799" firstAttribute="centerY" secondItem="Mxh-Du-VSW" secondAttribute="centerY" id="2802"/>
                             <constraint firstItem="2799" firstAttribute="centerX" secondItem="Mxh-Du-VSW" secondAttribute="centerX" id="2803"/>
                             <constraint firstItem="2799" firstAttribute="bottom" secondItem="Mxh-Du-VSW" secondAttribute="bottom" id="2804"/>
-                            <constraint id="3447" firstItem="2327" firstAttribute="centerY" secondItem="2799" secondAttribute="centerY"/>
-                            <constraint id="3448" firstItem="2327" firstAttribute="centerX" secondItem="2799" secondAttribute="centerX" constant="1"/>
-                            <constraint id="3450" firstItem="2562" firstAttribute="centerX" secondItem="2799" secondAttribute="centerX" constant="2"/>
-                            <constraint id="3451" firstItem="2562" firstAttribute="leading" secondItem="Mxh-Du-VSW" secondAttribute="leadingMargin"/>
-                            <constraint id="3452" firstItem="2562" firstAttribute="trailing" secondItem="Mxh-Du-VSW" secondAttribute="trailingMargin" constant="4"/>
-                            <constraint id="3763" firstItem="500" firstAttribute="centerX" secondItem="2799" secondAttribute="centerX"/>
-                            <constraint id="3764" firstAttribute="leadingMargin" secondItem="500" secondAttribute="leading" constant="4"/>
-                            <constraint id="3765" firstItem="500" firstAttribute="trailing" secondItem="Mxh-Du-VSW" secondAttribute="trailingMargin" constant="4"/>
-                            <constraint id="3767" firstItem="1863" firstAttribute="centerX" secondItem="2799" secondAttribute="centerX"/>
-                            <constraint id="3768" firstItem="2562" firstAttribute="leading" secondItem="1863" secondAttribute="leading" constant="4"/>
-                            <constraint id="3769" firstItem="1863" firstAttribute="trailing" secondItem="Mxh-Du-VSW" secondAttribute="trailingMargin" constant="4"/>
-                            <constraint id="4067" firstItem="1863" firstAttribute="top" secondItem="HaF-73-5SK" secondAttribute="bottom" constant="76"/>
-                            <constraint id="4068" firstItem="500" firstAttribute="top" secondItem="HaF-73-5SK" secondAttribute="bottom" constant="115"/>
-                            <constraint id="4069" firstItem="2562" firstAttribute="top" secondItem="HaF-73-5SK" secondAttribute="bottom" constant="152"/>
+                            <constraint firstItem="2327" firstAttribute="centerY" secondItem="2799" secondAttribute="centerY" id="3447"/>
+                            <constraint firstItem="2327" firstAttribute="centerX" secondItem="2799" secondAttribute="centerX" constant="1" id="3448"/>
+                            <constraint firstItem="2562" firstAttribute="centerX" secondItem="2799" secondAttribute="centerX" constant="2" id="3450"/>
+                            <constraint firstItem="2562" firstAttribute="leading" secondItem="Mxh-Du-VSW" secondAttribute="leadingMargin" id="3451"/>
+                            <constraint firstItem="2562" firstAttribute="trailing" secondItem="Mxh-Du-VSW" secondAttribute="trailingMargin" constant="4" id="3452"/>
+                            <constraint firstItem="500" firstAttribute="centerX" secondItem="2799" secondAttribute="centerX" id="3763"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="500" secondAttribute="leading" constant="4" id="3764"/>
+                            <constraint firstItem="500" firstAttribute="trailing" secondItem="Mxh-Du-VSW" secondAttribute="trailingMargin" constant="4" id="3765"/>
+                            <constraint firstItem="1863" firstAttribute="centerX" secondItem="2799" secondAttribute="centerX" id="3767"/>
+                            <constraint firstItem="2562" firstAttribute="leading" secondItem="1863" secondAttribute="leading" constant="4" id="3768"/>
+                            <constraint firstItem="1863" firstAttribute="trailing" secondItem="Mxh-Du-VSW" secondAttribute="trailingMargin" constant="4" id="3769"/>
+                            <constraint firstItem="1863" firstAttribute="top" secondItem="HaF-73-5SK" secondAttribute="bottom" constant="76" id="4067"/>
+                            <constraint firstItem="500" firstAttribute="top" secondItem="HaF-73-5SK" secondAttribute="bottom" constant="115" id="4068"/>
+                            <constraint firstItem="2562" firstAttribute="top" secondItem="HaF-73-5SK" secondAttribute="bottom" constant="152" id="4069"/>
                         </constraints>
                     </view>
                     <connections>
