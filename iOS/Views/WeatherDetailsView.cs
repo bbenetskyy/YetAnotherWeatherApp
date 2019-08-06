@@ -3,6 +3,7 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
 using System;
+using UIKit;
 
 namespace iOS.Views
 {
@@ -49,6 +50,8 @@ namespace iOS.Views
                 .For("TextColor")
                 .To(vm => vm.MaxTemperatureColor)
                 .WithConversion("NativeColor");
+
+            refreshButton.Layer.BorderColor = UIColor.White.CGColor;
 
             set.Apply();
         }

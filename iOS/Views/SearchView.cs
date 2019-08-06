@@ -3,6 +3,8 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
 using System;
+using CoreGraphics;
+using UIKit;
 
 namespace iOS.Views
 {
@@ -36,6 +38,9 @@ namespace iOS.Views
                 .For("Visibility")
                 .To(vm => vm.IsLoading)
                 .WithConversion("InvertedVisibility");
+
+            searchButton.Layer.BorderColor = UIColor.White.CGColor;
+            getLocationButton.Layer.BorderColor = UIColor.White.CGColor;
 
             set.Apply();
         }

@@ -78,6 +78,10 @@
                                 <state key="normal" title="Refresh">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                  <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="10"/>
+                                  <userDefinedRuntimeAttribute type="string" keyPath="layer.borderWidth" value="2"/>
+                                </userDefinedRuntimeAttributes>
                                 <constraints>
                                     <constraint id="2037" firstAttribute="height" constant="30"/>
                                 </constraints>

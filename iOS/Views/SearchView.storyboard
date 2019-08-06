@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hhP-hi-JfS">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
@@ -24,25 +24,22 @@
                                 <rect key="frame" x="-4" y="0.0" width="383" height="812"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="500">
-                                <rect key="frame" x="12" y="159" width="351" height="29"/>
+                                <rect key="frame" x="12" y="135" width="351" height="29"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="29" id="3771"/>
                                 </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Search">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace" white="1" alpha="1"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="5"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.borderWidth" value="5"/>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColorFromUIColor">
-                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="10"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.borderWidth" value="2"/>
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter City name" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="1863">
-                                <rect key="frame" x="12" y="120" width="351" height="31"/>
+                                <rect key="frame" x="12" y="96" width="351" height="31"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <accessibility key="accessibilityConfiguration">
@@ -68,14 +65,18 @@
                                 </items>
                             </navigationBar>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="2327">
-                                <rect key="frame" x="170" y="387.66666666666669" width="37" height="37"/>
+                                <rect key="frame" x="170" y="387.5" width="37" height="37"/>
                             </activityIndicatorView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2562">
-                                <rect key="frame" x="16" y="196" width="347" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2562" misplaced="YES">
+                                <rect key="frame" x="12" y="172" width="351" height="30"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Get Your City Name">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="10"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.borderWidth" value="2"/>
+                                </userDefinedRuntimeAttributes>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -87,18 +88,17 @@
                             <constraint firstItem="2799" firstAttribute="bottom" secondItem="Mxh-Du-VSW" secondAttribute="bottom" id="2804"/>
                             <constraint firstItem="2327" firstAttribute="centerY" secondItem="2799" secondAttribute="centerY" id="3447"/>
                             <constraint firstItem="2327" firstAttribute="centerX" secondItem="2799" secondAttribute="centerX" constant="1" id="3448"/>
-                            <constraint firstItem="2562" firstAttribute="centerX" secondItem="2799" secondAttribute="centerX" constant="2" id="3450"/>
-                            <constraint firstItem="2562" firstAttribute="leading" secondItem="Mxh-Du-VSW" secondAttribute="leadingMargin" id="3451"/>
-                            <constraint firstItem="2562" firstAttribute="trailing" secondItem="Mxh-Du-VSW" secondAttribute="trailingMargin" constant="4" id="3452"/>
                             <constraint firstItem="500" firstAttribute="centerX" secondItem="2799" secondAttribute="centerX" id="3763"/>
                             <constraint firstAttribute="leadingMargin" secondItem="500" secondAttribute="leading" constant="4" id="3764"/>
                             <constraint firstItem="500" firstAttribute="trailing" secondItem="Mxh-Du-VSW" secondAttribute="trailingMargin" constant="4" id="3765"/>
                             <constraint firstItem="1863" firstAttribute="centerX" secondItem="2799" secondAttribute="centerX" id="3767"/>
-                            <constraint firstItem="2562" firstAttribute="leading" secondItem="1863" secondAttribute="leading" constant="4" id="3768"/>
                             <constraint firstItem="1863" firstAttribute="trailing" secondItem="Mxh-Du-VSW" secondAttribute="trailingMargin" constant="4" id="3769"/>
                             <constraint firstItem="1863" firstAttribute="top" secondItem="HaF-73-5SK" secondAttribute="bottom" constant="76" id="4067"/>
                             <constraint firstItem="500" firstAttribute="top" secondItem="HaF-73-5SK" secondAttribute="bottom" constant="115" id="4068"/>
-                            <constraint firstItem="2562" firstAttribute="top" secondItem="HaF-73-5SK" secondAttribute="bottom" constant="152" id="4069"/>
+                            <constraint id="4372" firstItem="2562" firstAttribute="leading" secondItem="500" secondAttribute="leading"/>
+                            <constraint id="4373" firstItem="2562" firstAttribute="height" secondItem="500" secondAttribute="height"/>
+                            <constraint id="4374" firstItem="2562" firstAttribute="trailing" secondItem="500" secondAttribute="trailing"/>
+                            <constraint id="4375" firstItem="2562" firstAttribute="top" secondItem="500" secondAttribute="bottom" constant="8"/>
                         </constraints>
                     </view>
                     <connections>
@@ -114,6 +114,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="clouds" width="193.5" height="258.5"/>
+        <image name="clouds" width="213.3333" height="285.3333"/>
     </resources>
 </document>
