@@ -13,6 +13,7 @@ using OpenWeatherMap;
 using Shouldly;
 using System.Reflection;
 using System.Threading.Tasks;
+using Plugin.Connectivity.Abstractions;
 
 namespace Core.UnitTests.ViewModels.MockedViewModels
 {
@@ -20,10 +21,12 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
     public class SearchViewModelTests : MvxIoCSupportingTest
     {
         private Mock<IMapper> mapperMock;
-        private Mock<IAlertService> alertMock;
+        private Mock<IWeatherService> weatherMock;
         private Mock<ILocationService> locationMock;
         private Mock<IMvxNavigationService> navigationMock;
         private Mock<SearchViewModel> searchMock;
+        private Mock<IAlertService> alertMock;
+        private Mock<IConnectivity> connectivityMock;
 
         protected override void AdditionalSetup()
         {
@@ -40,16 +43,25 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
             navigationMock = new Mock<IMvxNavigationService>();
             Ioc.RegisterSingleton<IMvxNavigationService>(navigationMock.Object);
 
-            alertMock = new Mock<IAlertService>();
-            Ioc.RegisterSingleton<IAlertService>(alertMock.Object);
+            weatherMock = new Mock<IWeatherService>();
+            Ioc.RegisterSingleton<IWeatherService>(weatherMock.Object);
 
             locationMock = new Mock<ILocationService>();
             locationMock.Setup(l => l.GetLocationCityNameAsync())
                 .ReturnsAsync(WeatherDetailsTestData.FakeWeatherDetails.CityName);
             Ioc.RegisterSingleton<ILocationService>(locationMock.Object);
 
+            alertMock = new Mock<IAlertService>();
+            Ioc.RegisterSingleton<IAlertService>(alertMock.Object);
+
+            connectivityMock = new Mock<IConnectivity>();
+            connectivityMock.Setup(a => a.IsConnected)
+                .Returns(true);
+            Ioc.RegisterSingleton<IConnectivity>(connectivityMock.Object);
+
             searchMock = new Mock<SearchViewModel>(MockBehavior.Loose,
-                mapperMock.Object, navigationMock.Object, alertMock.Object, locationMock.Object)
+                mapperMock.Object, navigationMock.Object, weatherMock.Object,
+                locationMock.Object, connectivityMock.Object, alertMock.Object)
             {
                 CallBase = true
             };

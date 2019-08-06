@@ -15,6 +15,7 @@ using OpenWeatherMap;
 using Shouldly;
 using System.Reflection;
 using System.Threading.Tasks;
+using Plugin.Connectivity.Abstractions;
 
 namespace Core.UnitTests.ViewModels.MockedViewModels
 {
@@ -22,9 +23,11 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
     public class WeatherDetailsViewModelMockTests : MvxIoCSupportingTest
     {
         private Mock<IMapper> mapperMock;
-        private Mock<IAlertService> alertMock;
+        private Mock<IWeatherService> weatherServiceMock;
         private Mock<IMvxNavigationService> navigationMock;
         private Mock<WeatherDetailsViewModel> weatherMock;
+        private Mock<IAlertService> alertMock;
+        private Mock<IConnectivity> connectivityMock;
 
         protected override void AdditionalSetup()
         {
@@ -41,11 +44,20 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
             navigationMock = new Mock<IMvxNavigationService>();
             Ioc.RegisterSingleton<IMvxNavigationService>(navigationMock.Object);
 
+            weatherServiceMock = new Mock<IWeatherService>();
+            Ioc.RegisterSingleton<IWeatherService>(weatherServiceMock.Object);
+
             alertMock = new Mock<IAlertService>();
             Ioc.RegisterSingleton<IAlertService>(alertMock.Object);
 
+            connectivityMock = new Mock<IConnectivity>();
+            connectivityMock.Setup(a => a.IsConnected)
+                .Returns(true);
+            Ioc.RegisterSingleton<IConnectivity>(connectivityMock.Object);
+
             weatherMock = new Mock<WeatherDetailsViewModel>(MockBehavior.Loose,
-                mapperMock.Object, navigationMock.Object, alertMock.Object)
+                mapperMock.Object, navigationMock.Object, weatherServiceMock.Object,
+                connectivityMock.Object, alertMock.Object)
             {
                 CallBase = true
             };

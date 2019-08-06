@@ -11,6 +11,8 @@ using Shouldly;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Core.Models;
+using Plugin.Connectivity.Abstractions;
 using Xamarin.Essentials;
 
 namespace Core.UnitTests.Services
@@ -20,7 +22,7 @@ namespace Core.UnitTests.Services
     {
         private Mock<IGeolocationService> geolocationMock;
         private Mock<IGeocodingService> geocodingMock;
-        private Mock<IInteractiveAlerts> interactiveMock;
+        private Mock<IAlertService> alertMock;
 
         protected override void AdditionalSetup()
         {
@@ -37,8 +39,8 @@ namespace Core.UnitTests.Services
             geocodingMock = new Mock<IGeocodingService>();
             Ioc.RegisterSingleton<IGeocodingService>(geocodingMock.Object);
 
-            interactiveMock = new Mock<IInteractiveAlerts>();
-            Ioc.RegisterSingleton<IInteractiveAlerts>(interactiveMock.Object);
+            alertMock = new Mock<IAlertService>();
+            Ioc.RegisterSingleton<IAlertService>(alertMock.Object);
         }
 
         [Test]
@@ -70,8 +72,7 @@ namespace Core.UnitTests.Services
                 Times.Once);
             geocodingMock.Verify(g => g.GetPlacemarksAsync(1, 1),
                 Times.Once);
-            interactiveMock.Verify(i => i.ShowAlert(It.IsAny<InteractiveAlertConfig>()),
-                Times.Never);
+            alertMock.Verify(a => a.Show(It.IsAny<string>(), AlertType.Warning), Times.Never);
         }
 
         [Test]
@@ -93,8 +94,7 @@ namespace Core.UnitTests.Services
                 Times.Once);
             geocodingMock.Verify(g => g.GetPlacemarksAsync(It.IsAny<int>(), It.IsAny<int>()),
                 Times.Never);
-            interactiveMock.Verify(i => i.ShowAlert(It.IsAny<InteractiveAlertConfig>()),
-                Times.Once);
+            alertMock.Verify(a => a.Show(It.IsAny<string>(), AlertType.Warning), Times.Once);
         }
 
         [Test]
@@ -116,8 +116,7 @@ namespace Core.UnitTests.Services
                 Times.Once);
             geocodingMock.Verify(g => g.GetPlacemarksAsync(It.IsAny<int>(), It.IsAny<int>()),
                 Times.Never);
-            interactiveMock.Verify(i => i.ShowAlert(It.IsAny<InteractiveAlertConfig>()),
-                Times.Once);
+            alertMock.Verify(a => a.Show(It.IsAny<string>(), AlertType.Warning), Times.Once);
         }
 
         [Test]
@@ -142,8 +141,7 @@ namespace Core.UnitTests.Services
                 Times.Once);
             geocodingMock.Verify(g => g.GetPlacemarksAsync(1, 1),
                 Times.Once);
-            interactiveMock.Verify(i => i.ShowAlert(It.IsAny<InteractiveAlertConfig>()),
-                Times.Once);
+            alertMock.Verify(a => a.Show(It.IsAny<string>(), AlertType.Warning), Times.Once);
         }
 
         [Test]
@@ -168,8 +166,7 @@ namespace Core.UnitTests.Services
                 Times.Once);
             geocodingMock.Verify(g => g.GetPlacemarksAsync(1, 1),
                 Times.Once);
-            interactiveMock.Verify(i => i.ShowAlert(It.IsAny<InteractiveAlertConfig>()),
-                Times.Once);
+            alertMock.Verify(a => a.Show(It.IsAny<string>(), AlertType.Warning), Times.Once);
         }
     }
 }

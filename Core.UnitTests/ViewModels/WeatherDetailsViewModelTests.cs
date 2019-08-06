@@ -14,14 +14,18 @@ using OpenWeatherMap;
 using Shouldly;
 using System.Threading;
 using System.Threading.Tasks;
+using Core.Models;
+using Plugin.Connectivity.Abstractions;
 
 namespace Core.UnitTests.ViewModels
 {
     [TestFixture]
     public class WeatherDetailsViewModelTests : MvxIoCSupportingTest
     {
-        private Mock<IAlertService> alertMock;
+        private Mock<IWeatherService> weatherMock;
         private Mock<IMvxNavigationService> navigationMock;
+        private Mock<IConnectivity> connectivityMock;
+        private Mock<IAlertService> alertMock;
 
         protected override void AdditionalSetup()
         {
@@ -32,19 +36,25 @@ namespace Core.UnitTests.ViewModels
             var helper = new MvxUnitTestCommandHelper();
             Ioc.RegisterSingleton<IMvxCommandHelper>(helper);
 
-            alertMock = new Mock<IAlertService>();
-            alertMock.Setup(a => a.GetWeatherAsync(It.IsAny<string>(), It.IsAny<string>()))
+            weatherMock = new Mock<IWeatherService>();
+            weatherMock.Setup(a => a.GetWeatherAsync(It.IsAny<string>(), It.IsAny<string>()))
                 .ReturnsAsync((CurrentWeatherResponse)null);
-            alertMock.Setup(a => a.IsInternetConnection())
-                .Returns(true);
-            alertMock.Setup(a => a.GetWeatherAsync(CurrentWeatherTestData.FakeCurrentWeather.City.Name, It.IsAny<string>()))
+            weatherMock.Setup(a => a.GetWeatherAsync(CurrentWeatherTestData.FakeCurrentWeather.City.Name, It.IsAny<string>()))
                 .ReturnsAsync(CurrentWeatherTestData.FakeCurrentWeather);
-            Ioc.RegisterSingleton<IAlertService>(alertMock.Object);
+            Ioc.RegisterSingleton<IWeatherService>(weatherMock.Object);
 
             navigationMock = new Mock<IMvxNavigationService>();
             navigationMock.Setup(n => n.Navigate<SearchViewModel>(null, default(CancellationToken)))
                 .ReturnsAsync(true);
             Ioc.RegisterSingleton<IMvxNavigationService>(navigationMock.Object);
+
+            alertMock = new Mock<IAlertService>();
+            Ioc.RegisterSingleton<IAlertService>(alertMock.Object);
+
+            connectivityMock = new Mock<IConnectivity>();
+            connectivityMock.Setup(a => a.IsConnected)
+                .Returns(true);
+            Ioc.RegisterSingleton<IConnectivity>(connectivityMock.Object);
 
             Ioc.RegisterSingleton<IMapper>(MapService.ConfigureMapper);
         }
@@ -79,8 +89,11 @@ namespace Core.UnitTests.ViewModels
             await vm.RefreshWeatherCommand.ExecuteAsync();
 
             //Assert
-            alertMock.Verify(a => a.IsInternetConnection(), Times.Once);
-            alertMock.Verify(a => a.GetWeatherAsync(vm.CityName, It.IsAny<string>()), Times.Once);
+            //todo separate in other tests
+            connectivityMock.Verify(a => a.IsConnected, Times.Once);
+            //todo check this string
+            alertMock.Verify(a => a.Show(It.IsAny<string>(), AlertType.Warning), Times.Never);
+            weatherMock.Verify(a => a.GetWeatherAsync(vm.CityName, It.IsAny<string>()), Times.Once);
             navigationMock.Verify(n => n.Navigate<SearchViewModel>(null, default(CancellationToken)),
                 Times.Never);
         }
@@ -96,8 +109,11 @@ namespace Core.UnitTests.ViewModels
             await vm.RefreshWeatherCommand.ExecuteAsync();
 
             //Assert
-            alertMock.Verify(a => a.IsInternetConnection(), Times.Once);
-            alertMock.Verify(a => a.GetWeatherAsync(vm.CityName, It.IsAny<string>()), Times.Once);
+            //todo separate in other tests
+            connectivityMock.Verify(a => a.IsConnected, Times.Once);
+            //todo check this string
+            alertMock.Verify(a => a.Show(It.IsAny<string>(), AlertType.Warning), Times.Never);
+            weatherMock.Verify(a => a.GetWeatherAsync(vm.CityName, It.IsAny<string>()), Times.Once);
             navigationMock.Verify(n => n.Navigate<SearchViewModel>(null, default(CancellationToken)),
                 Times.Once);
         }
@@ -107,7 +123,7 @@ namespace Core.UnitTests.ViewModels
         {
             //Arrange
             base.Setup();
-            alertMock.Setup(a => a.IsInternetConnection())
+            connectivityMock.Setup(a => a.IsConnected)
                 .Returns(false);
             var vm = Ioc.IoCConstruct<WeatherDetailsViewModel>();
 
@@ -115,8 +131,11 @@ namespace Core.UnitTests.ViewModels
             await vm.RefreshWeatherCommand.ExecuteAsync();
 
             //Assert
-            alertMock.Verify(a => a.IsInternetConnection(), Times.Once);
-            alertMock.Verify(a => a.GetWeatherAsync(vm.CityName, It.IsAny<string>()), Times.Never);
+            //todo separate in other tests
+            connectivityMock.Verify(a => a.IsConnected, Times.Once);
+            //todo check this string
+            alertMock.Verify(a => a.Show(It.IsAny<string>(), AlertType.Warning), Times.Once);
+            weatherMock.Verify(a => a.GetWeatherAsync(vm.CityName, It.IsAny<string>()), Times.Never);
             navigationMock.Verify(n => n.Navigate<SearchViewModel>(null, default(CancellationToken)),
                 Times.Once);
         }
@@ -132,8 +151,11 @@ namespace Core.UnitTests.ViewModels
             await vm.BackCommand.ExecuteAsync();
 
             //Assert
-            alertMock.Verify(a => a.IsInternetConnection(), Times.Never);
-            alertMock.Verify(a => a.GetWeatherAsync(vm.CityName, It.IsAny<string>()), Times.Never);
+            //todo separate in other tests
+            connectivityMock.Verify(a => a.IsConnected, Times.Never);
+            //todo check this string
+            alertMock.Verify(a => a.Show(It.IsAny<string>(), AlertType.Warning), Times.Never);
+            weatherMock.Verify(a => a.GetWeatherAsync(vm.CityName, It.IsAny<string>()), Times.Never);
             navigationMock.Verify(n => n.Navigate<SearchViewModel>(null, default(CancellationToken)),
                 Times.Once);
         }

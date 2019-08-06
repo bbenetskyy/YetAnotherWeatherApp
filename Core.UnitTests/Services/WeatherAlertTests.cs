@@ -11,15 +11,18 @@ using Plugin.Connectivity.Abstractions;
 using Shouldly;
 using System;
 using System.Threading.Tasks;
+using Core.Models;
+using Core.Services.Interfaces;
 
 namespace Core.UnitTests.Services
 {
     [TestFixture]
     public class WeatherAlertTests : MvxIoCSupportingTest
     {
+        //todo add base class for setup mocks
         private Mock<IApiClient> apiMock;
-        private Mock<IInteractiveAlerts> interactiveMock;
         private Mock<IConnectivity> connectivityMock;
+        private Mock<IAlertService> alertMock;
 
         protected override void AdditionalSetup()
         {
@@ -44,8 +47,8 @@ namespace Core.UnitTests.Services
                 .Returns(true);
             Ioc.RegisterSingleton<IConnectivity>(connectivityMock.Object);
 
-            interactiveMock = new Mock<IInteractiveAlerts>();
-            Ioc.RegisterSingleton<IInteractiveAlerts>(interactiveMock.Object);
+            alertMock = new Mock<IAlertService>();
+            Ioc.RegisterSingleton<IAlertService>(alertMock.Object);
         }
 
         [Test]
@@ -53,7 +56,7 @@ namespace Core.UnitTests.Services
         {
             //Arrange 
             base.Setup();
-            var alertService = Ioc.IoCConstruct<WeatherAlertService>();
+            var alertService = Ioc.IoCConstruct<WeatherService>();
             var cityName = CurrentWeatherTestData.FakeCurrentWeather.City.Name;
 
             //Act
@@ -63,7 +66,7 @@ namespace Core.UnitTests.Services
             currentWeather.ShouldNotBeNull();
             currentWeather.City.Name.ShouldBe(CurrentWeatherTestData.FakeCurrentWeather.City.Name);
             apiMock.Verify(a => a.GetWeatherByCityNameAsync(cityName), Times.Once);
-            interactiveMock.Verify(i => i.ShowAlert(It.IsAny<InteractiveAlertConfig>()), Times.Never);
+            alertMock.Verify(a => a.Show(It.IsAny<string>(), AlertType.Warning), Times.Never);
         }
 
         [TestCase("London2")]
@@ -71,8 +74,9 @@ namespace Core.UnitTests.Services
         public async Task GetWeather_Should_Call_Api_And_Show_Error_Alert(string cityName)
         {
             //Arrange 
+            //todo remove it to base file or into ctor
             base.Setup();
-            var alertService = Ioc.IoCConstruct<WeatherAlertService>();
+            var alertService = Ioc.IoCConstruct<WeatherService>();
 
             //Act
             var currentWeather = await alertService.GetWeatherAsync(cityName, null);
@@ -80,43 +84,7 @@ namespace Core.UnitTests.Services
             //Assert
             currentWeather.ShouldBeNull();
             apiMock.Verify(a => a.GetWeatherByCityNameAsync(cityName), Times.Once);
-            interactiveMock.Verify(i => i.ShowAlert(It.IsAny<InteractiveAlertConfig>()), Times.Once);
-        }
-
-        [Test]
-        public void IsInternetConnection_Should_Call_Return_True_If_Interntet_Available()
-        {
-            //Arrange 
-            base.Setup();
-            var alertService = Ioc.IoCConstruct<WeatherAlertService>();
-
-            //Act
-            var isInternet = alertService.IsInternetConnection();
-
-            //Assert
-            isInternet.ShouldBeTrue();
-            connectivityMock.Verify(c => c.IsConnected, Times.Once);
-            apiMock.Verify(a => a.GetWeatherByCityNameAsync(It.IsAny<string>()), Times.Never);
-            interactiveMock.Verify(i => i.ShowAlert(It.IsAny<InteractiveAlertConfig>()), Times.Never);
-        }
-
-        [Test]
-        public void IsInternetConnection_Should_Call_Return_False_And_Warning_Alert_If_No_Interntet()
-        {
-            //Arrange 
-            base.Setup();
-            connectivityMock.Setup(c => c.IsConnected)
-                .Returns(false);
-            var alertService = Ioc.IoCConstruct<WeatherAlertService>();
-
-            //Act
-            var isInternet = alertService.IsInternetConnection();
-
-            //Assert
-            isInternet.ShouldBeFalse();
-            connectivityMock.Verify(c => c.IsConnected, Times.Once);
-            apiMock.Verify(a => a.GetWeatherByCityNameAsync(It.IsAny<string>()), Times.Never);
-            interactiveMock.Verify(i => i.ShowAlert(It.IsAny<InteractiveAlertConfig>()), Times.Once);
+            alertMock.Verify(a => a.Show(It.IsAny<string>(), AlertType.Error), Times.Once);
         }
     }
 }
