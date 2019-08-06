@@ -5,7 +5,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
     <style name="SplashScreen" parent ="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowBackground">@drawable/temperature</item>
+        <item name="android:windowBackground">@drawable/splash_screen_background</item>
         <item name="android:windowFullscreen">true</item>
         <item name="windowNoTitle">true</item>
     </style>
