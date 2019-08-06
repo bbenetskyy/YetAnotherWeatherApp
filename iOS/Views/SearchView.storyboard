@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hhP-hi-JfS">
-    <device id="retina6_1" orientation="portrait">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -17,24 +17,25 @@
                         <viewControllerLayoutGuide type="bottom" id="Wwm-OV-EMe"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Mxh-Du-VSW">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clouds" translatesAutoresizingMaskIntoConstraints="NO" id="2799">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="-4" y="0.0" width="383" height="812"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="500">
-                                <rect key="frame" x="16" y="177" width="382" height="29"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.14509803921568629" green="0.47843137254901963" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="500">
+                                <rect key="frame" x="12" y="135.5" width="351" height="29"/>
+                                <color key="backgroundColor" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace" white="0" alpha="0"/>
+                                <color key="tintColor" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace" white="1" alpha="1"/>
                                 <state key="normal" title="Search">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace" white="1" alpha="1"/>
                                 </state>
+                                <constraints>
+                                    <constraint id="3771" firstAttribute="height" constant="29"/>
+                                </constraints>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter City name" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="1863">
-                                <rect key="frame" x="16" y="138" width="382" height="31"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter City name" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="1863">
+                                <rect key="frame" x="12" y="96.5" width="351" height="31"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <accessibility key="accessibilityConfiguration">
@@ -48,22 +49,26 @@
                                         <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <constraints>
+                                    <constraint id="3770" firstAttribute="height" constant="31"/>
+                                </constraints>
                             </textField>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2094">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2094" fixedFrame="YES">
                                 <rect key="frame" x="0.0" y="6" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Check Weather" id="2095"/>
                                 </items>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </navigationBar>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="2327">
-                                <rect key="frame" x="197" y="386" width="20" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="2327">
+                                <rect key="frame" x="170" y="387.5" width="37" height="37"/>
                             </activityIndicatorView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2562">
-                                <rect key="frame" x="258" y="214" width="140" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Get Your City Name"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2562">
+                                <rect key="frame" x="16" y="172" width="347" height="30"/>
+                                <color key="tintColor" colorSpace="calibratedRGB" red="0.0392156862745098" green="0.37647058823529411" blue="1" alpha="1"/>
+                                <state key="normal" title="Get Your City Name">
+                                    <color key="titleColor" colorSpace="calibratedRGB" red="1" green="1" blue="1" alpha="1"/>
+                                </state>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -73,6 +78,20 @@
                             <constraint firstItem="2799" firstAttribute="centerY" secondItem="Mxh-Du-VSW" secondAttribute="centerY" id="2802"/>
                             <constraint firstItem="2799" firstAttribute="centerX" secondItem="Mxh-Du-VSW" secondAttribute="centerX" id="2803"/>
                             <constraint firstItem="2799" firstAttribute="bottom" secondItem="Mxh-Du-VSW" secondAttribute="bottom" id="2804"/>
+                            <constraint id="3447" firstItem="2327" firstAttribute="centerY" secondItem="2799" secondAttribute="centerY"/>
+                            <constraint id="3448" firstItem="2327" firstAttribute="centerX" secondItem="2799" secondAttribute="centerX" constant="1"/>
+                            <constraint id="3450" firstItem="2562" firstAttribute="centerX" secondItem="2799" secondAttribute="centerX" constant="2"/>
+                            <constraint id="3451" firstItem="2562" firstAttribute="leading" secondItem="Mxh-Du-VSW" secondAttribute="leadingMargin"/>
+                            <constraint id="3452" firstItem="2562" firstAttribute="trailing" secondItem="Mxh-Du-VSW" secondAttribute="trailingMargin" constant="4"/>
+                            <constraint id="3763" firstItem="500" firstAttribute="centerX" secondItem="2799" secondAttribute="centerX"/>
+                            <constraint id="3764" firstAttribute="leadingMargin" secondItem="500" secondAttribute="leading" constant="4"/>
+                            <constraint id="3765" firstItem="500" firstAttribute="trailing" secondItem="Mxh-Du-VSW" secondAttribute="trailingMargin" constant="4"/>
+                            <constraint id="3767" firstItem="1863" firstAttribute="centerX" secondItem="2799" secondAttribute="centerX"/>
+                            <constraint id="3768" firstItem="2562" firstAttribute="leading" secondItem="1863" secondAttribute="leading" constant="4"/>
+                            <constraint id="3769" firstItem="1863" firstAttribute="trailing" secondItem="Mxh-Du-VSW" secondAttribute="trailingMargin" constant="4"/>
+                            <constraint id="4067" firstItem="1863" firstAttribute="top" secondItem="HaF-73-5SK" secondAttribute="bottom" constant="76"/>
+                            <constraint id="4068" firstItem="500" firstAttribute="top" secondItem="HaF-73-5SK" secondAttribute="bottom" constant="115"/>
+                            <constraint id="4069" firstItem="2562" firstAttribute="top" secondItem="HaF-73-5SK" secondAttribute="bottom" constant="152"/>
                         </constraints>
                     </view>
                     <connections>
@@ -88,6 +107,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="clouds" width="213.33329772949219" height="285.33331298828125"/>
+        <image name="clouds" width="193.5" height="258.5"/>
     </resources>
 </document>
