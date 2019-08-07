@@ -2,13 +2,29 @@
 
 This one more Weather application written in C# with Xamarin.Native **Android** & **iOS** based on **Open Weather API**
 
-This project use **ZenHub** as issue tracker, please use it during checking issues actual state.
-
 ## Checker Status
 
 [![Build Status](https://dev.azure.com/bbenetskyy/Yet%20Another%20Weather%20App/_apis/build/status/bbenetskyy.YetAnotherWeatherApp?branchName=master)](https://dev.azure.com/bbenetskyy/Yet%20Another%20Weather%20App/_build/latest?definitionId=3&branchName=master)
 
 [![CodeFactor](https://www.codefactor.io/repository/github/bbenetskyy/yetanotherweatherapp/badge)](https://www.codefactor.io/repository/github/bbenetskyy/yetanotherweatherapp)
+
+## iOS Design
+
+<div>
+    <img src=".\Screenshots\iPhoneSearch.png" height="300">
+    <img src=".\Screenshots\iPhoneResult.png" height="300">
+    <img src=".\Screenshots\iPhoneError.png" height="300">
+    <img src=".\Screenshots\iPhoneNoInternet.png" height="300">
+</div>
+
+## Android Design
+
+<div>
+    <img src=".\Screenshots\AndroidSearch.png" height="280">
+    <img src=".\Screenshots\AndroidResult.png" height="280">
+    <img src=".\Screenshots\AndroidError.png" height="280">
+    <img src=".\Screenshots\AndroidNoInternet.png" height="280">
+</div>
 
 ## Used Frameworks & NuGet's:
 
