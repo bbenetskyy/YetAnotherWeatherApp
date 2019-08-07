@@ -159,47 +159,5 @@ namespace Core.UnitTests.ViewModels
             navigationMock.Verify(n => n.Navigate<SearchViewModel>(null, default(CancellationToken)),
                 Times.Once);
         }
-
-        [Test]
-        public void CurrentTemperatureColor_Should_Return_Chilly_Color()
-        {
-            //Arrange
-            base.Setup();
-            var vm = Ioc.IoCConstruct<WeatherDetailsViewModel>();
-
-            //Act
-            vm.Prepare(WeatherDetailsTestData.FakeWeatherDetails);
-
-            //Assert
-            vm.CurrentTemperatureColor.ShouldBe(Colors.Chilly);
-        }
-
-        [Test]
-        public void MinTemperatureColor_Should_Return_Chilly_Color()
-        {
-            //Arrange
-            base.Setup();
-            var vm = Ioc.IoCConstruct<WeatherDetailsViewModel>();
-
-            //Act
-            vm.Prepare(WeatherDetailsTestData.FakeWeatherDetails);
-
-            //Assert
-            vm.MinTemperatureColor.ShouldBe(Colors.Chilly);
-        }
-
-        [Test]
-        public void MaxTemperatureColor_Should_Return_Chilly_Color()
-        {
-            //Arrange
-            base.Setup();
-            var vm = Ioc.IoCConstruct<WeatherDetailsViewModel>();
-
-            //Act
-            vm.Prepare(WeatherDetailsTestData.FakeWeatherDetails);
-
-            //Assert
-            vm.MaxTemperatureColor.ShouldBe(Colors.Warm);
-        }
     }
 }
