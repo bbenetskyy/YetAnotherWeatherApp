@@ -5,7 +5,7 @@ pool:
   vmImage: 'macOS-10.13'
 
 variables:
-  buildConfiguration: 'Release'
+  buildConfiguration: 'Debug'
   outputDirectory: '$(build.binariesDirectory)/$(buildConfiguration)'
 
 steps:
