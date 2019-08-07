@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Core.Models;
-using Core.Resources;
+﻿using Core.Models;
 using Core.Services;
-using Core.UnitTests.TestData;
 using InteractiveAlert;
 using Moq;
 using MvvmCross.Tests;
 using NUnit.Framework;
-using Shouldly;
-using Xamarin.Essentials;
 
 namespace Core.UnitTests.Services
 {

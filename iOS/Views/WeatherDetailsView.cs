@@ -40,16 +40,16 @@ namespace iOS.Views
 
             set.Bind(currentTemperatureLabel)
                 .For("TextColor")
-                .To(vm => vm.CurrentTemperatureColor)
-                .WithConversion("NativeColor");
+                .To(vm => vm.CurrentTemperature)
+                .WithConversion("TemperatureToColor");
             set.Bind(minTemperatureLabel)
                 .For("TextColor")
-                .To(vm => vm.MinTemperatureColor)
-                .WithConversion("NativeColor");
+                .To(vm => vm.MinTemperature)
+                .WithConversion("TemperatureToColor");
             set.Bind(maxTemperatureLabel)
                 .For("TextColor")
-                .To(vm => vm.MaxTemperatureColor)
-                .WithConversion("NativeColor");
+                .To(vm => vm.MaxTemperature)
+                .WithConversion("TemperatureToColor");
 
             refreshButton.Layer.BorderColor = UIColor.White.CGColor;
 

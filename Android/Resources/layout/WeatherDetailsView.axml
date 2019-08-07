@@ -74,7 +74,7 @@
         android:layout_gravity="fill"
         android:layout_columnWeight="1"
         android:layout_marginLeft="10px"
-        local:MvxBind="Text CurrentTemperature; TextColor NativeColor(CurrentTemperatureColor)"
+        local:MvxBind="Text CurrentTemperature; TextColor TemperatureToColor(CurrentTemperature)"
         android:id="@+id/currentTemperatureText"
     />
     <TextView
@@ -98,7 +98,7 @@
         android:layout_gravity="fill"
         android:layout_columnWeight="1"
         android:layout_marginLeft="10px"
-        local:MvxBind="Text MinTemperature; TextColor NativeColor(MinTemperatureColor)"
+        local:MvxBind="Text MinTemperature; TextColor TemperatureToColor(MinTemperature)"
         android:id="@+id/minTemperatureText"
     />
     <TextView
@@ -121,7 +121,7 @@
         android:layout_gravity="fill"
         android:layout_columnWeight="1"
         android:layout_marginLeft="10px"
-        local:MvxBind="Text MaxTemperature; TextColor NativeColor(MaxTemperatureColor)"
+        local:MvxBind="Text MaxTemperature; TextColor TemperatureToColor(MaxTemperature)"
         android:id="@+id/maxTemperatureText"
     />
     <Button

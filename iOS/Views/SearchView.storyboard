@@ -106,6 +106,7 @@
                         <outlet property="loadingIndicator" destination="2327" id="name-outlet-2327"/>
                         <outlet property="searchButton" destination="500" id="name-outlet-500"/>
                         <outlet property="searchTextField" destination="1863" id="name-outlet-1863"/>
+                        <outlet property="backgroundImage" destination="2799" id="name-outlet-2799"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aYG-jL-vDV" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -1,7 +1,5 @@
 ﻿using Core.Resources;
 using Core.Services.Interfaces;
-using InteractiveAlert;
-using MvvmCross;
 using System;
 using System.Linq;
 using System.Threading.Tasks;

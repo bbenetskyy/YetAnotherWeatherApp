@@ -15,6 +15,10 @@ namespace iOS.Views
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIImageView backgroundImage { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton getLocationButton { get; set; }
 
         [Outlet]
@@ -31,6 +35,11 @@ namespace iOS.Views
 
         void ReleaseDesignerOutlets ()
         {
+            if (backgroundImage != null) {
+                backgroundImage.Dispose ();
+                backgroundImage = null;
+            }
+
             if (getLocationButton != null) {
                 getLocationButton.Dispose ();
                 getLocationButton = null;

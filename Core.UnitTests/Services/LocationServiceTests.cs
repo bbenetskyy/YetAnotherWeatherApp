@@ -1,7 +1,6 @@
 ﻿using Core.Services;
 using Core.Services.Interfaces;
 using Core.UnitTests.TestData;
-using InteractiveAlert;
 using Moq;
 using MvvmCross.Base;
 using MvvmCross.Commands;
@@ -12,7 +11,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Core.Models;
-using Plugin.Connectivity.Abstractions;
 using Xamarin.Essentials;
 
 namespace Core.UnitTests.Services

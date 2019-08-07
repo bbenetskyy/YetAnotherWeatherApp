@@ -1,7 +1,6 @@
 ﻿using API;
 using Core.Services;
 using Core.UnitTests.TestData;
-using InteractiveAlert;
 using Moq;
 using MvvmCross.Base;
 using MvvmCross.Commands;

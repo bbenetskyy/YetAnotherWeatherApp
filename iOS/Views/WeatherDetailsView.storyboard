@@ -79,8 +79,8 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
-                                  <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="10"/>
-                                  <userDefinedRuntimeAttribute type="string" keyPath="layer.borderWidth" value="2"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="10"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.borderWidth" value="2"/>
                                 </userDefinedRuntimeAttributes>
                                 <constraints>
                                     <constraint id="2037" firstAttribute="height" constant="30"/>
@@ -152,6 +152,7 @@
                         <outlet property="maxTemperatureLabel" destination="qSN-mc-aNV" id="name-outlet-qSN-mc-aNV"/>
                         <outlet property="minTemperatureLabel" destination="FFL-eb-ILj" id="name-outlet-FFL-eb-ILj"/>
                         <outlet property="refreshButton" destination="1oC-y9-mzf" id="name-outlet-1oC-y9-mzf"/>
+                        <outlet property="backgroundImage" destination="1714" id="name-outlet-1714"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6x4-fO-kph" userLabel="First Responder" sceneMemberID="firstResponder"/>
