@@ -65,5 +65,6 @@ Was excluded:
 * From Core Project:
     - App.cs
     - Constants Folder
-    - Geocoding & Geolocation
+    - Geocoding & Geolocation    
+    - Converters Folder
 
