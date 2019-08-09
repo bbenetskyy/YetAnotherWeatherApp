@@ -20,7 +20,6 @@ namespace Core.UnitTests.Services
     [TestFixture]
     public class WeatherAlertTests : MvxIoCSupportingTest
     {
-        //todo add base class for setup mocks
         private Mock<IApiClient> apiMock;
         private Mock<IConnectivity> connectivityMock;
 

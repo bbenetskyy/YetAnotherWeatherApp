@@ -15,6 +15,7 @@ using Shouldly;
 using System.Threading;
 using System.Threading.Tasks;
 using Core.Models;
+using Core.Resources;
 using Plugin.Connectivity.Abstractions;
 
 namespace Core.UnitTests.ViewModels
@@ -89,9 +90,6 @@ namespace Core.UnitTests.ViewModels
             await vm.RefreshWeatherCommand.ExecuteAsync();
 
             //Assert
-            //todo separate in other tests
-            connectivityMock.Verify(a => a.IsConnected, Times.Once);
-            //todo check this string
             alertMock.Verify(a => a.Show(It.IsAny<string>(), AlertType.Warning), Times.Never);
             weatherMock.Verify(a => a.GetWeatherAsync(vm.CityName), Times.Once);
             navigationMock.Verify(n => n.Navigate<SearchViewModel>(null, default(CancellationToken)),
@@ -109,13 +107,24 @@ namespace Core.UnitTests.ViewModels
             await vm.RefreshWeatherCommand.ExecuteAsync();
 
             //Assert
-            //todo separate in other tests
-            connectivityMock.Verify(a => a.IsConnected, Times.Once);
-            //todo check this string
             alertMock.Verify(a => a.Show(It.IsAny<string>(), AlertType.Warning), Times.Never);
             weatherMock.Verify(a => a.GetWeatherAsync(vm.CityName), Times.Once);
             navigationMock.Verify(n => n.Navigate<SearchViewModel>(null, default(CancellationToken)),
                 Times.Once);
+        }
+
+        [Test]
+        public async Task RefreshWeatherCommand_Should_Check_Internet_Connection()
+        {
+            //Arrange
+            base.Setup();
+            var vm = Ioc.IoCConstruct<WeatherDetailsViewModel>();
+
+            //Act
+            await vm.RefreshWeatherCommand.ExecuteAsync();
+
+            //Assert
+            connectivityMock.Verify(a => a.IsConnected, Times.Once);
         }
 
         [Test]
@@ -131,10 +140,7 @@ namespace Core.UnitTests.ViewModels
             await vm.RefreshWeatherCommand.ExecuteAsync();
 
             //Assert
-            //todo separate in other tests
-            connectivityMock.Verify(a => a.IsConnected, Times.Once);
-            //todo check this string
-            alertMock.Verify(a => a.Show(It.IsAny<string>(), AlertType.Warning), Times.Once);
+            alertMock.Verify(a => a.Show(AppResources.CheckInternetConnection, AlertType.Warning), Times.Once);
             weatherMock.Verify(a => a.GetWeatherAsync(vm.CityName), Times.Never);
             navigationMock.Verify(n => n.Navigate<SearchViewModel>(null, default(CancellationToken)),
                 Times.Once);
@@ -151,9 +157,6 @@ namespace Core.UnitTests.ViewModels
             await vm.BackCommand.ExecuteAsync();
 
             //Assert
-            //todo separate in other tests
-            connectivityMock.Verify(a => a.IsConnected, Times.Never);
-            //todo check this string
             alertMock.Verify(a => a.Show(It.IsAny<string>(), AlertType.Warning), Times.Never);
             weatherMock.Verify(a => a.GetWeatherAsync(vm.CityName), Times.Never);
             navigationMock.Verify(n => n.Navigate<SearchViewModel>(null, default(CancellationToken)),
