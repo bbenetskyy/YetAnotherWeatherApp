@@ -8,7 +8,6 @@ using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using OpenWeatherMap;
 using System.Threading.Tasks;
-using Core.Exceptions;
 using Plugin.Connectivity.Abstractions;
 
 namespace Core.ViewModels

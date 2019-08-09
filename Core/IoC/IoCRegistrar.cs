@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using API;
+﻿using API;
 using Core.Services;
 using Core.Services.Interfaces;
 using MvvmCross;

@@ -11,9 +11,7 @@ using Shouldly;
 using System;
 using System.Threading.Tasks;
 using Core.Exceptions;
-using Core.Models;
 using Core.Resources;
-using Core.Services.Interfaces;
 
 namespace Core.UnitTests.Services
 {

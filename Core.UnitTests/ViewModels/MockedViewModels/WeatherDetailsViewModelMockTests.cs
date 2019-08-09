@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Core.Constants;
 using Core.Services.Interfaces;
 using Core.UnitTests.TestData;
 using Core.ViewModels;
@@ -9,7 +8,6 @@ using MvvmCross.Base;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using MvvmCross.Tests;
-using MvvmCross.UI;
 using NUnit.Framework;
 using OpenWeatherMap;
 using Shouldly;

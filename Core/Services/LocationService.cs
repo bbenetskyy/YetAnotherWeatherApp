@@ -4,7 +4,6 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Core.Exceptions;
-using Core.Models;
 using MvvmCross.Logging;
 using Xamarin.Essentials;
 

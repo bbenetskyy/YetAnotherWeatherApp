@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using API;
+﻿using API;
 using Core.IoC;
-using Core.Models;
 using Core.Services.Interfaces;
-using Moq;
 using MvvmCross;
-using MvvmCross.IoC;
 using MvvmCross.Tests;
 using NUnit.Framework;
 using Shouldly;

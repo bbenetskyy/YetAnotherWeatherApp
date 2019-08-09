@@ -4,7 +4,6 @@ using OpenWeatherMap;
 using System;
 using System.Threading.Tasks;
 using Core.Exceptions;
-using Core.Models;
 using Core.Resources;
 using MvvmCross.Logging;
 
