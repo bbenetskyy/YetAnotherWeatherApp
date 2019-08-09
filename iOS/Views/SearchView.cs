@@ -3,6 +3,7 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
 using System;
+using Core.Resources;
 using UIKit;
 
 namespace iOS.Views
@@ -40,6 +41,8 @@ namespace iOS.Views
 
             searchButton.Layer.BorderColor = UIColor.White.CGColor;
             getLocationButton.Layer.BorderColor = UIColor.White.CGColor;
+
+            //todo for all elements in UI => searchButton.SetTitle(AppResources.Error);
 
             set.Apply();
         }
