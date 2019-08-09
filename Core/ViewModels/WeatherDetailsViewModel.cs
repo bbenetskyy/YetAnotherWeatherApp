@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using Core.Models;
 using Core.Resources;
 using Core.Services.Interfaces;
@@ -33,15 +34,9 @@ namespace Core.ViewModels
             this.connectivity = connectivity;
             this.alertService = alertService;
 
-            RefreshWeatherCommand = new MvxAsyncCommand(async () =>
-            {
-                await RefreshWeather();
-            });
+            RefreshWeatherCommand = new MvxAsyncCommand(RefreshWeather);
 
-            BackCommand = new MvxAsyncCommand(async () =>
-            {
-                await NavigateToSearch();
-            });
+            BackCommand = new MvxAsyncCommand(NavigateToSearch);
         }
 
         public string CityName => weatherDetails?.CityName;
@@ -73,8 +68,17 @@ namespace Core.ViewModels
                 return null;
             }
 
+            CurrentWeatherResponse currentWeather = null;
             ShowActivityIndicator();
-            var currentWeather = await weatherService.GetWeatherAsync(weatherDetails?.CityName, AppResources.SomethingIsWrong);
+            try
+            {
+                currentWeather = await weatherService.GetWeatherAsync(weatherDetails?.CityName);
+            }
+            catch (Exception ex)
+            {
+                alertService.Show(ex.Message, AlertType.Error);
+            }
+
             HideActivityIndicator();
             return currentWeather;
         }

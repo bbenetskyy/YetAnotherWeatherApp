@@ -18,7 +18,7 @@ namespace Core.UnitTests.Services
         }
 
         [Test]
-        public void Mapper_Should_Convert_CurrentWeatherResponse_To_WeatherDetails_Correctly()
+        public void Mapper_MapCurrentWeatherResponseIntoWeatherDetails_WeatherDetailsConvertedCorrectly()
         {
             //Arrange
             base.Setup();

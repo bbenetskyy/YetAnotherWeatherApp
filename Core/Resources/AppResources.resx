@@ -58,6 +58,6 @@
     <value>City name is incorrect!</value>
 </data>
   <data name="SomethingIsWrong" xml:space="preserve">
-    <value>Something is going wrong, don't worry we will navigate you to Search again!</value>
+    <value>Something is going wrong! Please, try again later...</value>
 </data>
 </root>

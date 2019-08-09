@@ -3,53 +3,43 @@ using Core.Services.Interfaces;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Exceptions;
 using Core.Models;
+using MvvmCross.Logging;
 using Xamarin.Essentials;
 
 namespace Core.Services
 {
     public class LocationService : ILocationService
     {
+        private readonly TimeSpan timeout = TimeSpan.FromSeconds(5);
+        private readonly IMvxLog logger;
         private readonly IGeolocationService geolocation;
         private readonly IGeocodingService geocoding;
-        private readonly IAlertService alertService;
 
         public LocationService(
+            IMvxLog logger,
             IGeolocationService geolocation,
-            IGeocodingService geocoding,
-            IAlertService alertService)
+            IGeocodingService geocoding)
         {
+            this.logger = logger;
             this.geolocation = geolocation;
             this.geocoding = geocoding;
-            this.alertService = alertService;
         }
 
         public async Task<string> GetLocationCityNameAsync()
         {
             try
             {
-                var location = await geolocation.GetLocationAsync(new GeolocationRequest(GeolocationAccuracy.Lowest));
-                if (location == null)
-                {
-                    ShowAlert();
-                    return null;
-                }
-
-                var place = (await geocoding.GetPlacemarksAsync(location.Latitude, location.Longitude))?.FirstOrDefault();
-                if (string.IsNullOrEmpty(place?.Locality))
-                    ShowAlert();
-                return place?.Locality;
+                var location = await geolocation.GetLocationAsync(new GeolocationRequest(GeolocationAccuracy.Lowest, timeout));
+                var place = (await geocoding.GetPlacemarksAsync(location.Latitude, location.Longitude))?.First();
+                return place.Locality;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                ShowAlert();
-                return null;
+                logger.Log(MvxLogLevel.Warn, () => ex.Message, ex);
+                throw new LocationException(AppResources.CanNotGetCityName, ex);
             }
-        }
-
-        private void ShowAlert()
-        {
-            alertService.Show(AppResources.CanNotGetCityName, AlertType.Warning);
         }
     }
 }

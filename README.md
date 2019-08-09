@@ -61,10 +61,9 @@ This one more Weather application written in C# with Xamarin.Native **Android** 
 ### **Some Projects and files was excluded from coverage because they can not be tested.**
 Was excluded:
 * Full Tests Folder with Test Projects
-* Full Native Folder with Native Projects (but later may be added if UI tests are written)
+* Full Native Folder with Native Projects
 * From Core Project:
     - App.cs
     - Constants Folder
-    - Geocoding & Geolocation    
     - Converters Folder
 

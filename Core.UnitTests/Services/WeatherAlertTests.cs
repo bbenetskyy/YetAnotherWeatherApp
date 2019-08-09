@@ -10,7 +10,9 @@ using Plugin.Connectivity.Abstractions;
 using Shouldly;
 using System;
 using System.Threading.Tasks;
+using Core.Exceptions;
 using Core.Models;
+using Core.Resources;
 using Core.Services.Interfaces;
 
 namespace Core.UnitTests.Services
@@ -21,7 +23,11 @@ namespace Core.UnitTests.Services
         //todo add base class for setup mocks
         private Mock<IApiClient> apiMock;
         private Mock<IConnectivity> connectivityMock;
-        private Mock<IAlertService> alertMock;
+
+        public WeatherAlertTests()
+        {
+            base.Setup();
+        }
 
         protected override void AdditionalSetup()
         {
@@ -45,45 +51,36 @@ namespace Core.UnitTests.Services
             connectivityMock.Setup(c => c.IsConnected)
                 .Returns(true);
             Ioc.RegisterSingleton<IConnectivity>(connectivityMock.Object);
-
-            alertMock = new Mock<IAlertService>();
-            Ioc.RegisterSingleton<IAlertService>(alertMock.Object);
         }
 
         [Test]
-        public async Task GetWeather_Should_Call_Api_And_Return_Weather()
+        public async Task GetWeatherAsync_WithCorrectCityName_ApiCalledAndWeatherReturned()
         {
             //Arrange 
-            base.Setup();
             var alertService = Ioc.IoCConstruct<WeatherService>();
             var cityName = CurrentWeatherTestData.FakeCurrentWeather.City.Name;
 
             //Act
-            var currentWeather = await alertService.GetWeatherAsync(cityName, null);
+            var currentWeather = await alertService.GetWeatherAsync(cityName);
 
             //Assert
             currentWeather.ShouldNotBeNull();
             currentWeather.City.Name.ShouldBe(CurrentWeatherTestData.FakeCurrentWeather.City.Name);
             apiMock.Verify(a => a.GetWeatherByCityNameAsync(cityName), Times.Once);
-            alertMock.Verify(a => a.Show(It.IsAny<string>(), AlertType.Warning), Times.Never);
         }
 
         [TestCase("London2")]
         [TestCase("asdasd")]
-        public async Task GetWeather_Should_Call_Api_And_Show_Error_Alert(string cityName)
+        public async Task GetWeatherAsync_WithIncorrectCityName_WeatherExceptionThrown(string cityName)
         {
             //Arrange 
-            //todo remove it to base file or into ctor
-            base.Setup();
             var alertService = Ioc.IoCConstruct<WeatherService>();
 
             //Act
-            var currentWeather = await alertService.GetWeatherAsync(cityName, null);
+            Func<Task> action = () => alertService.GetWeatherAsync(cityName);
 
             //Assert
-            currentWeather.ShouldBeNull();
-            apiMock.Verify(a => a.GetWeatherByCityNameAsync(cityName), Times.Once);
-            alertMock.Verify(a => a.Show(It.IsAny<string>(), AlertType.Error), Times.Once);
+            (await action.ShouldThrowAsync<WeatherException>()).Message.ShouldBe(AppResources.CityNameIsIncorrect);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using Core.Models;
 using Core.Resources;
 using Core.Services.Interfaces;
@@ -7,6 +8,7 @@ using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using OpenWeatherMap;
 using System.Threading.Tasks;
+using Core.Exceptions;
 using Plugin.Connectivity.Abstractions;
 
 namespace Core.ViewModels
@@ -35,15 +37,9 @@ namespace Core.ViewModels
             this.connectivity = connectivity;
             this.alertService = alertService;
 
-            CheckWeatherCommand = new MvxAsyncCommand(async () =>
-            {
-                await CheckWeather();
-            }, () => !string.IsNullOrEmpty(CityName));
+            CheckWeatherCommand = new MvxAsyncCommand(CheckWeather, () => !string.IsNullOrEmpty(CityName));
 
-            GetLocationCityNameCommand = new MvxAsyncCommand(async () =>
-            {
-                await GetLocationCityName();
-            });
+            GetLocationCityNameCommand = new MvxAsyncCommand(GetLocationCityName);
         }
 
         private string cityName;
@@ -73,7 +69,14 @@ namespace Core.ViewModels
         protected virtual async Task GetLocationCityName()
         {
             ShowActivityIndicator();
-            CityName = await locationService.GetLocationCityNameAsync();
+            try
+            {
+                CityName = await locationService.GetLocationCityNameAsync();
+            }
+            catch (Exception ex)
+            {
+                alertService.Show(ex.Message, AlertType.Warning);
+            }
             HideActivityIndicator();
         }
 
@@ -98,8 +101,16 @@ namespace Core.ViewModels
                 return null;
             }
 
+            CurrentWeatherResponse currentWeather = null;
             ShowActivityIndicator();
-            var currentWeather = await weatherService.GetWeatherAsync(cityName, AppResources.CityNameIsIncorrect);
+            try
+            {
+                currentWeather = await weatherService.GetWeatherAsync(cityName);
+            }
+            catch (Exception ex)
+            {
+                alertService.Show(ex.Message, AlertType.Error);
+            }
             HideActivityIndicator();
             return currentWeather;
         }

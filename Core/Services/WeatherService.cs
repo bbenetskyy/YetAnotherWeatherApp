@@ -3,35 +3,41 @@ using Core.Services.Interfaces;
 using OpenWeatherMap;
 using System;
 using System.Threading.Tasks;
+using Core.Exceptions;
 using Core.Models;
+using Core.Resources;
+using MvvmCross.Logging;
 
 namespace Core.Services
 {
     public class WeatherService : IWeatherService
     {
+        private readonly IMvxLog logger;
         private readonly IApiClient apiClient;
-        private readonly IAlertService alertService;
 
-        public WeatherService(IApiClient apiClient, IAlertService alertService)
+        public WeatherService(IMvxLog logger, IApiClient apiClient)
         {
+            this.logger = logger;
             this.apiClient = apiClient;
-            this.alertService = alertService;
         }
 
-        public async Task<CurrentWeatherResponse> GetWeatherAsync(string cityName, string errorMessage)
+        public async Task<CurrentWeatherResponse> GetWeatherAsync(string cityName)
         {
             try
             {
-                var currentWeather = await apiClient.GetWeatherByCityNameAsync(cityName);
-                return currentWeather;
+                return await apiClient.GetWeatherByCityNameAsync(cityName);
             }
             catch (Exception ex) when (ex is AggregateException
                                        || ex is ArgumentException
                                        || ex is OpenWeatherMapException)
             {
-                alertService.Show(errorMessage, AlertType.Error);
+                throw new WeatherException(AppResources.CityNameIsIncorrect, ex);
             }
-            return null;
+            catch (Exception ex)
+            {
+                logger.Log(MvxLogLevel.Error, () => ex.Message, ex);
+                throw new WeatherException(AppResources.SomethingIsWrong, ex);
+            }
         }
     }
 }

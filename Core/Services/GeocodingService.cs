@@ -5,7 +5,7 @@ using Xamarin.Essentials;
 
 namespace Core.Services
 {
-    public class Geocoding : IGeocodingService
+    public class GeocodingService : IGeocodingService
     {
         public Task<IEnumerable<Placemark>> GetPlacemarksAsync(double latitude, double longitude)
         {

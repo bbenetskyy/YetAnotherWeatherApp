@@ -10,7 +10,9 @@ using Shouldly;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Core.Exceptions;
 using Core.Models;
+using Core.Resources;
 using Xamarin.Essentials;
 
 namespace Core.UnitTests.Services
@@ -20,7 +22,6 @@ namespace Core.UnitTests.Services
     {
         private Mock<IGeolocationService> geolocationMock;
         private Mock<IGeocodingService> geocodingMock;
-        private Mock<IAlertService> alertMock;
 
         protected override void AdditionalSetup()
         {
@@ -36,13 +37,10 @@ namespace Core.UnitTests.Services
 
             geocodingMock = new Mock<IGeocodingService>();
             Ioc.RegisterSingleton<IGeocodingService>(geocodingMock.Object);
-
-            alertMock = new Mock<IAlertService>();
-            Ioc.RegisterSingleton<IAlertService>(alertMock.Object);
         }
 
         [Test]
-        public async Task GetLocationCityNameAsync_Should_Return_City_Name()
+        public async Task GetLocationCityNameAsync_WithLocationAndPlacemark_CityNameReturned()
         {
             //Arrange
             base.Setup();
@@ -66,15 +64,12 @@ namespace Core.UnitTests.Services
             //Assert
             cityName.ShouldNotBeNull();
             cityName.ShouldBe(WeatherDetailsTestData.FakeWeatherDetails.CityName);
-            geolocationMock.Verify(g => g.GetLocationAsync(It.IsAny<GeolocationRequest>()),
-                Times.Once);
-            geocodingMock.Verify(g => g.GetPlacemarksAsync(1, 1),
-                Times.Once);
-            alertMock.Verify(a => a.Show(It.IsAny<string>(), AlertType.Warning), Times.Never);
+            geolocationMock.Verify(g => g.GetLocationAsync(It.IsAny<GeolocationRequest>()), Times.Once);
+            geocodingMock.Verify(g => g.GetPlacemarksAsync(1, 1), Times.Once);
         }
 
         [Test]
-        public async Task GetLocationCityNameAsync_Should_Return_Null_And_Allert_If_Geolocation_Return_Null()
+        public async Task GetLocationCityNameAsync_WithNullLocation_LocationExceptionThrown()
         {
             //Arrange
             base.Setup();
@@ -84,19 +79,18 @@ namespace Core.UnitTests.Services
             var locationService = Ioc.IoCConstruct<LocationService>();
 
             //Act
-            var cityName = await locationService.GetLocationCityNameAsync();
+            Func<Task> action = () => locationService.GetLocationCityNameAsync();
 
             //Assert
-            cityName.ShouldBeNull();
+            (await action.ShouldThrowAsync<LocationException>()).Message.ShouldBe(AppResources.CanNotGetCityName);
             geolocationMock.Verify(g => g.GetLocationAsync(It.IsAny<GeolocationRequest>()),
                 Times.Once);
             geocodingMock.Verify(g => g.GetPlacemarksAsync(It.IsAny<int>(), It.IsAny<int>()),
                 Times.Never);
-            alertMock.Verify(a => a.Show(It.IsAny<string>(), AlertType.Warning), Times.Once);
         }
 
         [Test]
-        public async Task GetLocationCityNameAsync_Should_Return_Null_And_Allert_If_Geolocation_Throw_Exception()
+        public async Task GetLocationCityNameAsync_WithExceptionInGeolocation_LocationExceptionThrown()
         {
             //Arrange
             base.Setup();
@@ -106,19 +100,18 @@ namespace Core.UnitTests.Services
             var locationService = Ioc.IoCConstruct<LocationService>();
 
             //Act
-            var cityName = await locationService.GetLocationCityNameAsync();
+            Func<Task> action = () => locationService.GetLocationCityNameAsync();
 
             //Assert
-            cityName.ShouldBeNull();
+            (await action.ShouldThrowAsync<LocationException>()).Message.ShouldBe(AppResources.CanNotGetCityName);
             geolocationMock.Verify(g => g.GetLocationAsync(It.IsAny<GeolocationRequest>()),
                 Times.Once);
             geocodingMock.Verify(g => g.GetPlacemarksAsync(It.IsAny<int>(), It.IsAny<int>()),
                 Times.Never);
-            alertMock.Verify(a => a.Show(It.IsAny<string>(), AlertType.Warning), Times.Once);
         }
 
         [Test]
-        public async Task GetLocationCityNameAsync_Should_Return_Null_And_Allert_If_Geocoding_Return_Null()
+        public async Task GetLocationCityNameAsync_WithNullPlacemark_LocationExceptionThrown()
         {
             //Arrange
             base.Setup();
@@ -131,19 +124,18 @@ namespace Core.UnitTests.Services
             var locationService = Ioc.IoCConstruct<LocationService>();
 
             //Act
-            var cityName = await locationService.GetLocationCityNameAsync();
+            Func<Task> action = () => locationService.GetLocationCityNameAsync();
 
             //Assert
-            cityName.ShouldBeNull();
+            (await action.ShouldThrowAsync<LocationException>()).Message.ShouldBe(AppResources.CanNotGetCityName);
             geolocationMock.Verify(g => g.GetLocationAsync(It.IsAny<GeolocationRequest>()),
                 Times.Once);
             geocodingMock.Verify(g => g.GetPlacemarksAsync(1, 1),
                 Times.Once);
-            alertMock.Verify(a => a.Show(It.IsAny<string>(), AlertType.Warning), Times.Once);
         }
 
         [Test]
-        public async Task GetLocationCityNameAsync_Should_Return_Null_And_Allert_If_Geocoding_Throw_Exception()
+        public async Task GetLocationCityNameAsync_WithExceptionInGeocoding_LocationExceptionThrown()
         {
             //Arrange
             base.Setup();
@@ -156,15 +148,14 @@ namespace Core.UnitTests.Services
             var locationService = Ioc.IoCConstruct<LocationService>();
 
             //Act
-            var cityName = await locationService.GetLocationCityNameAsync();
+            Func<Task> action = () => locationService.GetLocationCityNameAsync();
 
             //Assert
-            cityName.ShouldBeNull();
+            (await action.ShouldThrowAsync<LocationException>()).Message.ShouldBe(AppResources.CanNotGetCityName);
             geolocationMock.Verify(g => g.GetLocationAsync(It.IsAny<GeolocationRequest>()),
                 Times.Once);
             geocodingMock.Verify(g => g.GetPlacemarksAsync(1, 1),
                 Times.Once);
-            alertMock.Verify(a => a.Show(It.IsAny<string>(), AlertType.Warning), Times.Once);
         }
     }
 }

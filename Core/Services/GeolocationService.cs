@@ -4,7 +4,7 @@ using Xamarin.Essentials;
 
 namespace Core.Services
 {
-    public class Geolocation : IGeolocationService
+    public class GeolocationService : IGeolocationService
     {
         public Task<Location> GetLocationAsync(GeolocationRequest request)
         {

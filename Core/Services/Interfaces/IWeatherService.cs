@@ -5,6 +5,6 @@ namespace Core.Services.Interfaces
 {
     public interface IWeatherService
     {
-        Task<CurrentWeatherResponse> GetWeatherAsync(string cityName, string errorMessage);
+        Task<CurrentWeatherResponse> GetWeatherAsync(string cityName);
     }
 }
