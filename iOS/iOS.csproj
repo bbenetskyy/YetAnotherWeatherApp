@@ -80,7 +80,6 @@
     <Compile Include="Views\WeatherDetailsView.designer.cs">
       <DependentUpon>WeatherDetailsView.cs</DependentUpon>
     </Compile>
-    <BundleResource Include="Resources\temperature.png" />
     <InterfaceDefinition Include="Views\WeatherDetailsView.storyboard" />
     <None Include="Info.plist">
       <SubType>Designer</SubType>
@@ -113,6 +112,9 @@
     </Reference>
     <Reference Include="MvvmCross.Plugin.Color, Version=6.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmCross.Plugin.Color.6.3.1\lib\xamarinios10\MvvmCross.Plugin.Color.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Plugin.ResxLocalization, Version=6.3.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmCross.Plugin.ResxLocalization.6.3.1\lib\netstandard2.0\MvvmCross.Plugin.ResxLocalization.dll</HintPath>
     </Reference>
     <Reference Include="MvvmCross.Plugin.Visibility, Version=6.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmCross.Plugin.Visibility.6.3.1\lib\xamarinios10\MvvmCross.Plugin.Visibility.dll</HintPath>
@@ -208,6 +210,21 @@
     <ImageAsset Include="Assets.xcassets\clouds.imageset\clouds@3x.png">
       <Visible>false</Visible>
     </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\temperature.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\temperature.imageset\imagetopdf.pdf">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\temperature.imageset\temperature.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\temperature.imageset\temperature@2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\temperature.imageset\temperature@3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
     <ImageAsset Include="Assets.xcassets\night.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
@@ -230,5 +247,6 @@
       <Name>Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

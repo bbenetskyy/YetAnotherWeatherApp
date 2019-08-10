@@ -1,0 +1,28 @@
+{
+  "images": [
+    {
+      "scale": "1x",
+      "idiom": "universal",
+      "filename": "temperature.png"
+    },
+    {
+      "scale": "2x",
+      "idiom": "universal",
+      "filename": "temperature@2x.png"
+    },
+    {
+      "scale": "3x",
+      "idiom": "universal",
+      "filename": "temperature@3x.png"
+    },
+    {
+      "idiom": "universal",
+      "filename": "temperature.pdf"
+    }
+  ],
+  "properties": {},
+  "info": {
+    "version": 1,
+    "author": ""
+  }
+}
