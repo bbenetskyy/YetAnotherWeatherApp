@@ -88,6 +88,15 @@ namespace Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Description:.
+        /// </summary>
+        public static string DescriptionLabel {
+            get {
+                return ResourceManager.GetString("DescriptionLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         public static string Error {
@@ -97,11 +106,74 @@ namespace Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Get Your City Name.
+        /// </summary>
+        public static string GetCityNameButton {
+            get {
+                return ResourceManager.GetString("GetCityNameButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max:.
+        /// </summary>
+        public static string MaxLabel {
+            get {
+                return ResourceManager.GetString("MaxLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Min:.
+        /// </summary>
+        public static string MinLabel {
+            get {
+                return ResourceManager.GetString("MinLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refresh.
+        /// </summary>
+        public static string RefreshButton {
+            get {
+                return ResourceManager.GetString("RefreshButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        public static string SearchButton {
+            get {
+                return ResourceManager.GetString("SearchButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter City name.
+        /// </summary>
+        public static string SearchHint {
+            get {
+                return ResourceManager.GetString("SearchHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Something is going wrong! Please, try again later....
         /// </summary>
         public static string SomethingIsWrong {
             get {
                 return ResourceManager.GetString("SomethingIsWrong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Temperature:.
+        /// </summary>
+        public static string TemperatureLabel {
+            get {
+                return ResourceManager.GetString("TemperatureLabel", resourceCulture);
             }
         }
         

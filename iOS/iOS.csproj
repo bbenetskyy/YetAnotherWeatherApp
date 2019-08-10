@@ -113,9 +113,6 @@
     <Reference Include="MvvmCross.Plugin.Color, Version=6.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmCross.Plugin.Color.6.3.1\lib\xamarinios10\MvvmCross.Plugin.Color.dll</HintPath>
     </Reference>
-    <Reference Include="MvvmCross.Plugin.ResxLocalization, Version=6.3.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmCross.Plugin.ResxLocalization.6.3.1\lib\netstandard2.0\MvvmCross.Plugin.ResxLocalization.dll</HintPath>
-    </Reference>
     <Reference Include="MvvmCross.Plugin.Visibility, Version=6.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmCross.Plugin.Visibility.6.3.1\lib\xamarinios10\MvvmCross.Plugin.Visibility.dll</HintPath>
     </Reference>
