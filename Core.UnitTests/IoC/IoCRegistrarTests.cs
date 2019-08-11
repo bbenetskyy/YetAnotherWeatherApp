@@ -25,6 +25,7 @@ namespace Core.UnitTests.IoC
             iocRegistrar.RegisterServices();
 
             //Assert
+            Mvx.IoCProvider.CanResolve<IAlertService>().ShouldBeTrue();
             Mvx.IoCProvider.CanResolve<IApiClient>().ShouldBeTrue();
             Mvx.IoCProvider.CanResolve<IWeatherService>().ShouldBeTrue();
             Mvx.IoCProvider.CanResolve<ILocationService>().ShouldBeTrue();

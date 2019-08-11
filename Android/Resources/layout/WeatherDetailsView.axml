@@ -13,7 +13,6 @@
     android:id="@+id/mainGrid"
   >
     <TextView
-        android:text="Fake City"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:minWidth="25px"
         android:minHeight="25px"
@@ -29,7 +28,6 @@
         android:textColor="#ffffffff" 
     />
     <TextView
-        android:text="Description:"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_row="1"
         android:layout_column="0"
@@ -40,9 +38,9 @@
         android:layout_marginRight="10px"
         android:textAlignment="textEnd"
         android:id="@+id/descriptionLabel"
+        local:MvxBind="Text [DescriptionLabel]"
     />
     <TextView
-        android:text="Nice Weather"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_row="1"
         android:layout_column="1"
@@ -55,7 +53,6 @@
         android:textStyle="bold" 
     />
     <TextView
-        android:text="Temperature:"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_row="2"
         android:layout_column="0"
@@ -66,9 +63,9 @@
         android:layout_marginRight="10px"
         android:textAlignment="textEnd"
         android:id="@+id/currentTemperatureLabel"
+        local:MvxBind="Text [TemperatureLabel]"
     />
     <TextView
-        android:text="10 °C"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_row="2"
         android:layout_column="1"
@@ -79,7 +76,6 @@
         android:id="@+id/currentTemperatureText"
     />
     <TextView
-        android:text="Min:"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_row="3"
         android:layout_column="0"
@@ -90,9 +86,9 @@
         android:layout_marginRight="10px"
         android:textAlignment="textEnd"
         android:id="@+id/minTemperatureLabel"
+        local:MvxBind="Text [MinLabel]"
     />
     <TextView
-        android:text="9 °C"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_row="3"
         android:layout_column="1"
@@ -103,7 +99,6 @@
         android:id="@+id/minTemperatureText"
     />
     <TextView
-        android:text="Max:"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_row="4"
         android:layout_column="0"
@@ -113,9 +108,9 @@
         android:layout_marginRight="10px"
         android:textAlignment="textEnd"
         android:id="@+id/maxTemperatureLabel"
+        local:MvxBind="Text [MaxLabel]"
     />
     <TextView
-        android:text="12 °C"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_row="4"
         android:layout_column="1"
@@ -126,7 +121,6 @@
         android:id="@+id/maxTemperatureText"
     />
     <Button
-        android:text="Refresh"
         android:layout_row="5"
         android:layout_columnSpan="2"
         android:background="@drawable/button_states"
@@ -135,7 +129,7 @@
         android:layout_marginTop="50px"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        local:MvxBind="Click RefreshWeatherCommand; Visibility InvertedVisibility(IsLoading)"
+        local:MvxBind="Click RefreshWeatherCommand; Visibility InvertedVisibility(IsLoading); Text [RefreshButton]"
         android:id="@+id/refreshButton"
     />
     <ProgressBar

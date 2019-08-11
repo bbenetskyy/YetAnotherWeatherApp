@@ -9,6 +9,9 @@ using MvvmCross.ViewModels;
 using OpenWeatherMap;
 using System.Threading.Tasks;
 using Plugin.Connectivity.Abstractions;
+using MvvmCross.Localization;
+using System.Resources;
+using System.Globalization;
 
 namespace Core.ViewModels
 {
@@ -19,6 +22,7 @@ namespace Core.ViewModels
         private readonly IConnectivity connectivity;
         private readonly IAlertService alertService;
         private readonly IMvxNavigationService navigationService;
+        private readonly ResourceManager resourceManager;
         private WeatherDetails weatherDetails;
 
         public WeatherDetailsViewModel(
@@ -33,11 +37,14 @@ namespace Core.ViewModels
             this.weatherService = weatherService;
             this.connectivity = connectivity;
             this.alertService = alertService;
+            resourceManager = AppResources.ResourceManager;
 
             RefreshWeatherCommand = new MvxAsyncCommand(RefreshWeather);
 
             BackCommand = new MvxAsyncCommand(NavigateToSearch);
         }
+
+        public string this[string key] => resourceManager.GetString(key, CultureInfo.CurrentCulture);
 
         public string CityName => weatherDetails?.CityName;
         public string Description => weatherDetails?.Description;

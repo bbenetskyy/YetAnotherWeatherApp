@@ -8,7 +8,7 @@ using MvvmCross.Localization;
 namespace Android
 {
     [Application]
-    public class MainApplication : MvxAppCompatApplication<Setup, Core.App>
+    public class MainApplication : MvxAppCompatApplication<MvxAppCompatSetup<Core.App>, Core.App>
     {
         public MainApplication(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
