@@ -13,17 +13,19 @@ namespace Core.Converters
         private IMvxNativeColor NativeColor => nativeColor ?? (nativeColor = Mvx.IoCProvider.Resolve<IMvxNativeColor>());
 
 
-        protected override object Convert(string tempString, Type targetType, object parameter, CultureInfo culture)
+        protected override object Convert(string temperature, Type targetType, object parameter, CultureInfo culture)
+        {
+            return NativeColor.ToNative(GetColor(temperature));
+        }
+
+        public MvxColor GetColor(string temperature)
         {
             var mvxColor = Colors.Default;
-            if (string.IsNullOrEmpty(tempString) || !tempString.Contains(" ") || !double.TryParse(
-                    tempString.Substring(0, tempString.IndexOf(' ')),
+            if (string.IsNullOrEmpty(temperature) || !temperature.Contains(" ") || !double.TryParse(
+                    temperature.Substring(0, temperature.IndexOf(' ')),
                     out var tempValue))
-            {
-                return NativeColor.ToNative(mvxColor);
-            }
-
-            if (tempValue <= 0)
+            {                
+            } else if (tempValue <= 0)
             {
                 mvxColor = Colors.Cold;
             }
@@ -40,7 +42,7 @@ namespace Core.Converters
                 mvxColor = Colors.Hotly;
             }
 
-            return NativeColor.ToNative(mvxColor);
+            return mvxColor;
         }
     }
 }
