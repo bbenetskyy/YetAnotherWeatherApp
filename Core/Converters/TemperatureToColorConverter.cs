@@ -24,8 +24,9 @@ namespace Core.Converters
             if (string.IsNullOrEmpty(temperature) || !temperature.Contains(" ") || !double.TryParse(
                     temperature.Substring(0, temperature.IndexOf(' ')),
                     out var tempValue))
-            {                
-            } else if (tempValue <= 0)
+            {                //todo move it to constants
+            }
+            else if (tempValue <= 0)
             {
                 mvxColor = Colors.Cold;
             }
