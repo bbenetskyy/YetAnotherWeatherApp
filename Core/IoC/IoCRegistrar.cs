@@ -2,6 +2,7 @@
 using Core.Services;
 using Core.Services.Interfaces;
 using MvvmCross;
+using Plugin.Connectivity;
 
 namespace Core.IoC
 {
@@ -15,6 +16,12 @@ namespace Core.IoC
             Mvx.IoCProvider.RegisterType<IGeolocationService, GeolocationService>();
             Mvx.IoCProvider.RegisterType<ILocationService, LocationService>();
             Mvx.IoCProvider.RegisterType<IWeatherService, WeatherService>();
+        }
+
+        public void RegisterSingletons()
+        {
+            Mvx.IoCProvider.RegisterSingleton(MapService.ConfigureMapper);
+            Mvx.IoCProvider.RegisterSingleton(CrossConnectivity.Current);
         }
     }
 }
