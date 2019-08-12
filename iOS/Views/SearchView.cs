@@ -24,7 +24,7 @@ namespace iOS.Views
 
             var set = this.CreateBindingSet<SearchView, SearchViewModel>();
 
-            //set.Bind(searchTextField).To(vm => vm.CityName);
+            set.Bind(searchTextField).To(vm => vm.CityName);
             set.Bind(searchButton).To(vm => vm.CheckWeatherCommand);
             set.Bind(getLocationButton).To(vm => vm.GetLocationCityNameCommand);
 
@@ -44,7 +44,7 @@ namespace iOS.Views
             searchButton.Layer.BorderColor = UIColor.White.CGColor;
             getLocationButton.Layer.BorderColor = UIColor.White.CGColor;
 
-            searchTextField.Text = AppResources.SearchHint;
+            ViewModel.CityName = AppResources.SearchHint;
             searchTextField.EditingDidBegin += SearchTextField_EditingDidBegin;
             searchTextField.EditingDidEnd += SearchTextField_EditingDidEnd;
 
