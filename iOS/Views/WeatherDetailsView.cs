@@ -22,11 +22,11 @@ namespace iOS.Views
 
             var set = this.CreateBindingSet<WeatherDetailsView, WeatherDetailsViewModel>();
 
-            set.Bind(cityNameLabel).To(vm => vm.CityName);
-            set.Bind(descriptionLabel).To(vm => vm.Description);
-            set.Bind(currentTemperatureLabel).To(vm => vm.CurrentTemperature);
-            set.Bind(minTemperatureLabel).To(vm => vm.MinTemperature);
-            set.Bind(maxTemperatureLabel).To(vm => vm.MaxTemperature);
+            set.Bind(cityNameText).To(vm => vm.CityName);
+            set.Bind(descriptionText).To(vm => vm.Description);
+            set.Bind(currentTemperatureText).To(vm => vm.CurrentTemperature);
+            set.Bind(minTemperatureText).To(vm => vm.MinTemperature);
+            set.Bind(maxTemperatureText).To(vm => vm.MaxTemperature);
             set.Bind(refreshButton).To(vm => vm.RefreshWeatherCommand);
             set.Bind(backButton).To(vm => vm.BackCommand);
 
@@ -39,26 +39,26 @@ namespace iOS.Views
                 .To(vm => vm.IsLoading)
                 .WithConversion("InvertedVisibility");
 
-            set.Bind(currentTemperatureLabel)
+            set.Bind(currentTemperatureText)
                 .For("TextColor")
                 .To(vm => vm.CurrentTemperature)
                 .WithConversion("TemperatureToColor");
-            set.Bind(minTemperatureLabel)
+            set.Bind(minTemperatureText)
                 .For("TextColor")
                 .To(vm => vm.MinTemperature)
                 .WithConversion("TemperatureToColor");
-            set.Bind(maxTemperatureLabel)
+            set.Bind(maxTemperatureText)
                 .For("TextColor")
                 .To(vm => vm.MaxTemperature)
                 .WithConversion("TemperatureToColor");
 
             refreshButton.Layer.BorderColor = UIColor.White.CGColor;
 
-            descriptionHint.Text = ViewModel[nameof(AppResources.DescriptionLabel)];
-            currentTemperatureHint.Text = ViewModel[nameof(AppResources.TemperatureLabel)];
-            minTemperatureHint.Text = ViewModel[nameof(AppResources.MinLabel)];
-            maxTemperatureLabel.Text = ViewModel[nameof(AppResources.MaxLabel)];
-            refreshButton.SetTitle(ViewModel[nameof(AppResources.SearchButton)], UIControlState.Normal);
+            descriptionLabel.Text = AppResources.DescriptionLabel;
+            currentTemperatureLabel.Text = AppResources.TemperatureLabel;
+            minTemperatureLabel.Text = AppResources.MinLabel;
+            maxTemperatureLabel.Text = AppResources.MaxLabel;
+            refreshButton.SetTitle(AppResources.SearchButton, UIControlState.Normal);
 
             set.Apply();
         }
