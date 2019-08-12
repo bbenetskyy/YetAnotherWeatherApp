@@ -1,6 +1,8 @@
-﻿using OpenWeatherMap;
+﻿using ConfigurationBuilder;
+using OpenWeatherMap;
 using System.Net.Http;
 using System.Threading.Tasks;
+using API.Configuration;
 
 namespace API
 {
@@ -10,9 +12,14 @@ namespace API
 
         public ApiClient(string apiKey = null, HttpMessageHandler handler = null)
         {
-            client = new OpenWeatherMapClient(apiKey ?? "adb608d1b4b3a21dc16c85c499bf535f",
-                handler);
+            client = new OpenWeatherMapClient(GetApiKey(apiKey), handler);
         }
+
+        protected string GetApiKey(string apiKey)
+            => apiKey ?? new ConfigurationBuilder<ClientConfiguration>()
+                   .FromResource("API.Configuration.ProductionConfig.json")
+                   .AsJsonFormat()
+                   .Build().ApiKey;
 
         public Task<CurrentWeatherResponse> GetWeatherByCityNameAsync(string cityName)
         {
