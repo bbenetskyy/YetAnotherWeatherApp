@@ -10,6 +10,7 @@ using OpenWeatherMap;
 using System.Threading.Tasks;
 using System.Resources;
 using System.Globalization;
+using System.Reflection;
 
 namespace Core.ViewModels
 {
@@ -21,7 +22,6 @@ namespace Core.ViewModels
         private readonly ILocationService locationService;
         private readonly IConnectivityService connectivity;
         private readonly IAlertService alertService;
-        private readonly ResourceManager resourceManager;
 
         public SearchViewModel(
             IMapper mapper,
@@ -37,14 +37,11 @@ namespace Core.ViewModels
             this.locationService = locationService;
             this.connectivity = connectivity;
             this.alertService = alertService;
-            resourceManager = AppResources.ResourceManager;
 
             CheckWeatherCommand = new MvxAsyncCommand(CheckWeather, () => !string.IsNullOrEmpty(CityName));
 
             GetLocationCityNameCommand = new MvxAsyncCommand(GetLocationCityName);
         }
-
-        public string this[string key] => resourceManager.GetString(key, CultureInfo.CurrentCulture);
 
         private string cityName;
 

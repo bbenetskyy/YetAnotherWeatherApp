@@ -18,7 +18,7 @@
         android:textColorHint="@android:color/white"
         android:textColor="@android:color/white"
         android:id="@+id/searchEditText"
-        local:MvxBind="Text CityName; Hint [SearchHint]"
+        local:MvxBind="Text CityName"
   />
     <Button
         android:background="@drawable/button_states"
@@ -28,7 +28,7 @@
         android:layout_marginBottom="10dp"
         android:layout_height="wrap_content"
         android:id="@+id/searchButton"
-        local:MvxBind="Click CheckWeatherCommand; Visibility InvertedVisibility(IsLoading); Text [SearchButton]"
+        local:MvxBind="Click CheckWeatherCommand; Visibility InvertedVisibility(IsLoading)"
   />
     <Button
         android:background="@drawable/button_states"
@@ -38,7 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/getLocationButton"
-        local:MvxBind="Click GetLocationCityNameCommand; Visibility InvertedVisibility(IsLoading); Text [GetCityNameButton]"
+        local:MvxBind="Click GetLocationCityNameCommand; Visibility InvertedVisibility(IsLoading)"
   />
     <ProgressBar
         android:layout_width="match_parent"

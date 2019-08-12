@@ -20,7 +20,6 @@ namespace Core.ViewModels
         private readonly IConnectivityService connectivity;
         private readonly IAlertService alertService;
         private readonly IMvxNavigationService navigationService;
-        private readonly ResourceManager resourceManager;
         private WeatherDetails weatherDetails;
 
         public WeatherDetailsViewModel(
@@ -35,14 +34,11 @@ namespace Core.ViewModels
             this.weatherService = weatherService;
             this.connectivity = connectivity;
             this.alertService = alertService;
-            resourceManager = AppResources.ResourceManager;
 
             RefreshWeatherCommand = new MvxAsyncCommand(RefreshWeather);
 
             BackCommand = new MvxAsyncCommand(NavigateToSearch);
         }
-
-        public string this[string key] => resourceManager.GetString(key, CultureInfo.CurrentCulture);
 
         public string CityName => weatherDetails?.CityName;
         public string Description => weatherDetails?.Description;

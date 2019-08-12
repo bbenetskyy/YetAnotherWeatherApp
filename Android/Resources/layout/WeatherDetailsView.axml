@@ -38,7 +38,6 @@
         android:layout_marginRight="10dp"
         android:textAlignment="textEnd"
         android:id="@+id/descriptionLabel"
-        local:MvxBind="Text [DescriptionLabel]"
     />
     <TextView
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -63,7 +62,6 @@
         android:layout_marginRight="10dp"
         android:textAlignment="textEnd"
         android:id="@+id/currentTemperatureLabel"
-        local:MvxBind="Text [TemperatureLabel]"
     />
     <TextView
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -86,7 +84,6 @@
         android:layout_marginRight="10dp"
         android:textAlignment="textEnd"
         android:id="@+id/minTemperatureLabel"
-        local:MvxBind="Text [MinLabel]"
     />
     <TextView
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -108,7 +105,6 @@
         android:layout_marginRight="10dp"
         android:textAlignment="textEnd"
         android:id="@+id/maxTemperatureLabel"
-        local:MvxBind="Text [MaxLabel]"
     />
     <TextView
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -129,7 +125,7 @@
         android:layout_marginTop="50dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        local:MvxBind="Click RefreshWeatherCommand; Visibility InvertedVisibility(IsLoading); Text [RefreshButton]"
+        local:MvxBind="Click RefreshWeatherCommand; Visibility InvertedVisibility(IsLoading)"
         android:id="@+id/refreshButton"
     />
     <ProgressBar

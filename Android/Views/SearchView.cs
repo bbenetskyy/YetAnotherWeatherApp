@@ -1,5 +1,7 @@
 ﻿using Android.App;
 using Android.OS;
+using Android.Widget;
+using Core.Resources;
 using Core.ViewModels;
 using InteractiveAlert;
 using MvvmCross;
@@ -14,9 +16,20 @@ namespace Android.Views
         {
             Xamarin.Essentials.Platform.Init(this, bundle);
             base.OnCreate(bundle);
-#pragma warning disable CS0436 // Type conflicts with imported type
             SetContentView(Resource.Layout.SearchView);
-#pragma warning restore CS0436 // Type conflicts with imported type
+            BindResources();
+        }
+
+        private void BindResources()
+        {
+            var searchEditText = FindViewById<EditText>(Resource.Id.searchEditText);
+            searchEditText.Hint = AppResources.SearchHint;
+
+            var searchButton = FindViewById<Button>(Resource.Id.searchButton);
+            searchButton.Text = AppResources.SearchButton;
+
+            var getLocationButton = FindViewById<Button>(Resource.Id.getLocationButton);
+            getLocationButton.Text = AppResources.GetCityNameButton;
         }
 
         protected override void OnStart()
