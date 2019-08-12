@@ -48,36 +48,12 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
             alertMock = new Mock<IAlertService>();
             Ioc.RegisterSingleton<IAlertService>(alertMock.Object);
 
-            connectivityMock = new Mock<IConnectivity>();
-            connectivityMock.Setup(a => a.IsConnected)
-                .Returns(true);
-            Ioc.RegisterSingleton<IConnectivity>(connectivityMock.Object);
+            MockConnectivity();
 
-            weatherMock = new Mock<WeatherDetailsViewModel>(MockBehavior.Loose,
-                mapperMock.Object, navigationMock.Object, weatherServiceMock.Object,
-                connectivityMock.Object, alertMock.Object)
-            {
-                CallBase = true
-            };
-            weatherMock.Protected()
-                .Setup<Task>("NavigateToSearch")
-                .Returns(Task.FromResult("Some Result"))
-                .Verifiable();
-            weatherMock.Protected()
-                .Setup<Task>("MapWeatherToProperties", ItExpr.IsAny<CurrentWeatherResponse>())
-                .Returns(Task.FromResult("Some Result"))
-                .Verifiable();
-            weatherMock.Protected()
-                .Setup<Task<CurrentWeatherResponse>>("GetWeather")
-                .ReturnsAsync(CurrentWeatherTestData.FakeCurrentWeather)
-                .Verifiable();
-            weatherMock.Protected()
-                .Setup("ShowActivityIndicator")
-                .Verifiable();
-            weatherMock.Protected()
-                .Setup("HideActivityIndicator")
-                .Verifiable();
+            MockWeather();
         }
+
+        #region Tests
 
         [Test]
         public void RefreshWeather_Should_Call_GetWeather_And_MapWeatherToProperties_And_ActivityIndicators()
@@ -225,5 +201,47 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
             weatherMock.Protected().Verify("NavigateToSearch",
                 Times.Never());
         }
+
+        #endregion
+
+        #region Mocks
+
+        private void MockWeather()
+        {
+            weatherMock = new Mock<WeatherDetailsViewModel>(MockBehavior.Loose,
+                mapperMock.Object, navigationMock.Object, weatherServiceMock.Object,
+                connectivityMock.Object, alertMock.Object)
+            {
+                CallBase = true
+            };
+            weatherMock.Protected()
+                .Setup<Task>("NavigateToSearch")
+                .Returns(Task.FromResult("Some Result"))
+                .Verifiable();
+            weatherMock.Protected()
+                .Setup<Task>("MapWeatherToProperties", ItExpr.IsAny<CurrentWeatherResponse>())
+                .Returns(Task.FromResult("Some Result"))
+                .Verifiable();
+            weatherMock.Protected()
+                .Setup<Task<CurrentWeatherResponse>>("GetWeather")
+                .ReturnsAsync(CurrentWeatherTestData.FakeCurrentWeather)
+                .Verifiable();
+            weatherMock.Protected()
+                .Setup("ShowActivityIndicator")
+                .Verifiable();
+            weatherMock.Protected()
+                .Setup("HideActivityIndicator")
+                .Verifiable();
+        }
+
+        private void MockConnectivity()
+        {
+            connectivityMock = new Mock<IConnectivity>();
+            connectivityMock.Setup(a => a.IsConnected)
+                .Returns(true);
+            Ioc.RegisterSingleton<IConnectivity>(connectivityMock.Object);
+        }
+
+        #endregion
     }
 }
