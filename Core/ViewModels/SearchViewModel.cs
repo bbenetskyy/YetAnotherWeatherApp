@@ -8,7 +8,6 @@ using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using OpenWeatherMap;
 using System.Threading.Tasks;
-using Plugin.Connectivity.Abstractions;
 using System.Resources;
 using System.Globalization;
 
@@ -20,7 +19,7 @@ namespace Core.ViewModels
         private readonly IMvxNavigationService navigationService;
         private readonly IWeatherService weatherService;
         private readonly ILocationService locationService;
-        private readonly IConnectivity connectivity;
+        private readonly IConnectivityService connectivity;
         private readonly IAlertService alertService;
         private readonly ResourceManager resourceManager;
 
@@ -29,7 +28,7 @@ namespace Core.ViewModels
             IMvxNavigationService navigationService,
             IWeatherService weatherService,
             ILocationService locationService,
-            IConnectivity connectivity,
+            IConnectivityService connectivity,
             IAlertService alertService)
         {
             this.mapper = mapper;

@@ -8,7 +8,7 @@ namespace Core.Services
     {
         public Task<Location> GetLocationAsync(GeolocationRequest request)
         {
-            return Xamarin.Essentials.Geolocation.GetLocationAsync(request);
+            return Geolocation.GetLocationAsync(request);
         }
     }
 }

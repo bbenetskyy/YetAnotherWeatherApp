@@ -21,7 +21,7 @@ namespace Core.UnitTests.Services
         public void Mapper_MapCurrentWeatherResponseIntoWeatherDetails_WeatherDetailsConvertedCorrectly()
         {
             //Arrange
-            base.Setup();
+            Setup();
             var mapper = Ioc.GetSingleton<IMapper>();
             var currentWeather = CurrentWeatherTestData.FakeCurrentWeather;
 

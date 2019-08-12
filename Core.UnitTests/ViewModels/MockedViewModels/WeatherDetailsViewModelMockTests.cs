@@ -13,7 +13,6 @@ using OpenWeatherMap;
 using Shouldly;
 using System.Reflection;
 using System.Threading.Tasks;
-using Plugin.Connectivity.Abstractions;
 
 namespace Core.UnitTests.ViewModels.MockedViewModels
 {
@@ -25,7 +24,7 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
         private Mock<IMvxNavigationService> navigationMock;
         private Mock<WeatherDetailsViewModel> weatherMock;
         private Mock<IAlertService> alertMock;
-        private Mock<IConnectivity> connectivityMock;
+        private Mock<IConnectivityService> connectivityMock;
 
         protected override void AdditionalSetup()
         {
@@ -59,7 +58,7 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
         public void RefreshWeather_Should_Call_GetWeather_And_MapWeatherToProperties_And_ActivityIndicators()
         {
             //Arrange
-            base.Setup();
+            Setup();
             var vm = weatherMock.Object;
             var refreshWeather = vm.GetType().GetMethod("RefreshWeather",
                 BindingFlags.NonPublic | BindingFlags.Instance);
@@ -81,7 +80,7 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
         public void RefreshWeather_Should_Call_GetWeather_And_NavigateToSearch_And_ActivityIndicators()
         {
             //Arrange
-            base.Setup();
+            Setup();
             weatherMock.Protected()
                 .Setup<Task<CurrentWeatherResponse>>("GetWeather")
                 .ReturnsAsync((CurrentWeatherResponse)null)
@@ -106,7 +105,7 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
         public async Task BackCommand_Should_Call_NavigateToSearch()
         {
             //Arrange
-            base.Setup();
+            Setup();
             var vm = weatherMock.Object;
 
             //Act
@@ -129,7 +128,7 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
         public void ShowActivityIndicator_Should_Set_IsLoading_To_True()
         {
             //Arrange
-            base.Setup();
+            Setup();
             weatherMock.Protected()
                 .Setup("ShowActivityIndicator")
                 .CallBase();
@@ -157,7 +156,7 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
         public void HideActivityIndicator_Should_Set_IsLoading_To_False()
         {
             //Arrange
-            base.Setup();
+            Setup();
             weatherMock.Protected()
                 .Setup("HideActivityIndicator")
                 .CallBase();
@@ -185,7 +184,7 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
         public async Task RefreshWeatherCommand_Should_Call_RefreshWeather()
         {
             //Arrange
-            base.Setup();
+            Setup();
             weatherMock.Protected()
                 .Setup<Task>("RefreshWeather")
                 .Returns(Task.FromResult("Some Result"))
@@ -236,10 +235,10 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
 
         private void MockConnectivity()
         {
-            connectivityMock = new Mock<IConnectivity>();
+            connectivityMock = new Mock<IConnectivityService>();
             connectivityMock.Setup(a => a.IsConnected)
                 .Returns(true);
-            Ioc.RegisterSingleton<IConnectivity>(connectivityMock.Object);
+            Ioc.RegisterSingleton<IConnectivityService>(connectivityMock.Object);
         }
 
         #endregion

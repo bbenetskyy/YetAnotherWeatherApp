@@ -13,7 +13,7 @@ namespace Core.UnitTests.Services
 
         public AlertServiceTests()
         {
-            base.Setup();
+            Setup();
         }
 
         protected override void AdditionalSetup()

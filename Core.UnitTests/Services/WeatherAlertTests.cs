@@ -6,12 +6,12 @@ using MvvmCross.Base;
 using MvvmCross.Commands;
 using MvvmCross.Tests;
 using NUnit.Framework;
-using Plugin.Connectivity.Abstractions;
 using Shouldly;
 using System;
 using System.Threading.Tasks;
 using Core.Exceptions;
 using Core.Resources;
+using Core.Services.Interfaces;
 
 namespace Core.UnitTests.Services
 {
@@ -19,11 +19,11 @@ namespace Core.UnitTests.Services
     public class WeatherAlertTests : MvxIoCSupportingTest
     {
         private Mock<IApiClient> apiMock;
-        private Mock<IConnectivity> connectivityMock;
+        private Mock<IConnectivityService> connectivityMock;
 
         public WeatherAlertTests()
         {
-            base.Setup();
+            Setup();
         }
 
         protected override void AdditionalSetup()
@@ -44,10 +44,10 @@ namespace Core.UnitTests.Services
                 .ReturnsAsync(CurrentWeatherTestData.FakeCurrentWeather);
             Ioc.RegisterSingleton<IApiClient>(apiMock.Object);
 
-            connectivityMock = new Mock<IConnectivity>();
+            connectivityMock = new Mock<IConnectivityService>();
             connectivityMock.Setup(c => c.IsConnected)
                 .Returns(true);
-            Ioc.RegisterSingleton<IConnectivity>(connectivityMock.Object);
+            Ioc.RegisterSingleton<IConnectivityService>(connectivityMock.Object);
         }
 
         [Test]

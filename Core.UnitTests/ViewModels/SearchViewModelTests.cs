@@ -13,7 +13,6 @@ using Shouldly;
 using System.Threading;
 using System.Threading.Tasks;
 using Core.Resources;
-using Plugin.Connectivity.Abstractions;
 using IMvxCommandHelper = MvvmCross.Commands.IMvxCommandHelper;
 
 namespace Core.UnitTests.ViewModels
@@ -26,7 +25,7 @@ namespace Core.UnitTests.ViewModels
         private Mock<IMvxNavigationService> navigationMock;
         private Mock<ILocationService> locationMock;
         private Mock<IAlertService> alertMock;
-        private Mock<IConnectivity> connectivityMock;
+        private Mock<IConnectivityService> connectivityMock;
 
         protected override void AdditionalSetup()
         {
@@ -58,7 +57,7 @@ namespace Core.UnitTests.ViewModels
         public void CheckWeatherCommand_Should_RaisedCanExecuteChanged_When_CityName_Changed()
         {
             //Arrange
-            base.Setup();
+            Setup();
             var vm = Ioc.IoCConstruct<SearchViewModel>();
             vm.CheckWeatherCommand.ListenForRaiseCanExecuteChanged();
 
@@ -73,7 +72,7 @@ namespace Core.UnitTests.ViewModels
         public async Task CheckWeatherCommand_Should_Call_Api_And_Navigate_To_WeatherDetailsViewModel()
         {
             //Arrange
-            base.Setup();
+            Setup();
             var vm = Ioc.IoCConstruct<SearchViewModel>();
 
             //Act
@@ -93,7 +92,7 @@ namespace Core.UnitTests.ViewModels
         public async Task CheckWeatherCommand_Should_Check_Internet_Connection()
         {
             //Arrange
-            base.Setup();
+            Setup();
             var vm = Ioc.IoCConstruct<SearchViewModel>();
 
             //Act
@@ -109,7 +108,7 @@ namespace Core.UnitTests.ViewModels
         public async Task CheckWeatherCommand_Should_Call_Api_And_Show_Error_Alert(string cityName)
         {
             //Arrange
-            base.Setup();
+            Setup();
             var vm = Ioc.IoCConstruct<SearchViewModel>();
 
             //Act
@@ -128,7 +127,7 @@ namespace Core.UnitTests.ViewModels
         public async Task CheckWeatherCommand_Should_Call_Api_And_If_No_Internet_Show_Warning_Alert()
         {
             //Arrange
-            base.Setup();
+            Setup();
             connectivityMock.Setup(a => a.IsConnected)
                 .Returns(false);
             var vm = Ioc.IoCConstruct<SearchViewModel>();
@@ -148,7 +147,7 @@ namespace Core.UnitTests.ViewModels
         public async Task GetLocationCityNameCommand_Should_Call_Api_And_Update_City_Name()
         {
             //Arrange
-            base.Setup();
+            Setup();
             var vm = Ioc.IoCConstruct<SearchViewModel>();
 
             //Act
@@ -175,10 +174,10 @@ namespace Core.UnitTests.ViewModels
 
         private void MockConnectivity()
         {
-            connectivityMock = new Mock<IConnectivity>();
+            connectivityMock = new Mock<IConnectivityService>();
             connectivityMock.Setup(a => a.IsConnected)
                 .Returns(true);
-            Ioc.RegisterSingleton<IConnectivity>(connectivityMock.Object);
+            Ioc.RegisterSingleton<IConnectivityService>(connectivityMock.Object);
         }
 
         private void MockNavigation()

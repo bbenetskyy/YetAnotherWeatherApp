@@ -12,7 +12,7 @@ namespace Core.UnitTests.Converters
     {
         public TemperatureToColorConverterTests()
         {
-            base.Setup();
+            Setup();
         }
 
         [Theory]
