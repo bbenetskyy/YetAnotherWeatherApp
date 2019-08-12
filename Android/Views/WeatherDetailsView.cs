@@ -37,7 +37,6 @@ namespace Android.Views
             refreshButton.Text = AppResources.RefreshButton;
         }
 
-
         protected override void OnStart()
         {
             base.OnStart();

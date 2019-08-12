@@ -6,7 +6,6 @@ namespace Core.Exceptions
     {
         public WeatherException(string message, Exception ex) : base(message, ex)
         {
-
         }
     }
 }

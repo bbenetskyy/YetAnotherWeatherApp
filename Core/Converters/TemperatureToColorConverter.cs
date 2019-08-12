@@ -12,7 +12,6 @@ namespace Core.Converters
         private IMvxNativeColor nativeColor;
         private IMvxNativeColor NativeColor => nativeColor ?? (nativeColor = Mvx.IoCProvider.Resolve<IMvxNativeColor>());
 
-
         protected override object Convert(string temperature, Type targetType, object parameter, CultureInfo culture)
         {
             return NativeColor.ToNative(GetColor(temperature));

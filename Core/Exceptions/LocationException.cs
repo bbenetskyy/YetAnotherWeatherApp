@@ -6,7 +6,6 @@ namespace Core.Exceptions
     {
         public LocationException(string message, Exception ex) : base(message, ex)
         {
-
         }
     }
 }

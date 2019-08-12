@@ -91,7 +91,6 @@ namespace Core.UnitTests.ViewModels
                 Times.Once);
         }
 
-
         [Test]
         public async Task CheckWeatherCommand_Should_Check_Internet_Connection()
         {
