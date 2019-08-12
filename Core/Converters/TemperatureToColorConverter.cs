@@ -26,15 +26,15 @@ namespace Core.Converters
                     out var tempValue))
             {                //todo move it to constants
             }
-            else if (tempValue <= 0)
+            else if (tempValue <= MaxTemperature.Cold)
             {
                 mvxColor = Colors.Cold;
             }
-            else if (tempValue <= 10)
+            else if (tempValue <= MaxTemperature.Chilly)
             {
                 mvxColor = Colors.Chilly;
             }
-            else if (tempValue <= 20)
+            else if (tempValue <= MaxTemperature.Warm)
             {
                 mvxColor = Colors.Warm;
             }

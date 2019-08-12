@@ -23,7 +23,7 @@ namespace Core.UnitTests.Converters
 
         [Theory]
         [TestCaseSource(typeof(TemperatureConverterTestData), nameof(TemperatureConverterTestData.CorrectTemperatureToColorData))]
-        public void todo_1(string temperature, MvxColor expectedColor)
+        public void GetColor_WithCorrectTemperatureString_ExpectedColorReturned(string temperature, MvxColor expectedColor)
         {
             //Arrange
             var iocRegistrar = new TemperatureToColorConverter();
@@ -37,7 +37,7 @@ namespace Core.UnitTests.Converters
 
         [Theory]
         [TestCaseSource(typeof(TemperatureConverterTestData), nameof(TemperatureConverterTestData.IncorrectTemperatureToColorData))]
-        public void todo_2(string temperature)
+        public void GetColor_WithInCorrectTemperatureString_DefaultColorReturned(string temperature)
         {
             //Arrange
             var iocRegistrar = new TemperatureToColorConverter();
