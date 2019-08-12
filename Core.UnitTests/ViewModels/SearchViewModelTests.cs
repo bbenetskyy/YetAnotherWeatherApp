@@ -13,6 +13,7 @@ using Shouldly;
 using System.Threading;
 using System.Threading.Tasks;
 using Core.Resources;
+using Core.UnitTests.Fixtures;
 using IMvxCommandHelper = MvvmCross.Commands.IMvxCommandHelper;
 
 namespace Core.UnitTests.ViewModels
@@ -41,14 +42,17 @@ namespace Core.UnitTests.ViewModels
 
             MockNavigation();
 
-            MockWeather();
+            MockFixtures.MockWeather(out weatherMock);
+            Ioc.RegisterSingleton<IWeatherService>(weatherMock.Object);
 
             alertMock = new Mock<IAlertService>();
             Ioc.RegisterSingleton<IAlertService>(alertMock.Object);
 
-            MockConnectivity();
+            MockFixtures.MockConnectivity(out connectivityMock);
+            Ioc.RegisterSingleton<IConnectivityService>(connectivityMock.Object);
 
-            MockLocation();
+            MockFixtures.MockLocation(out locationMock);
+            Ioc.RegisterSingleton<ILocationService>(locationMock.Object);
         }
 
         #region Tests
@@ -164,22 +168,6 @@ namespace Core.UnitTests.ViewModels
 
         #region Mocks
 
-        private void MockLocation()
-        {
-            locationMock = new Mock<ILocationService>();
-            locationMock.Setup(l => l.GetLocationCityNameAsync())
-                .ReturnsAsync(WeatherDetailsTestData.FakeWeatherDetails.CityName);
-            Ioc.RegisterSingleton<ILocationService>(locationMock.Object);
-        }
-
-        private void MockConnectivity()
-        {
-            connectivityMock = new Mock<IConnectivityService>();
-            connectivityMock.Setup(a => a.IsConnected)
-                .Returns(true);
-            Ioc.RegisterSingleton<IConnectivityService>(connectivityMock.Object);
-        }
-
         private void MockNavigation()
         {
             navigationMock = new Mock<IMvxNavigationService>();
@@ -187,16 +175,6 @@ namespace Core.UnitTests.ViewModels
                     It.IsAny<WeatherDetails>(), null, default(CancellationToken)))
                 .ReturnsAsync(true);
             Ioc.RegisterSingleton<IMvxNavigationService>(navigationMock.Object);
-        }
-
-        private void MockWeather()
-        {
-            weatherMock = new Mock<IWeatherService>();
-            weatherMock.Setup(a => a.GetWeatherAsync(It.IsAny<string>()))
-                .ReturnsAsync((CurrentWeatherResponse)null);
-            weatherMock.Setup(a => a.GetWeatherAsync(CurrentWeatherTestData.FakeCurrentWeather.City.Name))
-                .ReturnsAsync(CurrentWeatherTestData.FakeCurrentWeather);
-            Ioc.RegisterSingleton<IWeatherService>(weatherMock.Object);
         }
 
         #endregion

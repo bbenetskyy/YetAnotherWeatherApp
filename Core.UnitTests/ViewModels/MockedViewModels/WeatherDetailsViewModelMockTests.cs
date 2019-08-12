@@ -13,6 +13,7 @@ using OpenWeatherMap;
 using Shouldly;
 using System.Reflection;
 using System.Threading.Tasks;
+using Core.UnitTests.Fixtures;
 
 namespace Core.UnitTests.ViewModels.MockedViewModels
 {
@@ -46,8 +47,9 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
 
             alertMock = new Mock<IAlertService>();
             Ioc.RegisterSingleton<IAlertService>(alertMock.Object);
-
-            MockConnectivity();
+            
+            MockFixtures.MockConnectivity(out connectivityMock);
+            Ioc.RegisterSingleton<IConnectivityService>(connectivityMock.Object);
 
             MockWeather();
         }
@@ -231,14 +233,6 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
             weatherMock.Protected()
                 .Setup("HideActivityIndicator")
                 .Verifiable();
-        }
-
-        private void MockConnectivity()
-        {
-            connectivityMock = new Mock<IConnectivityService>();
-            connectivityMock.Setup(a => a.IsConnected)
-                .Returns(true);
-            Ioc.RegisterSingleton<IConnectivityService>(connectivityMock.Object);
         }
 
         #endregion

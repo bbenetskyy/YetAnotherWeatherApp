@@ -13,6 +13,7 @@ using OpenWeatherMap;
 using Shouldly;
 using System.Reflection;
 using System.Threading.Tasks;
+using Core.UnitTests.Fixtures;
 
 namespace Core.UnitTests.ViewModels.MockedViewModels
 {
@@ -45,12 +46,14 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
             weatherMock = new Mock<IWeatherService>();
             Ioc.RegisterSingleton<IWeatherService>(weatherMock.Object);
 
-            MockLocation();
+            MockFixtures.MockLocation(out locationMock);
+            Ioc.RegisterSingleton<ILocationService>(locationMock.Object);
 
             alertMock = new Mock<IAlertService>();
             Ioc.RegisterSingleton<IAlertService>(alertMock.Object);
 
-            MockConnectivity();
+            MockFixtures.MockConnectivity(out connectivityMock);
+            Ioc.RegisterSingleton<IConnectivityService>(connectivityMock.Object);
 
             MockSearch();
         }
@@ -243,22 +246,6 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
                 .Setup<Task>("GetLocationCityName")
                 .Returns(Task.FromResult("Some Result"))
                 .Verifiable();
-        }
-
-        private void MockConnectivity()
-        {
-            connectivityMock = new Mock<IConnectivityService>();
-            connectivityMock.Setup(a => a.IsConnected)
-                .Returns(true);
-            Ioc.RegisterSingleton<IConnectivityService>(connectivityMock.Object);
-        }
-
-        private void MockLocation()
-        {
-            locationMock = new Mock<ILocationService>();
-            locationMock.Setup(l => l.GetLocationCityNameAsync())
-                .ReturnsAsync(WeatherDetailsTestData.FakeWeatherDetails.CityName);
-            Ioc.RegisterSingleton<ILocationService>(locationMock.Object);
         }
 
         #endregion
