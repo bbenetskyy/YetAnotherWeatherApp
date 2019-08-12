@@ -23,7 +23,7 @@ namespace iOS.Views
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UILabel cityNameLabel { get; set; }
+        UIKit.UILabel cityNameText { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -31,7 +31,15 @@ namespace iOS.Views
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel currentTemperatureText { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel descriptionLabel { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel descriptionText { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -43,7 +51,15 @@ namespace iOS.Views
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel maxTemperatureText { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel minTemperatureLabel { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel minTemperatureText { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -61,9 +77,9 @@ namespace iOS.Views
                 backgroundImage = null;
             }
 
-            if (cityNameLabel != null) {
-                cityNameLabel.Dispose ();
-                cityNameLabel = null;
+            if (cityNameText != null) {
+                cityNameText.Dispose ();
+                cityNameText = null;
             }
 
             if (currentTemperatureLabel != null) {
@@ -71,9 +87,19 @@ namespace iOS.Views
                 currentTemperatureLabel = null;
             }
 
+            if (currentTemperatureText != null) {
+                currentTemperatureText.Dispose ();
+                currentTemperatureText = null;
+            }
+
             if (descriptionLabel != null) {
                 descriptionLabel.Dispose ();
                 descriptionLabel = null;
+            }
+
+            if (descriptionText != null) {
+                descriptionText.Dispose ();
+                descriptionText = null;
             }
 
             if (loadingIndicator != null) {
@@ -86,9 +112,19 @@ namespace iOS.Views
                 maxTemperatureLabel = null;
             }
 
+            if (maxTemperatureText != null) {
+                maxTemperatureText.Dispose ();
+                maxTemperatureText = null;
+            }
+
             if (minTemperatureLabel != null) {
                 minTemperatureLabel.Dispose ();
                 minTemperatureLabel = null;
+            }
+
+            if (minTemperatureText != null) {
+                minTemperatureText.Dispose ();
+                minTemperatureText = null;
             }
 
             if (refreshButton != null) {

@@ -9,11 +9,18 @@ namespace Core.IoC
     {
         public void RegisterServices()
         {
+            Mvx.IoCProvider.RegisterType<IAlertService, AlertService>();
             Mvx.IoCProvider.RegisterType<IApiClient, ApiClient>();
-            Mvx.IoCProvider.RegisterType<IWeatherService, WeatherService>();
-            Mvx.IoCProvider.RegisterType<ILocationService, LocationService>();
-            Mvx.IoCProvider.RegisterType<IGeolocationService, GeolocationService>();
             Mvx.IoCProvider.RegisterType<IGeocodingService, GeocodingService>();
+            Mvx.IoCProvider.RegisterType<IGeolocationService, GeolocationService>();
+            Mvx.IoCProvider.RegisterType<ILocationService, LocationService>();
+            Mvx.IoCProvider.RegisterType<IWeatherService, WeatherService>();
+            Mvx.IoCProvider.RegisterType<IConnectivityService, ConnectivityService>();
+        }
+
+        public void RegisterSingletons()
+        {
+            Mvx.IoCProvider.RegisterSingleton(MapService.ConfigureMapper);
         }
     }
 }

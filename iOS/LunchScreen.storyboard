@@ -37,7 +37,4 @@
             <point key="canvasLocation" x="-242" y="-289"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="temperature.png" width="256" height="256"/>
-    </resources>
 </document>

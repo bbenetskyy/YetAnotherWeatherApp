@@ -42,7 +42,7 @@ namespace Core.UnitTests.Services
         public async Task GetLocationCityNameAsync_WithLocationAndPlacemark_CityNameReturned()
         {
             //Arrange
-            base.Setup();
+            Setup();
             geolocationMock
                 .Setup(g => g.GetLocationAsync(It.IsAny<GeolocationRequest>()))
                 .ReturnsAsync(new Location(1, 1));
@@ -71,7 +71,7 @@ namespace Core.UnitTests.Services
         public async Task GetLocationCityNameAsync_WithNullLocation_LocationExceptionThrown()
         {
             //Arrange
-            base.Setup();
+            Setup();
             geolocationMock
                 .Setup(g => g.GetLocationAsync(It.IsAny<GeolocationRequest>()))
                 .ReturnsAsync((Location)null);
@@ -92,7 +92,7 @@ namespace Core.UnitTests.Services
         public async Task GetLocationCityNameAsync_WithExceptionInGeolocation_LocationExceptionThrown()
         {
             //Arrange
-            base.Setup();
+            Setup();
             geolocationMock
                 .Setup(g => g.GetLocationAsync(It.IsAny<GeolocationRequest>()))
                 .Throws<Exception>();
@@ -113,7 +113,7 @@ namespace Core.UnitTests.Services
         public async Task GetLocationCityNameAsync_WithNullPlacemark_LocationExceptionThrown()
         {
             //Arrange
-            base.Setup();
+            Setup();
             geolocationMock
                 .Setup(g => g.GetLocationAsync(It.IsAny<GeolocationRequest>()))
                 .ReturnsAsync(new Location(1, 1));
@@ -137,7 +137,7 @@ namespace Core.UnitTests.Services
         public async Task GetLocationCityNameAsync_WithExceptionInGeocoding_LocationExceptionThrown()
         {
             //Arrange
-            base.Setup();
+            Setup();
             geolocationMock
                 .Setup(g => g.GetLocationAsync(It.IsAny<GeolocationRequest>()))
                 .ReturnsAsync(new Location(1, 1));

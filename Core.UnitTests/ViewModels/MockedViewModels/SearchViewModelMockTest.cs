@@ -13,7 +13,7 @@ using OpenWeatherMap;
 using Shouldly;
 using System.Reflection;
 using System.Threading.Tasks;
-using Plugin.Connectivity.Abstractions;
+using Core.UnitTests.Fixtures;
 
 namespace Core.UnitTests.ViewModels.MockedViewModels
 {
@@ -26,7 +26,7 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
         private Mock<IMvxNavigationService> navigationMock;
         private Mock<SearchViewModel> searchMock;
         private Mock<IAlertService> alertMock;
-        private Mock<IConnectivity> connectivityMock;
+        private Mock<IConnectivityService> connectivityMock;
 
         protected override void AdditionalSetup()
         {
@@ -46,39 +46,25 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
             weatherMock = new Mock<IWeatherService>();
             Ioc.RegisterSingleton<IWeatherService>(weatherMock.Object);
 
-            locationMock = new Mock<ILocationService>();
-            locationMock.Setup(l => l.GetLocationCityNameAsync())
-                .ReturnsAsync(WeatherDetailsTestData.FakeWeatherDetails.CityName);
+            MockFixtures.MockLocation(out locationMock);
             Ioc.RegisterSingleton<ILocationService>(locationMock.Object);
 
             alertMock = new Mock<IAlertService>();
             Ioc.RegisterSingleton<IAlertService>(alertMock.Object);
 
-            connectivityMock = new Mock<IConnectivity>();
-            connectivityMock.Setup(a => a.IsConnected)
-                .Returns(true);
-            Ioc.RegisterSingleton<IConnectivity>(connectivityMock.Object);
+            MockFixtures.MockConnectivity(out connectivityMock);
+            Ioc.RegisterSingleton<IConnectivityService>(connectivityMock.Object);
 
-            searchMock = new Mock<SearchViewModel>(MockBehavior.Loose,
-                mapperMock.Object, navigationMock.Object, weatherMock.Object,
-                locationMock.Object, connectivityMock.Object, alertMock.Object)
-            {
-                CallBase = true
-            };
-            searchMock.Protected()
-                .Setup("NavigateToWeatherDetails", ItExpr.IsAny<CurrentWeatherResponse>())
-                .Verifiable();
-            searchMock.Protected()
-                .Setup<Task>("GetLocationCityName")
-                .Returns(Task.FromResult("Some Result"))
-                .Verifiable();
+            MockSearch();
         }
+
+        #region Tests
 
         [Test]
         public async Task CheckWeatherCommand_Should_Call_CheckWeather()
         {
             //Arrange
-            base.Setup();
+            Setup();
             searchMock.Protected()
                 .Setup<Task>("CheckWeather")
                 .Returns(Task.FromResult("Some Result"));
@@ -99,7 +85,7 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
         public void CheckWeather_Should_Call_GetWeather_And_NavigateToWeatherDetails()
         {
             //Arrange
-            base.Setup();
+            Setup();
             searchMock.Protected()
                 .Setup<Task<CurrentWeatherResponse>>("GetWeather")
                 .ReturnsAsync(CurrentWeatherTestData.FakeCurrentWeather)
@@ -124,7 +110,7 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
         public void CheckWeather_Should_Call_Only_GetWeather(string cityName)
         {
             //Arrange
-            base.Setup();
+            Setup();
             searchMock.Protected()
                 .Setup<Task<CurrentWeatherResponse>>("GetWeather")
                 .ReturnsAsync((CurrentWeatherResponse)null)
@@ -148,7 +134,7 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
         public async Task GetLocationCityNameCommand_Should_Call_GetLocationCityName()
         {
             //Arrange
-            base.Setup();
+            Setup();
             var vm = searchMock.Object;
 
             //Act
@@ -163,7 +149,7 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
         public void GetLocationCityName_Should_Call_GetLocationCityNameAsync_And_ActivityIndicators_And_Update_CityName()
         {
             //Arrange
-            base.Setup();
+            Setup();
             searchMock.Protected()
                 .Setup<Task>("GetLocationCityName")
                 .CallBase();
@@ -189,7 +175,7 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
         public void ShowActivityIndicator_Should_Set_IsLoading_To_True()
         {
             //Arrange
-            base.Setup();
+            Setup();
             searchMock.Protected()
                 .Setup("ShowActivityIndicator")
                 .CallBase();
@@ -217,7 +203,7 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
         public void HideActivityIndicator_Should_Set_IsLoading_To_False()
         {
             //Arrange
-            base.Setup();
+            Setup();
             searchMock.Protected()
                 .Setup("HideActivityIndicator")
                 .CallBase();
@@ -240,5 +226,28 @@ namespace Core.UnitTests.ViewModels.MockedViewModels
             searchMock.Protected().Verify("NavigateToWeatherDetails",
                 Times.Never(), ItExpr.IsAny<CurrentWeatherResponse>());
         }
+
+        #endregion
+
+        #region Mocks
+
+        private void MockSearch()
+        {
+            searchMock = new Mock<SearchViewModel>(MockBehavior.Loose,
+                mapperMock.Object, navigationMock.Object, weatherMock.Object,
+                locationMock.Object, connectivityMock.Object, alertMock.Object)
+            {
+                CallBase = true
+            };
+            searchMock.Protected()
+                .Setup("NavigateToWeatherDetails", ItExpr.IsAny<CurrentWeatherResponse>())
+                .Verifiable();
+            searchMock.Protected()
+                .Setup<Task>("GetLocationCityName")
+                .Returns(Task.FromResult("Some Result"))
+                .Verifiable();
+        }
+
+        #endregion
     }
 }

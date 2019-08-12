@@ -15,7 +15,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Core.Models;
 using Core.Resources;
-using Plugin.Connectivity.Abstractions;
+using Core.UnitTests.Fixtures;
 
 namespace Core.UnitTests.ViewModels
 {
@@ -24,7 +24,7 @@ namespace Core.UnitTests.ViewModels
     {
         private Mock<IWeatherService> weatherMock;
         private Mock<IMvxNavigationService> navigationMock;
-        private Mock<IConnectivity> connectivityMock;
+        private Mock<IConnectivityService> connectivityMock;
         private Mock<IAlertService> alertMock;
 
         protected override void AdditionalSetup()
@@ -36,34 +36,27 @@ namespace Core.UnitTests.ViewModels
             var helper = new MvxUnitTestCommandHelper();
             Ioc.RegisterSingleton<IMvxCommandHelper>(helper);
 
-            weatherMock = new Mock<IWeatherService>();
-            weatherMock.Setup(a => a.GetWeatherAsync(It.IsAny<string>()))
-                .ReturnsAsync((CurrentWeatherResponse)null);
-            weatherMock.Setup(a => a.GetWeatherAsync(CurrentWeatherTestData.FakeCurrentWeather.City.Name))
-                .ReturnsAsync(CurrentWeatherTestData.FakeCurrentWeather);
+            MockFixtures.MockWeather(out weatherMock);
             Ioc.RegisterSingleton<IWeatherService>(weatherMock.Object);
 
-            navigationMock = new Mock<IMvxNavigationService>();
-            navigationMock.Setup(n => n.Navigate<SearchViewModel>(null, default(CancellationToken)))
-                .ReturnsAsync(true);
-            Ioc.RegisterSingleton<IMvxNavigationService>(navigationMock.Object);
+            MockNavigation();
 
             alertMock = new Mock<IAlertService>();
             Ioc.RegisterSingleton<IAlertService>(alertMock.Object);
 
-            connectivityMock = new Mock<IConnectivity>();
-            connectivityMock.Setup(a => a.IsConnected)
-                .Returns(true);
-            Ioc.RegisterSingleton<IConnectivity>(connectivityMock.Object);
+            MockFixtures.MockConnectivity(out connectivityMock);
+            Ioc.RegisterSingleton<IConnectivityService>(connectivityMock.Object);
 
             Ioc.RegisterSingleton<IMapper>(MapService.ConfigureMapper);
         }
+
+        #region Tests
 
         [Test]
         public void ViewModel_Should_Show_WeatherDetails_Correctly()
         {
             //Arrange
-            base.Setup();
+            Setup();
             var vm = Ioc.IoCConstruct<WeatherDetailsViewModel>();
 
             //Act
@@ -81,7 +74,7 @@ namespace Core.UnitTests.ViewModels
         public async Task RefreshWeatherCommand_Should_Call_Api_With_Same_CityName()
         {
             //Arrange
-            base.Setup();
+            Setup();
             var vm = Ioc.IoCConstruct<WeatherDetailsViewModel>();
             vm.Prepare(WeatherDetailsTestData.FakeWeatherDetails);
 
@@ -99,7 +92,7 @@ namespace Core.UnitTests.ViewModels
         public async Task RefreshWeatherCommand_Should_Navigate_To_SearchViewModel_If_Api_Throw_An_Error()
         {
             //Arrange
-            base.Setup();
+            Setup();
             var vm = Ioc.IoCConstruct<WeatherDetailsViewModel>();
 
             //Act
@@ -116,7 +109,7 @@ namespace Core.UnitTests.ViewModels
         public async Task RefreshWeatherCommand_Should_Check_Internet_Connection()
         {
             //Arrange
-            base.Setup();
+            Setup();
             var vm = Ioc.IoCConstruct<WeatherDetailsViewModel>();
 
             //Act
@@ -130,7 +123,7 @@ namespace Core.UnitTests.ViewModels
         public async Task RefreshWeatherCommand_Should_Navigate_To_SearchViewModel_If_No_Internet()
         {
             //Arrange
-            base.Setup();
+            Setup();
             connectivityMock.Setup(a => a.IsConnected)
                 .Returns(false);
             var vm = Ioc.IoCConstruct<WeatherDetailsViewModel>();
@@ -149,7 +142,7 @@ namespace Core.UnitTests.ViewModels
         public async Task BackCommand_Should_Navigate_To_SearchViewModel()
         {
             //Arrange
-            base.Setup();
+            Setup();
             var vm = Ioc.IoCConstruct<WeatherDetailsViewModel>();
 
             //Act
@@ -161,5 +154,19 @@ namespace Core.UnitTests.ViewModels
             navigationMock.Verify(n => n.Navigate<SearchViewModel>(null, default(CancellationToken)),
                 Times.Once);
         }
+
+        #endregion
+
+        #region Mocks
+
+        private void MockNavigation()
+        {
+            navigationMock = new Mock<IMvxNavigationService>();
+            navigationMock.Setup(n => n.Navigate<SearchViewModel>(null, default(CancellationToken)))
+                .ReturnsAsync(true);
+            Ioc.RegisterSingleton<IMvxNavigationService>(navigationMock.Object);
+        }
+
+        #endregion
     }
 }

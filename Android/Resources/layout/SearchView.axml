@@ -10,7 +10,7 @@
     android:layout_height="match_parent"
 >
     <EditText
-        android:paddingTop="100px"
+        android:paddingTop="40dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxLines="1"
@@ -19,10 +19,8 @@
         android:textColor="@android:color/white"
         android:id="@+id/searchEditText"
         local:MvxBind="Text CityName"
-        android:hint="Enter City name"
   />
     <Button
-        android:text="Search"
         android:background="@drawable/button_states"
         android:textColor="@android:color/white"
         android:layout_width="match_parent"
@@ -33,7 +31,6 @@
         local:MvxBind="Click CheckWeatherCommand; Visibility InvertedVisibility(IsLoading)"
   />
     <Button
-        android:text="Get Your City Name"
         android:background="@drawable/button_states"
         android:textColor="@android:color/white"
         android:layout_marginTop="10dp"

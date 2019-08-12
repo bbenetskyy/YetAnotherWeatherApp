@@ -1,18 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
                 <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
                 <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
               <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
               <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
@@ -31,33 +50,57 @@
     <value>text/microsoft-resx</value>
   </resheader>
   <resheader name="version">
-    <value>1.3</value>
+    <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CanNotGetCityName" xml:space="preserve">
     <value>Can't get your City name</value>
-</data>
+  </data>
   <data name="Warning" xml:space="preserve">
     <value>Warning</value>
-</data>
+  </data>
   <data name="TemperatureTemplate" xml:space="preserve">
     <value>{0} °C</value>
-</data>
+  </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>
-</data>
+  </data>
   <data name="CheckInternetConnection" xml:space="preserve">
     <value>Please check your Internet connection</value>
-</data>
+  </data>
   <data name="CityNameIsIncorrect" xml:space="preserve">
     <value>City name is incorrect!</value>
-</data>
+  </data>
   <data name="SomethingIsWrong" xml:space="preserve">
     <value>Something is going wrong! Please, try again later...</value>
-</data>
+  </data>
+  <data name="DescriptionLabel" xml:space="preserve">
+    <value>Description:</value>
+  </data>
+  <data name="GetCityNameButton" xml:space="preserve">
+    <value>Get Your City Name</value>
+  </data>
+  <data name="MaxLabel" xml:space="preserve">
+    <value>Max:</value>
+  </data>
+  <data name="MinLabel" xml:space="preserve">
+    <value>Min:</value>
+  </data>
+  <data name="RefreshButton" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="SearchButton" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="SearchHint" xml:space="preserve">
+    <value>Enter City name</value>
+  </data>
+  <data name="TemperatureLabel" xml:space="preserve">
+    <value>Temperature:</value>
+  </data>
 </root>

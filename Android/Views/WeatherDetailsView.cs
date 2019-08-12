@@ -1,5 +1,7 @@
 ﻿using Android.App;
 using Android.OS;
+using Android.Widget;
+using Core.Resources;
 using Core.ViewModels;
 using InteractiveAlert;
 using MvvmCross;
@@ -13,9 +15,26 @@ namespace Android.Views
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-#pragma warning disable CS0436 // Type conflicts with imported type
             SetContentView(Resource.Layout.WeatherDetailsView);
-#pragma warning restore CS0436 // Type conflicts with imported type
+            BindResources();
+        }
+
+        private void BindResources()
+        {
+            var descriptionLabel = FindViewById<TextView>(Resource.Id.descriptionLabel);
+            descriptionLabel.Text = AppResources.DescriptionLabel;
+
+            var currentTemperatureLabel = FindViewById<TextView>(Resource.Id.currentTemperatureLabel);
+            currentTemperatureLabel.Text = AppResources.TemperatureLabel;
+
+            var minTemperatureLabel = FindViewById<TextView>(Resource.Id.minTemperatureLabel);
+            minTemperatureLabel.Text = AppResources.MinLabel;
+
+            var maxTemperatureLabel = FindViewById<TextView>(Resource.Id.maxTemperatureLabel);
+            maxTemperatureLabel.Text = AppResources.MaxLabel;
+
+            var refreshButton = FindViewById<Button>(Resource.Id.refreshButton);
+            refreshButton.Text = AppResources.RefreshButton;
         }
 
         protected override void OnStart()

@@ -9,7 +9,7 @@ namespace Core.Services
     {
         public Task<IEnumerable<Placemark>> GetPlacemarksAsync(double latitude, double longitude)
         {
-            return Xamarin.Essentials.Geocoding.GetPlacemarksAsync(latitude, longitude);
+            return Geocoding.GetPlacemarksAsync(latitude, longitude);
         }
     }
 }

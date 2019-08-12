@@ -1,9 +1,6 @@
 ﻿using Core.IoC;
-using Core.Services;
 using Core.ViewModels;
-using MvvmCross;
 using MvvmCross.ViewModels;
-using Plugin.Connectivity;
 
 namespace Core
 {
@@ -11,9 +8,9 @@ namespace Core
     {
         public override void Initialize()
         {
-            Mvx.IoCProvider.RegisterSingleton(MapService.ConfigureMapper);
-            Mvx.IoCProvider.RegisterSingleton(CrossConnectivity.Current);
-            new IoCRegistrar().RegisterServices();
+            var ioc = new IoCRegistrar();
+            ioc.RegisterSingletons();
+            ioc.RegisterServices();
             RegisterAppStart<SearchViewModel>();
         }
     }

@@ -21,7 +21,7 @@ namespace Core.UnitTests.Services
         public void Mapper_MapCurrentWeatherResponseIntoWeatherDetails_WeatherDetailsConvertedCorrectly()
         {
             //Arrange
-            base.Setup();
+            Setup();
             var mapper = Ioc.GetSingleton<IMapper>();
             var currentWeather = CurrentWeatherTestData.FakeCurrentWeather;
 
@@ -29,12 +29,14 @@ namespace Core.UnitTests.Services
             var weatherDetails = mapper.Map<CurrentWeatherResponse, WeatherDetails>(currentWeather);
 
             //Assert
-            weatherDetails.ShouldNotBeNull();
-            weatherDetails.CityName.ShouldBe(currentWeather.City.Name);
-            weatherDetails.Description.ShouldBe(currentWeather.Weather.Value);
-            weatherDetails.CurrentTemperature.ShouldBe($"{currentWeather.Temperature.Value} °C");
-            weatherDetails.MinTemperature.ShouldBe($"{currentWeather.Temperature.Min} °C");
-            weatherDetails.MaxTemperature.ShouldBe($"{currentWeather.Temperature.Max} °C");
+            weatherDetails.ShouldSatisfyAllConditions(
+                () => weatherDetails.ShouldNotBeNull(),
+                () => weatherDetails.CityName.ShouldBe(currentWeather.City.Name),
+                () => weatherDetails.Description.ShouldBe(currentWeather.Weather.Value),
+                () => weatherDetails.CurrentTemperature.ShouldBe($"{currentWeather.Temperature.Value} °C"),
+                () => weatherDetails.MinTemperature.ShouldBe($"{currentWeather.Temperature.Min} °C"),
+                () => weatherDetails.MaxTemperature.ShouldBe($"{currentWeather.Temperature.Max} °C")
+            );
         }
     }
 }
