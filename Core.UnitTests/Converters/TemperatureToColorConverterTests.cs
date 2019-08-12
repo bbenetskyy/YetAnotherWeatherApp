@@ -7,6 +7,7 @@ using System.Text;
 using API;
 using Core.Constants;
 using Core.Services.Interfaces;
+using Core.UnitTests.Stubs;
 using Core.UnitTests.TestData;
 using MvvmCross;
 using MvvmCross.UI;
@@ -26,7 +27,7 @@ namespace Core.UnitTests.Converters
         public void GetColor_WithCorrectTemperatureString_ExpectedColorReturned(string temperature, MvxColor expectedColor)
         {
             //Arrange
-            var iocRegistrar = new TemperatureToColorConverter();
+            var iocRegistrar = new TemperatureToColorConverterStub();
 
             //Act
             var color = iocRegistrar.GetColor(temperature);
@@ -40,7 +41,7 @@ namespace Core.UnitTests.Converters
         public void GetColor_WithInCorrectTemperatureString_DefaultColorReturned(string temperature)
         {
             //Arrange
-            var iocRegistrar = new TemperatureToColorConverter();
+            var iocRegistrar = new TemperatureToColorConverterStub();
 
             //Act
             var color = iocRegistrar.GetColor(temperature);

@@ -18,7 +18,7 @@ namespace Core.Converters
             return NativeColor.ToNative(GetColor(temperature));
         }
 
-        public MvxColor GetColor(string temperature)
+        protected MvxColor GetColor(string temperature)
         {
             var mvxColor = Colors.Default;
             if (string.IsNullOrEmpty(temperature) || !temperature.Contains(" ") || !double.TryParse(
