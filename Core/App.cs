@@ -1,10 +1,6 @@
 ﻿using Core.IoC;
-using Core.Services;
 using Core.ViewModels;
-using MvvmCross;
-using MvvmCross.IoC;
 using MvvmCross.ViewModels;
-using Plugin.Connectivity;
 
 namespace Core
 {

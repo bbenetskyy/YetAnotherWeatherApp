@@ -1,15 +1,8 @@
-﻿using Core.Converters;
-using MvvmCross.Tests;
+﻿using MvvmCross.Tests;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using API;
 using Core.Constants;
-using Core.Services.Interfaces;
 using Core.UnitTests.Stubs;
 using Core.UnitTests.TestData;
-using MvvmCross;
 using MvvmCross.UI;
 using Shouldly;
 

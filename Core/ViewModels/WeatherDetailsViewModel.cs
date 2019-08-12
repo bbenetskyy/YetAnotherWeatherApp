@@ -9,7 +9,6 @@ using MvvmCross.ViewModels;
 using OpenWeatherMap;
 using System.Threading.Tasks;
 using Plugin.Connectivity.Abstractions;
-using MvvmCross.Localization;
 using System.Resources;
 using System.Globalization;
 
