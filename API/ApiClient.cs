@@ -10,13 +10,13 @@ namespace API
     {
         private readonly OpenWeatherMapClient client;
 
-        public ApiClient(string apiKey = null, HttpMessageHandler handler = null)
+        public ApiClient(HttpMessageHandler handler = null)
         {
-            client = new OpenWeatherMapClient(GetApiKey(apiKey), handler);
+            client = new OpenWeatherMapClient(GetApiKey(), handler);
         }
 
-        protected string GetApiKey(string apiKey)
-            => apiKey ?? new ConfigurationBuilder<ClientConfiguration>()
+        protected string GetApiKey()
+            => new ConfigurationBuilder<ClientConfiguration>()
                    .FromResource("API.Configuration.ProductionConfig.json")
                    .AsJsonFormat()
                    .Build().ApiKey;
