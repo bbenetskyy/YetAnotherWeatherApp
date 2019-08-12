@@ -210,9 +210,6 @@
     <ImageAsset Include="Assets.xcassets\temperature.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\temperature.imageset\imagetopdf.pdf">
-      <Visible>false</Visible>
-    </ImageAsset>
     <ImageAsset Include="Assets.xcassets\temperature.imageset\temperature.png">
       <Visible>false</Visible>
     </ImageAsset>

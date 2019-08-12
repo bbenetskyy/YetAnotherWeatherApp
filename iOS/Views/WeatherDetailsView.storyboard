@@ -69,7 +69,6 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12 °C" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qSN-mc-aNV">
                                 <rect key="frame" x="208.5" y="231" width="182" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1oC-y9-mzf">
@@ -153,6 +152,9 @@
                         <outlet property="minTemperatureLabel" destination="FFL-eb-ILj" id="name-outlet-FFL-eb-ILj"/>
                         <outlet property="refreshButton" destination="1oC-y9-mzf" id="name-outlet-1oC-y9-mzf"/>
                         <outlet property="backgroundImage" destination="1714" id="name-outlet-1714"/>
+                        <outlet property="descriptionHint" destination="8d2-18-bxP" id="name-outlet-8d2-18-bxP"/>
+                        <outlet property="currentTemperatureHint" destination="m9X-mH-BXA" id="name-outlet-m9X-mH-BXA"/>
+                        <outlet property="minTemperatureHint" destination="jhX-vI-6vB" id="name-outlet-jhX-vI-6vB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6x4-fO-kph" userLabel="First Responder" sceneMemberID="firstResponder"/>

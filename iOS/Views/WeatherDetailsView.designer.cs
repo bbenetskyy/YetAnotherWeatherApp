@@ -27,7 +27,15 @@ namespace iOS.Views
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel currentTemperatureHint { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel currentTemperatureLabel { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel descriptionHint { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -40,6 +48,10 @@ namespace iOS.Views
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel maxTemperatureLabel { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel minTemperatureHint { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -66,9 +78,19 @@ namespace iOS.Views
                 cityNameLabel = null;
             }
 
+            if (currentTemperatureHint != null) {
+                currentTemperatureHint.Dispose ();
+                currentTemperatureHint = null;
+            }
+
             if (currentTemperatureLabel != null) {
                 currentTemperatureLabel.Dispose ();
                 currentTemperatureLabel = null;
+            }
+
+            if (descriptionHint != null) {
+                descriptionHint.Dispose ();
+                descriptionHint = null;
             }
 
             if (descriptionLabel != null) {
@@ -84,6 +106,11 @@ namespace iOS.Views
             if (maxTemperatureLabel != null) {
                 maxTemperatureLabel.Dispose ();
                 maxTemperatureLabel = null;
+            }
+
+            if (minTemperatureHint != null) {
+                minTemperatureHint.Dispose ();
+                minTemperatureHint = null;
             }
 
             if (minTemperatureLabel != null) {

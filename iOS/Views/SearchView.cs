@@ -42,7 +42,9 @@ namespace iOS.Views
             searchButton.Layer.BorderColor = UIColor.White.CGColor;
             getLocationButton.Layer.BorderColor = UIColor.White.CGColor;
 
-            //todo for all elements in UI => searchButton.SetTitle(AppResources.Error);
+            searchTextField.Placeholder = ViewModel[nameof(AppResources.SearchHint)];
+            searchButton.SetTitle(ViewModel[nameof(AppResources.SearchButton)], UIControlState.Normal);
+            getLocationButton.SetTitle(ViewModel[nameof(AppResources.GetCityNameButton)], UIControlState.Normal);
 
             set.Apply();
         }

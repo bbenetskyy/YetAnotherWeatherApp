@@ -3,6 +3,7 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
 using System;
+using Core.Resources;
 using UIKit;
 
 namespace iOS.Views
@@ -52,6 +53,12 @@ namespace iOS.Views
                 .WithConversion("TemperatureToColor");
 
             refreshButton.Layer.BorderColor = UIColor.White.CGColor;
+
+            descriptionHint.Text = ViewModel[nameof(AppResources.DescriptionLabel)];
+            currentTemperatureHint.Text = ViewModel[nameof(AppResources.TemperatureLabel)];
+            minTemperatureHint.Text = ViewModel[nameof(AppResources.MinLabel)];
+            maxTemperatureLabel.Text = ViewModel[nameof(AppResources.MaxLabel)];
+            refreshButton.SetTitle(ViewModel[nameof(AppResources.SearchButton)], UIControlState.Normal);
 
             set.Apply();
         }
