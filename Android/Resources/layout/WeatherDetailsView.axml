@@ -24,105 +24,130 @@
         local:MvxBind="Text CityName"
         android:layout_marginBottom="10dp"
         android:id="@+id/cityNameText"
-        android:textColor="#ffffffff" 
+        android:textColor="#ffffffff"
         local:layout_constraintLeft_toLeftOf="parent"
         local:layout_constraintTop_toTopOf="parent"
     />
-    <TextView
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/white"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:id="@+id/descriptionLayout"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
-        android:layout_marginRight="10dp"
-        android:textAlignment="textEnd"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.5"
-        android:id="@+id/descriptionLabel"
         local:layout_constraintLeft_toLeftOf="@+id/cityNameText"
-        local:layout_constraintTop_toBottomOf="@+id/cityNameText"
+        local:layout_constraintTop_toBottomOf="@+id/cityNameText">
+        <TextView
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white"
+            android:layout_marginRight="10dp"
+            android:textAlignment="textEnd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:id="@+id/descriptionLabel"
     />
-    <TextView
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#ffffffff"
-        android:layout_marginLeft="10dp"
-        local:MvxBind="Text Description"
-        android:id="@+id/descriptionText"
-        android:textStyle="bold" 
-        android:textAlignment="textStart"
+        <TextView
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#ffffffff"
+            android:layout_marginLeft="10dp"
+            local:MvxBind="Text Description"
+            android:id="@+id/descriptionText"
+            android:textStyle="bold"
+            android:textAlignment="textStart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+    />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:layout_weight="0.5"
-        local:layout_constraintLeft_toRightOf="@+id/descriptionLabel"
-        local:layout_constraintBottom_toBottomOf="@+id/descriptionLabel"
-    />
-    <TextView
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/white"
         android:layout_marginBottom="10dp"
-        android:layout_marginRight="10dp"
-        android:textAlignment="textEnd"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.5"
-        android:id="@+id/currentTemperatureLabel"
-        local:layout_constraintLeft_toLeftOf="@+id/descriptionLabel"
-        local:layout_constraintTop_toBottomOf="@+id/descriptionLabel"
+        android:id="@+id/currentTemperatureLayout"
+        local:layout_constraintLeft_toLeftOf="@+id/descriptionLayout"
+        local:layout_constraintTop_toBottomOf="@+id/descriptionLayout">
+        <TextView
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white"
+            android:layout_marginRight="10dp"
+            android:textAlignment="textEnd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:id="@+id/currentTemperatureLabel"
     />
-    <TextView
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_marginLeft="10dp"
-        local:MvxBind="Text CurrentTemperature; TextColor TemperatureToColor(CurrentTemperature)"
-        android:id="@+id/currentTemperatureText"
-        android:textAlignment="textStart"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.5"
-        local:layout_constraintLeft_toRightOf="@+id/currentTemperatureLabel"
-        local:layout_constraintBottom_toBottomOf="@+id/currentTemperatureLabel"
+        <TextView
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginLeft="10dp"
+            local:MvxBind="Text CurrentTemperature; TextColor TemperatureToColor(CurrentTemperature)"
+            android:id="@+id/currentTemperatureText"
+            android:textAlignment="textStart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
     />
-    <TextView
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/white"
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:layout_marginRight="10dp"
-        android:textAlignment="textEnd"
-        android:id="@+id/minTemperatureLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        local:layout_constraintLeft_toLeftOf="@+id/currentTemperatureLabel"
-        local:layout_constraintTop_toBottomOf="@+id/currentTemperatureLabel"
+        android:id="@+id/minTemperatureLayout"
+        local:layout_constraintLeft_toLeftOf="@+id/currentTemperatureLayout"
+        local:layout_constraintTop_toBottomOf="@+id/currentTemperatureLayout">
+        <TextView
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white"
+            android:layout_marginRight="10dp"
+            android:textAlignment="textEnd"
+            android:id="@+id/minTemperatureLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
     />
-    <TextView
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_gravity="fill"
-        android:layout_marginLeft="10dp"
-        local:MvxBind="Text MinTemperature; TextColor TemperatureToColor(MinTemperature)"
-        android:id="@+id/minTemperatureText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        local:layout_constraintLeft_toRightOf="@+id/minTemperatureLabel"
-        local:layout_constraintBottom_toBottomOf="@+id/minTemperatureLabel"
+        <TextView
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginLeft="10dp"
+            local:MvxBind="Text MinTemperature; TextColor TemperatureToColor(MinTemperature)"
+            android:id="@+id/minTemperatureText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
     />
-    <TextView
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/white"
-        android:layout_gravity="fill"
-        android:layout_marginRight="10dp"
-        android:textAlignment="textEnd"
-        android:id="@+id/maxTemperatureLabel"
-        android:layout_width="wrap_content"
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
-        local:layout_constraintLeft_toLeftOf="@+id/minTemperatureLabel"
-        local:layout_constraintTop_toBottomOf="@+id/minTemperatureLabel"
+        android:id="@+id/maxTemperatureLayout"
+        local:layout_constraintLeft_toLeftOf="@+id/minTemperatureLayout"
+        local:layout_constraintTop_toBottomOf="@+id/minTemperatureLayout">
+        <TextView
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white"
+            android:layout_marginRight="10dp"
+            android:textAlignment="textEnd"
+            android:id="@+id/maxTemperatureLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
     />
-    <TextView
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_gravity="fill"
-        android:layout_marginLeft="10dp"
-        local:MvxBind="Text MaxTemperature; TextColor TemperatureToColor(MaxTemperature)"
-        android:id="@+id/maxTemperatureText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        local:layout_constraintLeft_toRightOf="@+id/maxTemperatureLabel"
-        local:layout_constraintBottom_toBottomOf="@+id/maxTemperatureLabel"
+        <TextView
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginLeft="10dp"
+            local:MvxBind="Text MaxTemperature; TextColor TemperatureToColor(MaxTemperature)"
+            android:id="@+id/maxTemperatureText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
     />
+    </LinearLayout>
     <Button
         android:background="@drawable/button_states"
         android:textColor="@android:color/white"
@@ -133,8 +158,8 @@
         android:layout_marginRight="30dp"
         local:MvxBind="Click RefreshWeatherCommand; Visibility InvertedVisibility(IsLoading)"
         android:id="@+id/refreshButton"
-        local:layout_constraintLeft_toLeftOf="@+id/maxTemperatureLabel"
-        local:layout_constraintTop_toBottomOf="@+id/maxTemperatureLabel"
+        local:layout_constraintLeft_toLeftOf="@+id/maxTemperatureLayout"
+        local:layout_constraintTop_toBottomOf="@+id/maxTemperatureLayout"
     />
     <ProgressBar
         android:layout_height="wrap_content"
@@ -146,7 +171,7 @@
         android:layout_marginTop="50dp"
         android:indeterminateDrawable="@drawable/progress"
         local:MvxBind="Visibility Visibility(IsLoading)"
-        local:layout_constraintLeft_toLeftOf="@+id/maxTemperatureLabel"
-        local:layout_constraintTop_toBottomOf="@+id/maxTemperatureLabel"
+        local:layout_constraintLeft_toLeftOf="@+id/maxTemperatureLayout"
+        local:layout_constraintTop_toBottomOf="@+id/maxTemperatureLayout"
     />
 </android.support.constraint.ConstraintLayout>
